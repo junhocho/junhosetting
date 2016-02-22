@@ -32,6 +32,8 @@ set number
 set visualbell
 set noswapfile
 "set paste!                         "Use when Paste sth
+set tags=~/caffe_sal/tags
+set laststatus=2
 
 syntax on
 
