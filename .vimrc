@@ -15,8 +15,8 @@ set fencs=utf8,euc-kr,cp949,cp932,euc-jp,shift-jis,big5,latin1,ucs-2le
 set visualbell
 set backspace=indent,eol,start
 set statusline=%h%F%m%r%=[%l:%c(%p%%)]
-set tabstop=2
-set shiftwidth=2
+set tabstop=4
+set shiftwidth=4
 set cindent
 set autoindent
 set smartindent
@@ -48,6 +48,7 @@ map <F8> <ESC>:new<CR>
 map <F9> <ESC>:close<CR>
 map <C-TAB> <C-p>
 let mapleader=","
+let python_highlight_all = 1
 
 " Vundle
 set nocompatible              " be iMproved
@@ -77,7 +78,7 @@ Plugin 'pyflakes'
 Plugin 'Python-Syntax'
 " Bundle 'Valloric/YouCompleteMe'
 Plugin 'AutoComplPop'
-
+Plugin 'nathanaelkane/vim-indent-guides'
 call vundle#end()             " required
 filetype plugin indent on     " required!
 "
