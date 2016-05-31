@@ -1,7 +1,8 @@
 " vimrc
 " Author: Goznauk [goznauk@nhnnext.org]
 " 2014/04/05 updated
-"
+:set vb
+:set noeb vb t_vb=
 
 set nocompatible
 filetype on
@@ -33,11 +34,12 @@ set visualbell
 set noswapfile
 "set paste!                         "Use when Paste sth
 set tags=~/caffe_sal/tags
+"set tags+=~/py-faster-rcnn/tags
 set laststatus=2
 
 syntax on
 
-map <F1> <ESC>:help<CR>
+map <F1> <ESC>:Tlist<CR>
 map <F2> <ESC>:NERDTree<CR>
 map <F3> <ESC>:w<CR>
 map <F4> <ESC>:wq<CR>
