@@ -1,6 +1,6 @@
 " vimrc
-" Author: Goznauk [goznauk@nhnnext.org]
-" 2014/04/05 updated
+" Author: Junho Cho [junhocho@snu.ac.kr]
+" 2016/09/30 updated
 :set vb
 :set noeb vb t_vb=
 
@@ -49,6 +49,12 @@ map <F7> <ESC>:sp<CR>
 map <F8> <ESC>:new<CR>
 map <F9> <ESC>:close<CR>
 map <C-TAB> <C-p>
+
+"ctags
+map <C-}> :exec("tag /".expand("<cword>"))<CR>  
+map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>  
+map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
+
 let mapleader=","
 let python_highlight_all = 1
 
