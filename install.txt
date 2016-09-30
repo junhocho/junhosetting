@@ -8,3 +8,5 @@ $ git clone https://github.com/djui/alias-tips.git  # 저장소를 로컬로 복
 $ $EDITOR ~/.zshrc                                  # 에디터로 파일을 에디터로 불러들임
 plugins=(git ... alias-tips) 추가
 
+Vundle
+https://dobest.io/install-vundle-and-nerdtree/
