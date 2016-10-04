@@ -84,6 +84,9 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias ta="tmux attach -t "
+alias tn="tmux new -s "
+alias fc='ls . | wc -l'
+alias grepn="grep -nr --color "
 
 export NVM_DIR="/home/junho/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
