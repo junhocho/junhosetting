@@ -37,6 +37,9 @@ set tags=~/caffe_sal/tags
 "set tags+=~/py-faster-rcnn/tags
 set laststatus=2
 
+"Prevent freezing vim without tmux
+set noeb vb t_vb=
+
 syntax on
 
 map <F1> <ESC>:Tlist<CR>
