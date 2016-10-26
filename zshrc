@@ -85,8 +85,12 @@ source $ZSH/oh-my-zsh.sh
 
 alias ta="tmux attach -t "
 alias tn="tmux new -s "
+alias tm="tmux attach -t MAIN"
+
 alias fc='ls . | wc -l'
 alias grepn="grep -nr --color "
+
+alias wn="watch nvidia-smi"
 
 export NVM_DIR="/home/junho/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
