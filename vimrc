@@ -43,7 +43,9 @@ set noeb vb t_vb=
 syntax on
 
 map <F1> <ESC>:Tlist<CR>
-map <F2> <ESC>:NERDTree<CR>
+"map <F2> <ESC>:NERDTree<CR>
+nnoremap <silent> <special> <F2> :NERDTreeToggle <Bar> if &filetype ==# 'nerdtree' <Bar> wincmd p <Bar> endif<CR>
+
 map <F3> <ESC>:w<CR>
 map <F4> <ESC>:wq<CR>
 
