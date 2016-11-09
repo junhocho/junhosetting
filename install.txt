@@ -1,6 +1,7 @@
-lua file type plug-in for vim -  https://github.com/xolox/vim-lua-ftplugin.git
+# Zsh setup
 zsh autojump - https://github.com/wting/autojump.git
 zsh syntax highlighting - https://github.com/zsh-users/zsh-syntax-highlighting.git
+
 
 #alias-tips
 $ cd ${ZSH_CUSTOM1:-$ZSH/custom}/plugins            # 커스텀 플러그인 폴더로 이동
@@ -8,5 +9,8 @@ $ git clone https://github.com/djui/alias-tips.git  # 저장소를 로컬로 복
 $ $EDITOR ~/.zshrc                                  # 에디터로 파일을 에디터로 불러들임
 plugins=(git ... alias-tips) 추가
 
+
+# Vim
 Vundle
+lua file type plug-in for vim -  https://github.com/xolox/vim-lua-ftplugin.git
 https://dobest.io/install-vundle-and-nerdtree/
