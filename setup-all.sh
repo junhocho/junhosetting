@@ -8,8 +8,8 @@ sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/i
 
 # install zsh highlight
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
-echo 'source ${(q-)PWD}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh' >> ${ZDOTDIR:-$HOME}/.zshrc
-source ./zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+echo 'source ${(q-)PWD}/junhosetting/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh' >> ${ZDOTDIR:-$HOME}/.zshrc
+# source zsh later
 
 # concat my alias to .zshrc
 cat ~/junhosetting/alias >> ~/.zshrc
