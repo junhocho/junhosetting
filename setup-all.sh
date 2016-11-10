@@ -4,7 +4,7 @@
 
 # install zsh and ohmyz.sh
 sudo apt-get install zsh -y
-sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" # install
+sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" & # install in bg
 
 # install zsh highlight
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
@@ -39,3 +39,4 @@ rm installVimPlugin
 sudo chsh -s /usr/bin/zsh ${USER}
 
 echo "Now enjoy! start with command : zsh!"
+zsh
