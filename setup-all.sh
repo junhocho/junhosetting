@@ -1,10 +1,10 @@
 # run this in ~/junhosetting
 # This is recommended to run in clean slate user.
+# run this with   `sh setup-all.sh`
 
 # install zsh and ohmyz.sh
 sudo apt-get install zsh -y
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" # install
-sudo chsh -s /usr/bin/zsh ${USER}
 
 # install zsh highlight
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
@@ -27,8 +27,12 @@ git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 # vim
 touch installVimPlugin
-echo "do   `:PluginInstall` \n and exit with `:wq`" >> installVimPlugin
+echo "do   :PluginInstall " >> installVimPlugin
+
+vi installVimPlugin
 
 echo "done installing plugins"
 rm installVimPlugin
 
+# change default shell
+sudo chsh -s /usr/bin/zsh ${USER}
