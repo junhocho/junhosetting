@@ -4,7 +4,8 @@
 
 # install zsh and ohmyz.sh
 sudo apt-get install zsh -y
-sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" # install 
+sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" < EOF # install 
+EOF
 
 # install zsh highlight
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
