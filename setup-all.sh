@@ -1,12 +1,11 @@
+#!/bin/bash
 # This is recommended to run in clean slate user.
 # run this in ~/junhosetting
 # run this with   `sh setup-all.sh` and exit just after `zsh` is installed to proceed following configurations.
 
 # install zsh and ohmyz.sh
 sudo apt-get install zsh -y
-bash << EOF
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"  # install 
-EOF
 
 # install zsh highlight
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
