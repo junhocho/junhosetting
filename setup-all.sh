@@ -28,6 +28,7 @@ git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 # vim
 touch installVimPlugin
 echo "do   :PluginInstall " >> installVimPlugin
+echo "if done exit with :q and continue configuration" >> installVimPlugin
 
 vi installVimPlugin
 
