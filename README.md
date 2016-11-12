@@ -14,5 +14,6 @@ run `./setup-all.sh` then input passwords 2 times (for sudo) then `exit` at firs
 - vimrc
 - zshrc
 
-[Slides pdf](./get-used-to-cli.pdf)
-[Slides md](./get-used-to-cli.md)
+## [Slides pdf](https://dl.dropboxusercontent.com/u/51664086/get-used-to-cli.pdf)
+
+## [Slides md](./get-used-to-cli.md)
