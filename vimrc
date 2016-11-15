@@ -93,6 +93,14 @@ Plugin 'Python-Syntax'
 " Bundle 'Valloric/YouCompleteMe'
 Plugin 'AutoComplPop'
 Plugin 'nathanaelkane/vim-indent-guides'
+
+" Syntastic
+Plugin 'vim-syntastic/syntastic.git'
+
+" airline
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+
 call vundle#end()             " required
 filetype plugin indent on     " required!
 "
