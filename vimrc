@@ -30,7 +30,7 @@ set foldmethod=marker
 set hlsearch
 set background=dark
 set number
-nnoremap <F2> :set nonumber!<CR>	"Toggle set number
+nnoremap <C-l> :set nonumber!<CR>
 set visualbell
 set noswapfile
 set cursorline 
@@ -45,6 +45,14 @@ set noeb vb t_vb=
 "Ctirl.vim
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 let g:ctrlp_map = '<c-p>'
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\.git$\|public$\|log$\|tmp$\|vendor$',
+  \ 'file': '\v\.(exe|so|dll)$'
+  \ }
+"airline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline_powerline_fonts = 1
 
 syntax on
 
