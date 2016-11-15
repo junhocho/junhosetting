@@ -4,3 +4,4 @@ alias tm="tmux attach -t 1080-MAIN"
 alias fc='ls . | wc -l'
 alias grepn="grep -nr --color "
 alias wn="watch nvidia-smi"
+alias jp="jupyter notebook --no-browser"
