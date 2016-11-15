@@ -30,6 +30,7 @@ set foldmethod=marker
 set hlsearch
 set background=dark
 set number
+nnoremap <F2> :set nonumber!<CR>	"Toggle set number
 set visualbell
 set noswapfile
 set cursorline 
