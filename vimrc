@@ -42,17 +42,56 @@ set laststatus=2
 "Prevent freezing vim without tmux
 set noeb vb t_vb=
 
-"Ctirl.vim
+"=== Ctirl.vim ===================
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\.git$\|public$\|log$\|tmp$\|vendor$',
   \ 'file': '\v\.(exe|so|dll)$'
   \ }
-"airline
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline_powerline_fonts = 1
+" 가장 가까운 .git 디렉토리를 cwd(현재 작업 디렉토리)로 사용
+" 버전 관리를 사용하는 프로젝트를 할 때 꽤 적절하다.
+" .svn, .hg, .bzr도 지원한다.
+let g:ctrlp_working_path_mode = 'r'
+
+" 단축키를 리더 키로 대체
+nmap <leader>p :CtrlP<cr>
+
+" 여러 모드를 위한 단축키
+nmap <leader>bb :CtrlPBuffer<cr>
+nmap <leader>bm :CtrlPMixed<cr>
+nmap <leader>bs :CtrlPMRU<cr>
+
+
+
+"=== airline ===============
+let g:airline#extensions#tabline#enabled = 1 "buffer list
+let g:airline#extensions#tabline#fnamemod = ':t' "buffer file name print only
+let g:airline_powerline_fonts = 1 "able powerline font. disable if font breaks. Or install powerline-patch
+
+
+" BUFFER : this concept is heavily inspired from
+" http://bakyeono.net/post/2015-08-13-vim-tab-madness-translate.html
+" 이 옵션은 버퍼를 수정한 직후 버퍼를 감춰지도록 한다.
+" 이 방법으로 버퍼를 사용하려면 거의 필수다.
+set hidden
+
+" 버퍼 새로 열기
+" 원래 이 단축키로 바인딩해 두었던 :tabnew를 대체한다.
+nmap <leader>T :enew<cr>
+
+" 다음 버퍼로 이동
+nmap <leader>l :bnext<CR>
+
+" 이전 버퍼로 이동
+nmap <leader>h :bprevious<CR>
+
+" 현재 버퍼를 닫고 이전 버퍼로 이동
+" 탭 닫기 단축키를 대체한다.
+nmap <leader>bq :bp <BAR> bd #<CR>
+
+" 모든 버퍼와 각 버퍼 상태 출력
+nmap <leader>bl :ls<CR>
 
 syntax on
 
@@ -113,6 +152,9 @@ Plugin 'vim-syntastic/syntastic.git'
 " airline
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+"more airline compatible plugins
+Plugin 'airblade/vim-gitgutter'
+Plugin 'ctrlpvim/ctrlp.vim'
 
 call vundle#end()             " required
 filetype plugin indent on     " required!
