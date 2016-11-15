@@ -33,8 +33,6 @@ cp ~/junhosetting/vimrc ~/.vimrc
 # install vundle
 git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
-git clone https://github.com/ctrlpvim/ctrlp.vim.git ~/.vim/bundle/ctrlp.vim
-
 vim +PluginInstall
 
 # change default shell
