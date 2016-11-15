@@ -27,14 +27,16 @@ cp ~/junhosetting/vimrc ~/.vimrc
 git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 # vim
-touch installVimPlugin
-echo "do   :PluginInstall " >> installVimPlugin
-echo "if done exit with :q and continue configuration" >> installVimPlugin
+# touch installVimPlugin
+# echo "do   :PluginInstall " >> installVimPlugin
+# echo "if done exit with :q and continue configuration" >> installVimPlugin
 
-vi installVimPlugin
+# vi installVimPlugin
 
-echo "done installing plugins"
-rm installVimPlugin
+# echo "done installing plugins"
+# rm installVimPlugin
+
+vim +PluginInstall
 
 # change default shell
 sudo chsh -s /usr/bin/zsh ${USER}
