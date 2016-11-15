@@ -49,10 +49,11 @@ let g:ctrlp_custom_ignore = {
   \ 'dir':  '\.git$\|public$\|log$\|tmp$\|vendor$',
   \ 'file': '\v\.(exe|so|dll)$'
   \ }
+let g:ctrlp_working_path_mode = 'r'
+
 "airline
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline_powerline_fonts = 1
 
 syntax on
 
