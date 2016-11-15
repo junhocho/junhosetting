@@ -147,7 +147,8 @@ Plugin 'AutoComplPop'
 Plugin 'nathanaelkane/vim-indent-guides'
 
 " Syntastic
-Plugin 'vim-syntastic/syntastic.git'
+"Plugin 'vim-syntastic/syntastic.git' old
+Plugin 'scrooloose/syntastic'
 
 " airline
 Plugin 'vim-airline/vim-airline'
