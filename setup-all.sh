@@ -5,7 +5,7 @@
 
 # install zsh and ohmyz.sh
 sudo apt-get install zsh -y
-sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"  # install 
+sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"  # install
 
 # install zsh highlight
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
@@ -27,21 +27,13 @@ git clone https://github.com/tmux-plugins/tmux-resurrect ~/junhosetting/tmux-res
 cp ~/junhosetting/tmux.conf ~/.tmux.conf
 tmux source ~/.tmux.conf
 
-# install vim and copy .vimrc 
+# install vim and copy .vimrc
 sudo apt-get install vim -y
 cp ~/junhosetting/vimrc ~/.vimrc
 # install vundle
 git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
-# vim
-# touch installVimPlugin
-# echo "do   :PluginInstall " >> installVimPlugin
-# echo "if done exit with :q and continue configuration" >> installVimPlugin
-
-# vi installVimPlugin
-
-# echo "done installing plugins"
-# rm installVimPlugin
+git clone https://github.com/ctrlpvim/ctrlp.vim.git ~/.vim/bundle/ctrlp.vim
 
 vim +PluginInstall
 
