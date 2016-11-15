@@ -41,6 +41,10 @@ set laststatus=2
 "Prevent freezing vim without tmux
 set noeb vb t_vb=
 
+"Ctirl.vim
+set runtimepath^=~/.vim/bundle/ctrlp.vim
+let g:ctrlp_map = '<c-p>'
+
 syntax on
 
 map <F1> <ESC>:Tlist<CR>
