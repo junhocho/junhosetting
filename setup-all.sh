@@ -16,7 +16,14 @@ echo 'source ~/junhosetting/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh'
 cat ~/junhosetting/alias >> ~/.zshrc
 
 # install tmux and set tmux.conf
-sudo apt-get install tmux -y
+sudo apt-get install -y python-software-properties software-properties-common
+sudo add-apt-repository -y ppa:pi-rho/dev
+sudo apt-get update
+sudo apt-get install -y tmux=2.0-1~ppa1~t
+
+
+git clone https://github.com/tmux-plugins/tmux-resurrect ~/junhosetting/tmux-resurrect
+
 cp ~/junhosetting/tmux.conf ~/.tmux.conf
 tmux source ~/.tmux.conf
 
