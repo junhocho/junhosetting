@@ -158,7 +158,7 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'ctrlpvim/ctrlp.vim'
 
 " Lua plugins
-" git clone https://github.com/tbastos/vim-lua.git ~/.vim/bundle/
+" git clone https://github.com/tbastos/vim-lua.git ~/.vim/bundle/vim-lua
 Plugin 'tabstos/vim-lua'
 
 

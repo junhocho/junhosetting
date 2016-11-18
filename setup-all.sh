@@ -32,6 +32,8 @@ sudo apt-get install vim -y
 cp ~/junhosetting/vimrc ~/.vimrc
 # install vundle
 git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+# Some plugins git cloned in the folder
+git clone https://github.com/tbastos/vim-lua.git ~/.vim/bundle/vim-lua
 
 vim +PluginInstall
 
