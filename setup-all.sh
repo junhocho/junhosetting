@@ -38,6 +38,7 @@ echo 'source ~/junhosetting/vimrc' >> ~/.vimrc
 git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 # Some plugins git cloned in the folder
 git clone https://github.com/tbastos/vim-lua.git ~/.vim/bundle/vim-lua
+git clone git://github.com/majutsushi/tagbar ~/.vim/bundle/tagbar
 
 vim +PluginInstall
 
