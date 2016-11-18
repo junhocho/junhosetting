@@ -24,12 +24,16 @@ sudo apt-get install -y tmux=2.0-1~ppa1~t
 
 git clone https://github.com/tmux-plugins/tmux-resurrect ~/junhosetting/tmux-resurrect
 
-cp ~/junhosetting/tmux.conf ~/.tmux.conf
+# cp ~/junhosetting/tmux.conf ~/.tmux.conf
+echo 'source ~/junhosetting/tmux.conf' >> ~/.tmux.conf
 tmux source ~/.tmux.conf
 
 # install vim and copy .vimrc
 sudo apt-get install vim -y
-cp ~/junhosetting/vimrc ~/.vimrc
+#cp ~/junhosetting/vimrc ~/.vimrc
+# also source vimrc for frequent vimrc update
+echo 'source ~/junhosetting/vimrc' >> ~/.vimrc
+
 # install vundle
 git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 # Some plugins git cloned in the folder
