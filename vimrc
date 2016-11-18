@@ -157,9 +157,13 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'ctrlpvim/ctrlp.vim'
 
+" Tagbar
+" git clone git://github.com/majutsushi/tagbar ~/.vim/bundle/tagbar
+Plugin 'Tagbar'
+
 " Lua plugins
 " git clone https://github.com/tbastos/vim-lua.git ~/.vim/bundle/vim-lua
-Plugin 'tabstos/vim-lua'
+Plugin 'vim-lua'
 
 
 call vundle#end()             " required
