@@ -12,8 +12,8 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
 echo 'source ~/junhosetting/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh' >> ${ZDOTDIR:-$HOME}/.zshrc
 # source zsh later
 
-# concat my alias to .zshrc
-cat ~/junhosetting/alias >> ~/.zshrc
+# source my alias to .zshrc. This is because I usually update my alias.
+echo 'source ~/junhosetting/alias' >> ~/.zshrc
 
 # install tmux and set tmux.conf
 sudo apt-get install -y python-software-properties software-properties-common
@@ -36,6 +36,9 @@ git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 git clone https://github.com/tbastos/vim-lua.git ~/.vim/bundle/vim-lua
 
 vim +PluginInstall
+
+# Or install Neovim
+sh ./neovim-install.sh
 
 # change default shell
 sudo chsh -s /usr/bin/zsh ${USER}
