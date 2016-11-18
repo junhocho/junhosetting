@@ -8,7 +8,7 @@ run `./setup-all.sh` then input passwords 2 times (for sudo) then `exit` at firs
 powerline font might be needed : https://github.com/powerline/fonts
 
 Personally shifting vim to [neovim](https://github.com/neovim/neovim/wiki/Installing-Neovim)
-Here's my [`neovim`](./neovim-install.sh)
+Here's my [`neovim`](./neovim-install.sh). It also installs [vim-plug](https://github.com/junegunn/vim-plug#example)
 
 Using Iterm2 and want to fix my tab name.
 Disable all  `Iterm2 > Preferences > Appearance > Window & Tab Titles`

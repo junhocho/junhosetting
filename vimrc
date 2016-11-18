@@ -123,53 +123,53 @@ set nocompatible              " be iMproved
 filetype on
 filetype off                  " required!
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+"set rtp+=~/.vim/bundle/Vundle.vim
+call plug#begin('~/.vim/plugged')
 
 " let Vundle manage Vundle
 " required!
-Plugin 'gmarik/vundle'
-Plugin 'tpope/vim-fugitive'
+"Plugin 'gmarik/vundle'
+Plug 'tpope/vim-fugitive'
 "Plugin 'Lokaltog/vim-easymotion'  : not necessary to me
-Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
 "Plugin 'tpope/vim-rails.git'
 " vim-scripts repos
-Plugin 'L9'
+Plug 'L9'
 "Plugin 'FuzzyFinder' --> Use CtrlP instead
 " non-GitHub repos
 "Plugin 'git://git.wincent.com/command-t.git' --> Use CtrlP
 "Plugin 'vim-ruby/vim-ruby'
-Plugin 'The-NERD-tree'
+Plug 'The-NERD-tree'
 
 "Plugin 'Source-Explorer-srcexpl.vim'
-Plugin 'wesleyche/SrcExpl'
+Plug 'wesleyche/SrcExpl'
 "Plugin 'pyflakes'
-Plugin 'Python-Syntax'
+Plug 'Python-Syntax'
 " Bundle 'Valloric/YouCompleteMe'
-Plugin 'AutoComplPop'
-Plugin 'nathanaelkane/vim-indent-guides'
+Plug 'AutoComplPop'
+Plug 'nathanaelkane/vim-indent-guides'
 
 " Syntastic
 "Plugin 'vim-syntastic/syntastic.git' old
-Plugin 'scrooloose/syntastic'
+Plug 'scrooloose/syntastic'
 
 " airline
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 "more airline compatible plugins
-Plugin 'airblade/vim-gitgutter'
-Plugin 'ctrlpvim/ctrlp.vim'
+Plug 'airblade/vim-gitgutter'
+Plug 'ctrlpvim/ctrlp.vim'
 
 " Tagbar
 " git clone git://github.com/majutsushi/tagbar ~/.vim/bundle/tagbar
-Plugin 'Tagbar'
+Plug 'Tagbar'
 
 " Lua plugins
 " git clone https://github.com/tbastos/vim-lua.git ~/.vim/bundle/vim-lua
-Plugin 'vim-lua'
+Plug 'tbastos/vim-lua'
 
 
-call vundle#end()             " required
+call plug#end()             " required
 filetype plugin indent on     " required!
 "
 " Brief help
