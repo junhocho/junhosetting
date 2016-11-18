@@ -7,4 +7,4 @@ echo "source ~/.nvimrc" >> ~/.config/nvim/init.vim
 # also make .nvimrc symlink
 ln -s ~/.vimrc ~/.nvimrc
 echo "alias vi='nvim'" >> ~/.zshrc
-source ~/.zshrc
+echo "Now Reload your zsh!"

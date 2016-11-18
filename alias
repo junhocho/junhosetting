@@ -5,3 +5,5 @@ alias fc='ls . | wc -l'
 alias grepn="grep -nr --color "
 alias wn="watch nvidia-smi"
 alias jp="jupyter notebook --no-browser"
+alias vi='nvim'
+alias zshreload='source ~/.zshrc'
