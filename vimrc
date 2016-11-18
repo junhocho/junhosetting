@@ -95,7 +95,7 @@ nmap <leader>bl :ls<CR>
 
 syntax on
 
-map <F1> <ESC>:Tlist<CR>
+map <F1> <ESC>:TagbarToggle<CR>
 "map <F2> <ESC>:NERDTree<CR>
 nnoremap <silent> <special> <F2> :NERDTreeToggle <Bar> if &filetype ==# 'nerdtree' <Bar> wincmd p <Bar> endif<CR>
 
@@ -104,7 +104,9 @@ map <F4> <ESC>:wq<CR>
 
 map <F6> <ESC>:vs<CR>
 map <F7> <ESC>:sp<CR>
-map <F8> <ESC>:new<CR>
+"map <F8> <ESC>:new<CR>
+nmap <F8> :SrcExplToggle<CR> 
+
 map <F9> <ESC>:close<CR>
 map <C-TAB> <C-p>
 
@@ -128,19 +130,20 @@ call vundle#begin()
 " required!
 Plugin 'gmarik/vundle'
 Plugin 'tpope/vim-fugitive'
-Plugin 'Lokaltog/vim-easymotion'
+"Plugin 'Lokaltog/vim-easymotion'  : not necessary to me
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-Plugin 'tpope/vim-rails.git'
+"Plugin 'tpope/vim-rails.git'
 " vim-scripts repos
 Plugin 'L9'
-Plugin 'FuzzyFinder'
+"Plugin 'FuzzyFinder' --> Use CtrlP instead
 " non-GitHub repos
-Plugin 'git://git.wincent.com/command-t.git'
-Plugin 'vim-ruby/vim-ruby'
+"Plugin 'git://git.wincent.com/command-t.git' --> Use CtrlP
+"Plugin 'vim-ruby/vim-ruby'
 Plugin 'The-NERD-tree'
 
-Plugin 'Source-Explorer-srcexpl.vim'
-Plugin 'pyflakes'
+"Plugin 'Source-Explorer-srcexpl.vim'
+Plugin 'wesleyche/SrcExpl'
+"Plugin 'pyflakes'
 Plugin 'Python-Syntax'
 " Bundle 'Valloric/YouCompleteMe'
 Plugin 'AutoComplPop'
