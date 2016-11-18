@@ -157,6 +157,11 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'ctrlpvim/ctrlp.vim'
 
+" Lua plugins
+" git clone https://github.com/tbastos/vim-lua.git ~/.vim/bundle/
+Plugin 'tabstos/vim-lua'
+
+
 call vundle#end()             " required
 filetype plugin indent on     " required!
 "
