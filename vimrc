@@ -33,7 +33,7 @@ set number
 nnoremap <C-l> :set nonumber!<CR>
 set visualbell
 set noswapfile
-set cursorline 
+set cursorline
 "set paste!                         "Use when Paste sth
 set tags=~/caffe_sal/tags
 "set tags+=~/py-faster-rcnn/tags
@@ -101,18 +101,19 @@ nnoremap <silent> <special> <F2> :NERDTreeToggle <Bar> if &filetype ==# 'nerdtre
 
 map <F3> <ESC>:w<CR>
 map <F4> <ESC>:wq<CR>
-
+" remove white spaces : trailing
+map <F5> <ESC>:%s/\s\+$//e<CR>
 map <F6> <ESC>:vs<CR>
 map <F7> <ESC>:sp<CR>
 "map <F8> <ESC>:new<CR>
-nmap <F8> :SrcExplToggle<CR> 
+nmap <F8> :SrcExplToggle<CR>
 
 map <F9> <ESC>:close<CR>
 map <C-TAB> <C-p>
 
 "ctags
-map <C-}> :exec("tag /".expand("<cword>"))<CR>  
-map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>  
+map <C-}> :exec("tag /".expand("<cword>"))<CR>
+map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 
 let mapleader=","
