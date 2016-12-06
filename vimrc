@@ -100,9 +100,9 @@ map <F1> <ESC>:TagbarToggle<CR>
 nnoremap <silent> <special> <F2> :NERDTreeToggle <Bar> if &filetype ==# 'nerdtree' <Bar> wincmd p <Bar> endif<CR>
 
 map <F3> <ESC>:w<CR>
-map <F4> <ESC>:wq<CR>
 " remove white spaces : trailing
-map <F5> <ESC>:%s/\s\+$//e<CR>
+map <F4> <ESC>:%s/\s\+$//e<CR>
+map <F5> <ESC>:edit<CR>
 map <F6> <ESC>:vs<CR>
 map <F7> <ESC>:sp<CR>
 "map <F8> <ESC>:new<CR>
