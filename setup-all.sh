@@ -40,10 +40,10 @@ git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 git clone https://github.com/tbastos/vim-lua.git ~/.vim/bundle/vim-lua
 git clone git://github.com/majutsushi/tagbar ~/.vim/bundle/tagbar
 
-vim +PluginInstall
-
-# Or install Neovim
+# install Neovim. I use Neovim which is complete refactoring of vim.
 sh ./neovim-install.sh
+
+vim +PlugInstall # vim +PluginInstall
 
 # change default shell
 sudo chsh -s /usr/bin/zsh ${USER}
