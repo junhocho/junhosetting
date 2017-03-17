@@ -48,7 +48,6 @@ curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
 
 nvim +PluginInstall
 
-
 # change default shell
 sudo chsh -s /usr/bin/zsh ${USER}
 
