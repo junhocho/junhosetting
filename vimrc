@@ -160,6 +160,7 @@ Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
 " Plugin 'git://git.wincent.com/command-t.git' --> Use CtrlP
 " Plugin 'vim-ruby/vim-ruby'
 " Plug 'The-NERD-tree'
+Plug 'scrooloose/nerdtree'
 
 "Plugin 'Source-Explorer-srcexpl.vim'
 Plug 'wesleyche/SrcExpl'
@@ -182,7 +183,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 
 " Tagbar
 " git clone git://github.com/majutsushi/tagbar ~/.vim/bundle/tagbar
-" Plug 'Tagbar'
+Plug 'majutsushi/tagbar'
 
 " Lua plugins
 " git clone https://github.com/tbastos/vim-lua.git ~/.vim/bundle/vim-lua

@@ -1,6 +1,6 @@
 sudo add-apt-repository ppa:neovim-ppa/unstable
 sudo apt-get update
-sudo apt-get install neovim -y
+sudo apt-get install neovim ctags -y
 # Config changed from neovim
 mkdir ~/.config/nvim/
 echo "source ~/.nvimrc" >> ~/.config/nvim/init.vim
@@ -10,6 +10,15 @@ echo "source ~/.nvimrc" >> ~/.config/nvim/init.vim
 #    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+# install vundle --> changed to plug
+# git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+# Some plugins git cloned in the folder
+git clone https://github.com/tbastos/vim-lua.git ~/.vim/plugged/vim-lua
+git clone https://github.com/scrooloose/nerdtree.git ~/.vim/plugged/nerdtree
+git clone https://github.com/majutsushi/tagbar.git ~/.vimr/plugged/tagbar
+
+nvim +PluginInstall
 
 # also make .nvimrc symlink
 # ln -s ~/.vimrc ~/.nvimrc
