@@ -154,19 +154,19 @@ Plug 'tpope/vim-fugitive'
 Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
 "Plugin 'tpope/vim-rails.git'
 " vim-scripts repos
-Plug 'L9'
+" Plug 'L9'
 "Plugin 'FuzzyFinder' --> Use CtrlP instead
 " non-GitHub repos
-"Plugin 'git://git.wincent.com/command-t.git' --> Use CtrlP
-"Plugin 'vim-ruby/vim-ruby'
-Plug 'The-NERD-tree'
+" Plugin 'git://git.wincent.com/command-t.git' --> Use CtrlP
+" Plugin 'vim-ruby/vim-ruby'
+" Plug 'The-NERD-tree'
 
 "Plugin 'Source-Explorer-srcexpl.vim'
 Plug 'wesleyche/SrcExpl'
 "Plugin 'pyflakes'
 "Plug 'Python-Syntax'
 " Bundle 'Valloric/YouCompleteMe'
-Plug 'AutoComplPop'
+" Plug 'AutoComplPop'
 Plug 'nathanaelkane/vim-indent-guides'
 
 " Syntastic
@@ -182,7 +182,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 
 " Tagbar
 " git clone git://github.com/majutsushi/tagbar ~/.vim/bundle/tagbar
-Plug 'Tagbar'
+" Plug 'Tagbar'
 
 " Lua plugins
 " git clone https://github.com/tbastos/vim-lua.git ~/.vim/bundle/vim-lua
