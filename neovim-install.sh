@@ -1,6 +1,6 @@
 sudo add-apt-repository ppa:neovim-ppa/unstable
 sudo apt-get update
-sudo apt-get install neovim
+sudo apt-get install neovim -y
 # Config changed from neovim
 mkdir ~/.config/nvim/
 echo "source ~/.nvimrc" >> ~/.config/nvim/init.vim
