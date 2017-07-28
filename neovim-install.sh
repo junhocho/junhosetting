@@ -16,9 +16,18 @@ curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
 # Some plugins git cloned in the folder
 git clone https://github.com/tbastos/vim-lua.git ~/.vim/plugged/vim-lua
 git clone https://github.com/scrooloose/nerdtree.git ~/.vim/plugged/nerdtree
-git clone https://github.com/majutsushi/tagbar.git ~/.vimr/plugged/tagbar
+git clone https://github.com/majutsushi/tagbar.git ~/.vim/plugged/tagbar
+git clone https://github.com/hdima/python-syntax.git ~/.vim/plugged/python-syntax
+git clone https://github.com/Valloric/YouCompleteMe.git ~/.vim/plugged/YouCompleteMe
+
 
 nvim +PluginInstall
+cd ~/.vim/prugged/YouCompleteMe
+git submodule update --init --recursive
+./install.sh
+# REFER :  http://neverapple88.tistory.com/26
+# https://github.com/Valloric/YouCompleteMe
+cd ~/junhosetting
 
 # also make .nvimrc symlink
 # ln -s ~/.vimrc ~/.nvimrc
