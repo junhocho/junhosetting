@@ -1,5 +1,7 @@
 # Junho setting
 
+git clone --depth 1 <repo>
+
 ## you can configure zsh, vim plugins, tmux with `./setup-all.sh`
 
 it installs all zsh, vim , tmux firt
