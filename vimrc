@@ -8,6 +8,9 @@ set nocompatible
 filetype on
 filetype off
 
+"MACVIM
+set guifont=Source\ Code\ Pro\ For\ Powerline:h14
+colorscheme desert
 
 " EnCoding
 set enc=UTF-8

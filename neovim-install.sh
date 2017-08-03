@@ -22,7 +22,7 @@ git clone https://github.com/Valloric/YouCompleteMe.git ~/.vim/plugged/YouComple
 
 
 nvim +PluginInstall
-cd ~/.vim/prugged/YouCompleteMe
+cd ~/.vim/plugged/YouCompleteMe
 git submodule update --init --recursive
 ./install.sh
 # REFER :  http://neverapple88.tistory.com/26
