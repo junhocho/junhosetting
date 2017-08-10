@@ -37,6 +37,8 @@ nnoremap <C-l> :set nonumber!<CR>
 set visualbell
 set noswapfile
 set cursorline
+
+set wildmenu
 "set paste!                         "Use when Paste sth
 set tags=~/caffe_sal/tags
 "set tags+=~/py-faster-rcnn/tags
