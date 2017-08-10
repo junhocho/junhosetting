@@ -122,7 +122,6 @@ map <C-}> :exec("tag /".expand("<cword>"))<CR>
 map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 
-let mapleader=","
 let python_highlight_all = 1
 
 " Vundle
@@ -184,6 +183,12 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'airblade/vim-gitgutter'
 Plug 'ctrlpvim/ctrlp.vim'
 
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-obsession'
+Plug 'dhruvasagar/vim-prosession'
+Plug 'gikmx/ctrlp-obsession'
+Plug 'mbbill/undotree'
+
 " Tagbar
 " git clone git://github.com/majutsushi/tagbar ~/.vim/bundle/tagbar
 Plug 'majutsushi/tagbar'
@@ -204,3 +209,15 @@ filetype plugin indent on     " required!
 "
 " see :h vundle for more details or wiki for FAQ
 " NOTE: comments after Bundle commands are not allowed.
+
+
+" ctrlp-obsession
+nnoremap <leader>ss :CtrlPObsession<CR>
+
+" undotree
+if has("persistent_undo")
+	set undodir=~/.vim/.undodir/
+	set undofile
+endif
+nnoremap <leader>ut :UndotreeToggle<CR>:UndotreeFocus<CR>
+
