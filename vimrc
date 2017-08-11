@@ -4,6 +4,9 @@
 :set vb
 :set noeb vb t_vb=
 
+" Default shell as zsh
+set shell=zsh\ -i
+
 set nocompatible
 filetype on
 filetype off
