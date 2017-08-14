@@ -1,11 +1,12 @@
 " vimrc
 " Author: Junho Cho [junhocho@snu.ac.kr]
 " 2016/09/30 updated
-:set vb
-:set noeb vb t_vb=
+" :set vb
+set noeb vb t_vb=
 
 " Default shell as zsh
-set shell=zsh\ -i
+" set shell="zsh -l"
+"set shell=/bin/zs
 
 set nocompatible
 filetype on
@@ -48,7 +49,7 @@ set tags=~/caffe_sal/tags
 set laststatus=2
 
 "Prevent freezing vim without tmux
-set noeb vb t_vb=
+" set noeb vb t_vb=
 
 "=== Ctirl.vim ===================
 set runtimepath^=~/.vim/bundle/ctrlp.vim
