@@ -34,16 +34,10 @@ sudo apt-get install vim -y
 # also source vimrc for frequent vimrc update
 echo 'source ~/junhosetting/vimrc' >> ~/.vimrc
 
-# install vundle
-git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-# Some plugins git cloned in the folder
-git clone https://github.com/tbastos/vim-lua.git ~/.vim/bundle/vim-lua
-git clone git://github.com/majutsushi/tagbar ~/.vim/bundle/tagbar
 
-# install Neovim. I use Neovim which is complete refactoring of vim.
+# install Neovim
 sh ./neovim-install.sh
 
-vim +PlugInstall # vim +PluginInstall
 
 # change default shell
 sudo chsh -s /usr/bin/zsh ${USER}

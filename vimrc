@@ -111,6 +111,9 @@ nmap <F8> :SrcExplToggle<CR>
 map <F9> <ESC>:close<CR>
 map <C-TAB> <C-p>
 
+" Split line
+nnoremap K i<CR><Esc>
+
 "ctags
 map <C-}> :exec("tag /".expand("<cword>"))<CR>
 map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
@@ -124,6 +127,22 @@ set nocompatible              " be iMproved
 filetype on
 filetype off                  " required!
 
+
+
+" Syntastic Setting
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
+nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
+
+
 "set rtp+=~/.vim/bundle/Vundle.vim
 call plug#begin('~/.vim/plugged')
 
@@ -135,19 +154,20 @@ Plug 'tpope/vim-fugitive'
 Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
 "Plugin 'tpope/vim-rails.git'
 " vim-scripts repos
-Plug 'L9'
+" Plug 'L9'
 "Plugin 'FuzzyFinder' --> Use CtrlP instead
 " non-GitHub repos
-"Plugin 'git://git.wincent.com/command-t.git' --> Use CtrlP
-"Plugin 'vim-ruby/vim-ruby'
-Plug 'The-NERD-tree'
+" Plugin 'git://git.wincent.com/command-t.git' --> Use CtrlP
+" Plugin 'vim-ruby/vim-ruby'
+" Plug 'The-NERD-tree'
+Plug 'scrooloose/nerdtree'
 
 "Plugin 'Source-Explorer-srcexpl.vim'
 Plug 'wesleyche/SrcExpl'
 "Plugin 'pyflakes'
-Plug 'Python-Syntax'
+"Plug 'Python-Syntax'
 " Bundle 'Valloric/YouCompleteMe'
-Plug 'AutoComplPop'
+" Plug 'AutoComplPop'
 Plug 'nathanaelkane/vim-indent-guides'
 
 " Syntastic
@@ -163,7 +183,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 
 " Tagbar
 " git clone git://github.com/majutsushi/tagbar ~/.vim/bundle/tagbar
-Plug 'Tagbar'
+Plug 'majutsushi/tagbar'
 
 " Lua plugins
 " git clone https://github.com/tbastos/vim-lua.git ~/.vim/bundle/vim-lua
