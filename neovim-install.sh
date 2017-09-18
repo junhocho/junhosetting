@@ -2,8 +2,8 @@ sudo add-apt-repository ppa:neovim-ppa/unstable
 sudo apt-get update
 sudo apt-get install neovim ctags -y
 # Config changed from neovim
-mkdir ~/.config/nvim/
-echo "source ~/.nvimrc" >> ~/.config/nvim/init.vim
+mkdir -p ~/.config/nvim/
+echo "source ~/.vimrc" >> ~/.config/nvim/init.vim
 
 # Old deprcated
 #curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
