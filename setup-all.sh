@@ -12,8 +12,8 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
 echo 'source ~/junhosetting/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh' >> ${ZDOTDIR:-$HOME}/.zshrc
 # source zsh later
 
-# source my alias to .zshrc. This is because I usually update my alias.
-echo 'source ~/junhosetting/alias' >> ~/.zshrc
+# Copy my setup to zshrc
+cat my-zsh-setup >> ~/.zshrc
 
 # install tmux and set tmux.conf
 sudo apt-get install -y python-software-properties software-properties-common
