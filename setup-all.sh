@@ -3,6 +3,12 @@
 # run this in ~/junhosetting
 # run this with   `sh setup-all.sh` and exit just after `zsh` is installed to proceed following configurations.
 
+# GIT setup
+git config --global user.email "junhocho@snu.ac.kr"
+git config --global user.name "junhocho"
+git config --global push.default simple
+git config --global core.editor vim
+
 # install zsh and ohmyz.sh
 sudo apt-get install zsh -y
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"  # install
