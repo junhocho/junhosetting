@@ -7,6 +7,6 @@ alias jp="jupyter notebook --no-browser"
 alias vi='nvim'
 alias zshreload='source ~/.zshrc'
 
-" For iTerm-2 from client macbook
+# For iTerm-2 from client macbook
 DISABLE_AUTO_TITLE="true"
 echo -ne "\e]1;PC NAME\a"
