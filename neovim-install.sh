@@ -19,6 +19,7 @@ git clone https://github.com/scrooloose/nerdtree.git ~/.vim/plugged/nerdtree
 git clone https://github.com/majutsushi/tagbar.git ~/.vim/plugged/tagbar
 git clone https://github.com/hdima/python-syntax.git ~/.vim/plugged/python-syntax
 git clone https://github.com/Valloric/YouCompleteMe.git ~/.vim/plugged/YouCompleteMe
+git clone https://github.com/junegunn/seoul256.vim.git ~/.vimr/plugged/seoul256.vim
 
 
 nvim +PluginInstall

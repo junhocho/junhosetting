@@ -14,7 +14,7 @@ filetype off
 
 "MACVIM
 set guifont=Source\ Code\ Pro\ For\ Powerline:h14
-colorscheme desert
+colorscheme seoul256
 
 " EnCoding
 set enc=UTF-8
@@ -90,10 +90,10 @@ set hidden
 nmap <leader>T :enew<cr>
 
 " 다음 버퍼로 이동
-nmap <leader>l :bnext<CR>
+nmap <leader>' :bnext<CR>
 
 " 이전 버퍼로 이동
-nmap <leader>h :bprevious<CR>
+nmap <leader>; :bprevious<CR>
 
 " 현재 버퍼를 닫고 이전 버퍼로 이동
 " 탭 닫기 단축키를 대체한다.
@@ -194,6 +194,7 @@ Plug 'tpope/vim-obsession'
 Plug 'dhruvasagar/vim-prosession'
 Plug 'gikmx/ctrlp-obsession'
 Plug 'mbbill/undotree'
+Plug 'junegunn/seoul256.vim'
 
 " Tagbar
 " git clone git://github.com/majutsushi/tagbar ~/.vim/bundle/tagbar
