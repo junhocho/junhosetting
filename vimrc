@@ -14,7 +14,6 @@ filetype off
 
 "MACVIM
 set guifont=Source\ Code\ Pro\ For\ Powerline:h14
-colorscheme seoul256
 
 " EnCoding
 set enc=UTF-8
@@ -228,3 +227,4 @@ if has("persistent_undo")
 endif
 nnoremap <leader>ut :UndotreeToggle<CR>:UndotreeFocus<CR>
 
+colo seoul256
