@@ -227,4 +227,5 @@ if has("persistent_undo")
 endif
 nnoremap <leader>ut :UndotreeToggle<CR>:UndotreeFocus<CR>
 
+let g:seoul256_background = 235
 colo seoul256
