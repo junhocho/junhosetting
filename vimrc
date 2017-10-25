@@ -52,6 +52,7 @@ set laststatus=2
 
 "=== Ctirl.vim ===================
 set runtimepath^=~/.vim/bundle/ctrlp.vim
+let g:ctrlp_show_hidden = 1
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\.git$\|public$\|log$\|tmp$\|vendor$',
