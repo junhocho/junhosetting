@@ -126,7 +126,7 @@ map <F9> <ESC>:close<CR>
 map <C-TAB> <C-p>
 
 " Split line
-nnoremap K i<CR><Esc>
+nnoremap L i<CR><Esc>
 
 "ctags
 map <C-}> :exec("tag /".expand("<cword>"))<CR>
