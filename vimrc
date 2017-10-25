@@ -12,6 +12,11 @@ set nocompatible
 filetype on
 filetype off
 
+"NEOVIM
+"smooth scrolling : http://eduncan911.com/software/fix-slow-scrolling-in-vim-and-neovim.html
+set lazyredraw 
+set mouse=a
+
 "MACVIM
 set guifont=Source\ Code\ Pro\ For\ Powerline:h14
 
@@ -174,8 +179,13 @@ Plug 'scrooloose/nerdtree'
 Plug 'wesleyche/SrcExpl'
 "Plugin 'pyflakes'
 "Plug 'Python-Syntax'
+
+" Autocompl
 " Bundle 'Valloric/YouCompleteMe'
 " Plug 'AutoComplPop'
+Plug 'davidhalter/vim-jedi'
+Plug 'maralla/completor.vim'
+
 Plug 'nathanaelkane/vim-indent-guides'
 
 " Syntastic
