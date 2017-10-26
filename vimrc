@@ -4,6 +4,8 @@
 " :set vb
 set noeb vb t_vb=
 
+let mapleader = ","
+
 " Default shell as zsh
 " set shell="zsh -l"
 "set shell=/bin/zs
