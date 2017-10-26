@@ -20,9 +20,9 @@ git clone https://github.com/majutsushi/tagbar.git ~/.vim/plugged/tagbar
 git clone https://github.com/hdima/python-syntax.git ~/.vim/plugged/python-syntax
 git clone https://github.com/Valloric/YouCompleteMe.git ~/.vim/plugged/YouCompleteMe
 git clone https://github.com/junegunn/seoul256.vim.git ~/.vim/plugged/seoul256.vim
-#git clone --recursive https://github.com/davidhalter/jedi-vim.git ~/.vim/plugged/jedi-vim
-mkdir ~/.vim/plugged/completor/start
-git clone https://github.com/maralla/completor.vim.git ~/.vim/plugged/completor/start/completor.vim
+#git clone --recursive https://github.com/davidhalter/jedi-vim.git ~/.vim/bundle/jedi-vim
+#mkdir ~/.vim/plugged/completor/start
+#git clone https://github.com/maralla/completor.vim.git ~/.vim/plugged/completor/start/completor.vim
 
 
 pip install neovim
