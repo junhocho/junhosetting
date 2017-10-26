@@ -186,7 +186,9 @@ Plug 'wesleyche/SrcExpl'
 " Bundle 'Valloric/YouCompleteMe'
 " Plug 'AutoComplPop'
 "Plug 'davidhalter/vim-jedi'
-"Plug 'maralla/completor.vim'
+Plug 'maralla/completor.vim'
+"Plug 'roxma/nvim-completion-manager'
+"Plug 'prabirshrestha/asyncomplete.vim'
 
 Plug 'nathanaelkane/vim-indent-guides'
 
