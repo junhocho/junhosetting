@@ -10,7 +10,7 @@ git config --global push.default simple
 git config --global core.editor vim
 
 # install zsh and ohmyz.sh
-sudo apt-get install zsh -y
+sudo apt-get install zsh curl -y
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"  # install
 
 # install zsh highlight
@@ -31,19 +31,14 @@ sudo apt-get install -y tmux=2.0-1~ppa1~t
 git clone https://github.com/tmux-plugins/tmux-resurrect ~/junhosetting/tmux-resurrect
 
 # cp ~/junhosetting/tmux.conf ~/.tmux.conf
-echo 'source ~/junhosetting/tmux.conf' >> ~/.tmux.conf
+echo 'source ~/junhosetting/tmux.conf' > ~/.tmux.conf
 tmux source ~/.tmux.conf
 
 # install vim and copy .vimrc
 sudo apt-get install vim -y
 #cp ~/junhosetting/vimrc ~/.vimrc
 # also source vimrc for frequent vimrc update
-echo 'source ~/junhosetting/vimrc' >> ~/.vimrc
-
-
-# install Neovim
-sh ./neovim-install.sh
-
+echo 'source ~/junhosetting/vimrc' > ~/.vimrc
 
 # change default shell
 sudo chsh -s /usr/bin/zsh ${USER}
