@@ -21,6 +21,9 @@ set mouse=a
 
 "MACVIM
 set guifont=Source\ Code\ Pro\ For\ Powerline:h14
+set guicursor=	
+"Fix bug of weird character on tmux after neovim
+"https://github.com/neovim/neovim/wiki/FAQ#nvim-shows-weird-symbols-2-q-when-changing-modes
 
 " EnCoding
 set enc=UTF-8
