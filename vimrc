@@ -5,6 +5,7 @@
 set noeb vb t_vb=
 
 let mapleader = ","
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 0
 
 " Default shell as zsh
 " set shell="zsh -l"
@@ -21,9 +22,7 @@ set mouse=a
 
 "MACVIM
 set guifont=Source\ Code\ Pro\ For\ Powerline:h14
-set guicursor=	
-"Fix bug of weird character on tmux after neovim
-"https://github.com/neovim/neovim/wiki/FAQ#nvim-shows-weird-symbols-2-q-when-changing-modes
+"set guicursor=	"Fix bug of weird character on tmux after vi https://github.com/neovim/neovim/wiki/FAQ#nvim-shows-weird-symbols-2-q-when-changing-modes
 
 " EnCoding
 set enc=UTF-8
