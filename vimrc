@@ -192,6 +192,8 @@ Plug 'wesleyche/SrcExpl'
 Plug 'maralla/completor.vim'
 "Plug 'roxma/nvim-completion-manager'
 "Plug 'prabirshrestha/asyncomplete.vim'
+" Auto Pairs : parenthesis
+Plug 'jiangmiao/auto-pairs'
 
 Plug 'nathanaelkane/vim-indent-guides'
 
