@@ -185,6 +185,10 @@ Plug 'wesleyche/SrcExpl'
 "Plugin 'pyflakes'
 "Plug 'Python-Syntax'
 
+" Markdown
+Plug 'plasticboy/vim-markdown'
+Plug 'JamshedVesuna/vim-markdown-preview'
+
 " Autocompl
 " Bundle 'Valloric/YouCompleteMe'
 " Plug 'AutoComplPop'
@@ -246,6 +250,10 @@ if has("persistent_undo")
 	set undofile
 endif
 nnoremap <leader>ut :UndotreeToggle<CR>:UndotreeFocus<CR>
+
+"Markdown preview requirement. Also `pip install grip`
+let vim_markdown_preview_github=1
+
 
 let g:seoul256_background = 235
 colo seoul256
