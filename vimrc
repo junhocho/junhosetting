@@ -146,6 +146,13 @@ filetype on
 filetype off                  " required!
 
 
+" Auto-paris
+"let g:AutoPairsFlyMode = 0
+"let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`'}
+"let g:AutoPairsShortcutToggle = '<M-p>'
+let g:AutoPairsShortcutFastWrap = '<C-e>'
+let g:AutoPairsShortcutBackInsert = '<C-b>'
+let g:AutoPairsShortcutJump = '<C-n>'
 
 " Syntastic Setting
 set statusline+=%#warningmsg#
@@ -253,6 +260,7 @@ nnoremap <leader>ut :UndotreeToggle<CR>:UndotreeFocus<CR>
 
 "Markdown preview requirement. Also `pip install grip`
 let vim_markdown_preview_github=1
+
 
 
 let g:seoul256_background = 235
