@@ -61,11 +61,11 @@ set laststatus=2
 
 "=== Ctirl.vim ===================
 set runtimepath^=~/.vim/bundle/ctrlp.vim
-let g:ctrlp_show_hidden = 1
+let g:ctrlp_show_hidden = 0
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\.git$\|public$\|log$\|tmp$\|vendor$',
-  \ 'file': '\v\.(exe|so|dll)$'
+  \ 'file': '\v\.(exe|so|dll|png|jpg)$'
   \ }
 " 가장 가까운 .git 디렉토리를 cwd(현재 작업 디렉토리)로 사용
 " 버전 관리를 사용하는 프로젝트를 할 때 꽤 적절하다.
@@ -249,7 +249,7 @@ filetype plugin indent on     " required!
 " NOTE: comments after Bundle commands are not allowed.
 
 
-" ctrlp-obsession
+" ctrlp-obsession : for ctrlp vim sessions
 nnoremap <leader>ss :CtrlPObsession<CR>
 
 " undotree
