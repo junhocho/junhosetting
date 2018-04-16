@@ -145,6 +145,13 @@ filetype on
 filetype off                  " required!
 
 
+" Auto-paris
+"let g:AutoPairsFlyMode = 0
+"let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`'}
+"let g:AutoPairsShortcutToggle = '<M-p>'
+let g:AutoPairsShortcutFastWrap = '<C-e>'
+let g:AutoPairsShortcutBackInsert = '<C-b>'
+let g:AutoPairsShortcutJump = '<C-n>'
 
 " Syntastic Setting
 set statusline+=%#warningmsg#
@@ -183,6 +190,10 @@ Plug 'scrooloose/nerdtree'
 Plug 'wesleyche/SrcExpl'
 "Plug 'Python-Syntax'
 
+" Markdown
+Plug 'plasticboy/vim-markdown'
+Plug 'JamshedVesuna/vim-markdown-preview'
+
 " Autocompl
 " Bundle 'Valloric/YouCompleteMe'
 " Plug 'AutoComplPop'
@@ -190,6 +201,8 @@ Plug 'wesleyche/SrcExpl'
 Plug 'maralla/completor.vim'
 "Plug 'roxma/nvim-completion-manager'
 "Plug 'prabirshrestha/asyncomplete.vim'
+" Auto Pairs : parenthesis
+Plug 'jiangmiao/auto-pairs'
 
 Plug 'nathanaelkane/vim-indent-guides'
 
@@ -245,6 +258,11 @@ if has("persistent_undo")
 	set undofile
 endif
 nnoremap <leader>ut :UndotreeToggle<CR>:UndotreeFocus<CR>
+
+"Markdown preview requirement. Also `pip install grip`
+let vim_markdown_preview_github=1
+
+
 
 let g:seoul256_background = 235
 colo seoul256
