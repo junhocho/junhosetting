@@ -170,18 +170,17 @@ Plug 'tpope/vim-fugitive'
 "Plugin 'Lokaltog/vim-easymotion'  : not necessary to me
 Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
 "Plugin 'tpope/vim-rails.git'
+
 " vim-scripts repos
 " Plug 'L9'
 "Plugin 'FuzzyFinder' --> Use CtrlP instead
+
 " non-GitHub repos
 " Plugin 'git://git.wincent.com/command-t.git' --> Use CtrlP
-" Plugin 'vim-ruby/vim-ruby'
-" Plug 'The-NERD-tree'
 Plug 'scrooloose/nerdtree'
 
 "Plugin 'Source-Explorer-srcexpl.vim'
 Plug 'wesleyche/SrcExpl'
-"Plugin 'pyflakes'
 "Plug 'Python-Syntax'
 
 " Autocompl
@@ -197,6 +196,9 @@ Plug 'nathanaelkane/vim-indent-guides'
 " Syntastic
 "Plugin 'vim-syntastic/syntastic.git' old
 Plug 'scrooloose/syntastic'
+
+" Show marks
+Plug 'jacquesbh/vim-showmarks'
 
 " airline
 Plug 'vim-airline/vim-airline'
