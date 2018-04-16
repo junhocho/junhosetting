@@ -16,12 +16,12 @@ filetype off
 
 "NEOVIM
 "smooth scrolling : http://eduncan911.com/software/fix-slow-scrolling-in-vim-and-neovim.html
-set lazyredraw 
+set lazyredraw
 set mouse=a
 
 "MACVIM
 set guifont=Source\ Code\ Pro\ For\ Powerline:h14
-set guicursor=	
+set guicursor=
 "Fix bug of weird character on tmux after neovim
 "https://github.com/neovim/neovim/wiki/FAQ#nvim-shows-weird-symbols-2-q-when-changing-modes
 
@@ -114,11 +114,13 @@ nmap <leader>bl :ls<CR>
 
 syntax on
 
-map <F1> <ESC>:TagbarToggle<CR>
 "map <F2> <ESC>:NERDTree<CR>
-nnoremap <silent> <special> <F2> :NERDTreeToggle <Bar> if &filetype ==# 'nerdtree' <Bar> wincmd p <Bar> endif<CR>
+nnoremap <silent> <special> <F1> :NERDTreeToggle <Bar> if &filetype ==# 'nerdtree' <Bar> wincmd p <Bar> endif<CR>
+map <C-F1> <ESC>:TagbarToggle<CR>
 
+" Quick Save
 map <F3> <ESC>:w<CR>
+
 " remove white spaces : trailing
 map <F4> <ESC>:%s/\s\+$//e<CR>
 map <F5> <ESC>:edit<CR>
@@ -167,6 +169,8 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
 nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
 
+
+inoremap <C-s> <C-o>:w<CR>
 
 "set rtp+=~/.vim/bundle/Vundle.vim
 call plug#begin('~/.vim/plugged')
