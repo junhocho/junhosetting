@@ -62,7 +62,7 @@ set laststatus=2
 " set noeb vb t_vb=
 
 "=== Ctirl.vim ===================
-set runtimepath^=~/.vim/bundle/ctrlp.vim
+set runtimepath^=~/.vim/plugged/ctrlp.vim
 let g:ctrlp_show_hidden = 0
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_custom_ignore = {
@@ -73,6 +73,12 @@ let g:ctrlp_custom_ignore = {
 " 버전 관리를 사용하는 프로젝트를 할 때 꽤 적절하다.
 " .svn, .hg, .bzr도 지원한다.
 let g:ctrlp_working_path_mode = 'r'
+" Too slow ctrlp: https://stackoverflow.com/questions/21346068/slow-performance-on-ctrlp-it-doesnt-work-to-ignore-some-folders
+let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+if executable('ag')
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
+let g:ctrlp_clear_cache_on_exit = 0
 
 " 단축키를 리더 키로 대체
 nmap <leader>p :CtrlP<cr>
