@@ -123,7 +123,6 @@ syntax on
 
 "map <F2> <ESC>:NERDTree<CR>
 nnoremap <silent> <special> <F1> :NERDTreeToggle <Bar> if &filetype ==# 'nerdtree' <Bar> wincmd p <Bar> endif<CR>
-map <C-F1> <ESC>:TagbarToggle<CR>
 
 " Quick Save
 map <F3> <ESC>:w<CR>
@@ -134,9 +133,10 @@ map <F5> <ESC>:edit<CR>
 map <F6> <ESC>:vs<CR>
 map <F7> <ESC>:sp<CR>
 "map <F8> <ESC>:new<CR>
-nmap <F8> :SrcExplToggle<CR>
-
-map <F9> <ESC>:close<CR>
+nmap <F8> <ESC>:SrcExplToggle<CR>
+:map <F9> <ESC>:TagbarToggle<CR>
+"map <F9> <ESC>:close<CR>
+"
 map <C-TAB> <C-p>
 
 " Split line
@@ -260,6 +260,9 @@ filetype plugin indent on     " required!
 " see :h vundle for more details or wiki for FAQ
 " NOTE: comments after Bundle commands are not allowed.
 
+" ShowMarks
+nnoremap <leader>m :DoShowMarks<CR>
+nnoremap dm :execute 'delmarks '.nr2char(getchar())<cr>
 
 " ctrlp-obsession : for ctrlp vim sessions
 nnoremap <leader>ss :CtrlPObsession<CR>
