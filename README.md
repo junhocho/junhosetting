@@ -9,14 +9,14 @@ For faster clone:
 - Run `./setup-all.sh` then input passwords when needed.
 - `exit` at first zsh to proceed following installs.
 
-powerline font might be needed : https://github.com/powerline/fonts
 
 # Neovim
 
-- Prefer [neovim](https://github.com/neovim/neovim/wiki/Installing-Neovim).
+- I prefer [neovim](https://github.com/neovim/neovim/wiki/Installing-Neovim) over vim.
 - Here's my [`neovim`](./neovim-install.sh).
 - It also installs [vim-plug](https://github.com/junegunn/vim-plug#example)
 - Simple install with `sh neovim-install.sh`
+- powerline font might be needed at your client : https://github.com/powerline/fonts
 
 # Iterm-2 setup
 
