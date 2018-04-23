@@ -10,6 +10,7 @@ let mapleader = ","
 nnoremap L i<CR><Esc>
 nnoremap <C-l> :set nonumber!<CR>
 inoremap <C-s> <C-o>:w<CR>
+:tnoremap <Esc> <C-\><C-n>
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 0
 
 " Default shell as zsh
@@ -56,7 +57,7 @@ set noswapfile
 set cursorline
 set visualbell
 set wildmenu
-set paste!                         "Use when Paste sth
+"set paste!                         "Use when Paste sth
 "set tags=~/caffe_sal/tags
 "set tags+=~/py-faster-rcnn/tags
 set laststatus=2
@@ -197,7 +198,8 @@ Plug 'vim-airline/vim-airline-themes'
 " if not working :IPython, try :UpdateRemotePlugins and restart nvim
 Plug 'hkupty/iron.nvim' "Ipython
 Plug 'tbastos/vim-lua' " Lua plugins
-Plug 'hdima/python-syntax' "Python
+"Plug 'hdima/python-syntax' "Python
+Plug 'junhocho/python-syntax'
 
 " Markdown
 Plug 'plasticboy/vim-markdown'
@@ -218,7 +220,8 @@ filetype plugin indent on     " required!
 " ============================================================================
 
 
-
+" Python syntax
+let python_highlight_all = 1
 
 
 "=== ShowMarks ====
