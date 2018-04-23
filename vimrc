@@ -4,7 +4,12 @@
 " :set vb
 set noeb vb t_vb=
 
+" === Junho custom mapping
 let mapleader = ","
+" Split line
+nnoremap L i<CR><Esc>
+nnoremap <C-l> :set nonumber!<CR>
+inoremap <C-s> <C-o>:w<CR>
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 0
 
 " Default shell as zsh
@@ -15,12 +20,12 @@ set nocompatible
 filetype on
 filetype off
 
-"NEOVIM
+"=== NEOVIM ===
 "smooth scrolling : http://eduncan911.com/software/fix-slow-scrolling-in-vim-and-neovim.html
 set lazyredraw
 set mouse=a
 
-"MACVIM
+"=== MACVIM ===
 set guifont=Source\ Code\ Pro\ For\ Powerline:h14
 set guicursor=
 "Fix bug of weird character on tmux after neovim
@@ -47,19 +52,19 @@ set foldmethod=marker
 set hlsearch
 set background=dark
 set number
-nnoremap <C-l> :set nonumber!<CR>
-set visualbell
 set noswapfile
 set cursorline
-
+set visualbell
 set wildmenu
-"set paste!                         "Use when Paste sth
-set tags=~/caffe_sal/tags
+set paste!                         "Use when Paste sth
+"set tags=~/caffe_sal/tags
 "set tags+=~/py-faster-rcnn/tags
 set laststatus=2
+syntax on
 
 "Prevent freezing vim without tmux
 " set noeb vb t_vb=
+
 
 "=== Ctirl.vim ===================
 set runtimepath^=~/.vim/plugged/ctrlp.vim
@@ -82,7 +87,6 @@ let g:ctrlp_clear_cache_on_exit = 0
 
 " 단축키를 리더 키로 대체
 nmap <leader>p :CtrlP<cr>
-
 " 여러 모드를 위한 단축키
 nmap <leader>bb :CtrlPBuffer<cr>
 nmap <leader>bm :CtrlPMixed<cr>
@@ -96,37 +100,30 @@ let g:airline#extensions#tabline#fnamemod = ':t' "buffer file name print only
 let g:airline_powerline_fonts = 1 "able powerline font. disable if font breaks. Or install powerline-patch
 
 
-" BUFFER : this concept is heavily inspired from
+"===  BUFFER : this concept is heavily inspired from
 " http://bakyeono.net/post/2015-08-13-vim-tab-madness-translate.html
 " 이 옵션은 버퍼를 수정한 직후 버퍼를 감춰지도록 한다.
 " 이 방법으로 버퍼를 사용하려면 거의 필수다.
 set hidden
-
 " 버퍼 새로 열기
 " 원래 이 단축키로 바인딩해 두었던 :tabnew를 대체한다.
 nmap <leader>T :enew<cr>
-
 " 다음 버퍼로 이동
 nmap <leader>' :bnext<CR>
-
 " 이전 버퍼로 이동
 nmap <leader>; :bprevious<CR>
-
 " 현재 버퍼를 닫고 이전 버퍼로 이동
 " 탭 닫기 단축키를 대체한다.
 nmap <leader>bq :bp <BAR> bd #<CR>
-
 " 모든 버퍼와 각 버퍼 상태 출력
 nmap <leader>bl :ls<CR>
 
-syntax on
 
+" === Function keys mapping ===
 "map <F2> <ESC>:NERDTree<CR>
 nnoremap <silent> <special> <F1> :NERDTreeToggle <Bar> if &filetype ==# 'nerdtree' <Bar> wincmd p <Bar> endif<CR>
-
 " Quick Save
 map <F3> <ESC>:w<CR>
-
 " remove white spaces : trailing
 map <F4> <ESC>:%s/\s\+$//e<CR>
 map <F5> <ESC>:edit<CR>
@@ -139,23 +136,15 @@ nmap <F8> <ESC>:SrcExplToggle<CR>
 "
 map <C-TAB> <C-p>
 
-" Split line
-nnoremap L i<CR><Esc>
 
-"ctags
+"=== ctags ===
 map <C-}> :exec("tag /".expand("<cword>"))<CR>
 map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 
 let python_highlight_all = 1
 
-" Vundle
-set nocompatible              " be iMproved
-filetype on
-filetype off                  " required!
-
-
-" Auto-paris
+"===  Auto-paris ===
 "let g:AutoPairsFlyMode = 0
 "let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`'}
 "let g:AutoPairsShortcutToggle = '<M-p>'
@@ -163,44 +152,35 @@ let g:AutoPairsShortcutFastWrap = '<C-e>'
 let g:AutoPairsShortcutBackInsert = '<C-b>'
 let g:AutoPairsShortcutJump = '<C-n>'
 
-" Syntastic Setting
+"=== Syntastic Setting ===
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-
 let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
 nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
 
 
-inoremap <C-s> <C-o>:w<CR>
-
-"set rtp+=~/.vim/bundle/Vundle.vim
+"============= PLUG ===============
 call plug#begin('~/.vim/plugged')
 
-" let Vundle manage Vundle
-" required!
-"Plugin 'gmarik/vundle'
-Plug 'tpope/vim-fugitive'
-"Plugin 'Lokaltog/vim-easymotion'  : not necessary to me
+Plug 'tpope/vim-fugitive' "Git wrapper
 Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
-"Plugin 'tpope/vim-rails.git'
 
 " vim-scripts repos
 " Plug 'L9'
 "Plugin 'FuzzyFinder' --> Use CtrlP instead
 
-" non-GitHub repos
-" Plugin 'git://git.wincent.com/command-t.git' --> Use CtrlP
 Plug 'scrooloose/nerdtree'
-
-"Plugin 'Source-Explorer-srcexpl.vim'
 Plug 'wesleyche/SrcExpl'
-"Plug 'Python-Syntax'
+
+" Ipython
+" if not working :IPython, try :UpdateRemotePlugins and restart nvim
+Plug 'hkupty/iron.nvim' "Ipython
+Plug 'tbastos/vim-lua' " Lua plugins
 
 " Markdown
 Plug 'plasticboy/vim-markdown'
@@ -209,24 +189,17 @@ Plug 'JamshedVesuna/vim-markdown-preview'
 " Autocompl
 " Bundle 'Valloric/YouCompleteMe'
 " Plug 'AutoComplPop'
-"Plug 'davidhalter/vim-jedi'
+" Plug 'davidhalter/vim-jedi'
+" Plug 'roxma/nvim-completion-manager'
+" Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'maralla/completor.vim'
-"Plug 'roxma/nvim-completion-manager'
-"Plug 'prabirshrestha/asyncomplete.vim'
-" Auto Pairs : parenthesis
-Plug 'jiangmiao/auto-pairs'
 
 Plug 'nathanaelkane/vim-indent-guides'
+Plug 'jiangmiao/auto-pairs' " Auto Pairs : parenthesis
+Plug 'scrooloose/syntastic' " Syntastic
+Plug 'jacquesbh/vim-showmarks' "Show marks
 
-" Syntastic
-"Plugin 'vim-syntastic/syntastic.git' old
-Plug 'scrooloose/syntastic'
-
-" Show marks
-Plug 'jacquesbh/vim-showmarks'
-
-" airline
-Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline' " airline
 Plug 'vim-airline/vim-airline-themes'
 "more airline compatible plugins
 Plug 'airblade/vim-gitgutter'
@@ -236,16 +209,10 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-obsession'
 Plug 'dhruvasagar/vim-prosession'
 Plug 'gikmx/ctrlp-obsession'
-Plug 'mbbill/undotree'
-Plug 'junegunn/seoul256.vim'
+Plug 'mbbill/undotree' "Undotree
+Plug 'majutsushi/tagbar' " Tagbar
+Plug 'junegunn/seoul256.vim' "Theme
 
-" Tagbar
-" git clone git://github.com/majutsushi/tagbar ~/.vim/bundle/tagbar
-Plug 'majutsushi/tagbar'
-
-" Lua plugins
-" git clone https://github.com/tbastos/vim-lua.git ~/.vim/bundle/vim-lua
-Plug 'tbastos/vim-lua'
 
 
 call plug#end()             " required
@@ -259,25 +226,30 @@ filetype plugin indent on     " required!
 "
 " see :h vundle for more details or wiki for FAQ
 " NOTE: comments after Bundle commands are not allowed.
+" ============================================================================
 
-" ShowMarks
+
+
+
+
+"=== ShowMarks ====
 nnoremap <leader>m :DoShowMarks<CR>
 nnoremap dm :execute 'delmarks '.nr2char(getchar())<cr>
 
 " ctrlp-obsession : for ctrlp vim sessions
 nnoremap <leader>ss :CtrlPObsession<CR>
 
-" undotree
+"===  undotree ===
 if has("persistent_undo")
 	set undodir=~/.vim/.undodir/
 	set undofile
 endif
 nnoremap <leader>ut :UndotreeToggle<CR>:UndotreeFocus<CR>
 
-"Markdown preview requirement. Also `pip install grip`
+"=== Markdown preview requirement. Also `pip install grip`
 let vim_markdown_preview_github=1
 
 
-
+"=== Theme ===
 let g:seoul256_background = 235
 colo seoul256
