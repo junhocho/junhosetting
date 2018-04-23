@@ -142,7 +142,6 @@ map <C-}> :exec("tag /".expand("<cword>"))<CR>
 map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 
-let python_highlight_all = 1
 
 "===  Auto-paris ===
 "let g:AutoPairsFlyMode = 0
@@ -194,10 +193,11 @@ Plug 'junegunn/seoul256.vim' "Theme
 Plug 'vim-airline/vim-airline' " airline
 Plug 'vim-airline/vim-airline-themes'
 
-" Ipython
+" Language
 " if not working :IPython, try :UpdateRemotePlugins and restart nvim
 Plug 'hkupty/iron.nvim' "Ipython
 Plug 'tbastos/vim-lua' " Lua plugins
+Plug 'hdima/python-syntax' "Python
 
 " Markdown
 Plug 'plasticboy/vim-markdown'
