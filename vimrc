@@ -167,15 +167,32 @@ nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
 "============= PLUG ===============
 call plug#begin('~/.vim/plugged')
 
-Plug 'tpope/vim-fugitive' "Git wrapper
-Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Git
+Plug 'airblade/vim-gitgutter' "Shows git diff
+Plug 'tpope/vim-fugitive' "Git wrapper in vim
 
-" vim-scripts repos
-" Plug 'L9'
-"Plugin 'FuzzyFinder' --> Use CtrlP instead
-
+" Easier browsing through vim
 Plug 'scrooloose/nerdtree'
 Plug 'wesleyche/SrcExpl'
+Plug 'majutsushi/tagbar' " Tagbar
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'tpope/vim-obsession'
+Plug 'dhruvasagar/vim-prosession'
+Plug 'gikmx/ctrlp-obsession' "Session navigator using vim-obsession/vim-prosession
+
+" Easy Editting
+Plug 'maralla/completor.vim' " Autocompl
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'jiangmiao/auto-pairs' " Auto Pairs : parenthesis
+Plug 'mbbill/undotree' "Undotree
+Plug 'tpope/vim-commentary' "Comment with gcc and gc
+
+" Visualize
+Plug 'jacquesbh/vim-showmarks' "Show marks
+Plug 'scrooloose/syntastic' " Syntastic
+Plug 'junegunn/seoul256.vim' "Theme
+Plug 'vim-airline/vim-airline' " airline
+Plug 'vim-airline/vim-airline-themes'
 
 " Ipython
 " if not working :IPython, try :UpdateRemotePlugins and restart nvim
@@ -185,34 +202,6 @@ Plug 'tbastos/vim-lua' " Lua plugins
 " Markdown
 Plug 'plasticboy/vim-markdown'
 Plug 'JamshedVesuna/vim-markdown-preview'
-
-" Autocompl
-" Bundle 'Valloric/YouCompleteMe'
-" Plug 'AutoComplPop'
-" Plug 'davidhalter/vim-jedi'
-" Plug 'roxma/nvim-completion-manager'
-" Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'maralla/completor.vim'
-
-Plug 'nathanaelkane/vim-indent-guides'
-Plug 'jiangmiao/auto-pairs' " Auto Pairs : parenthesis
-Plug 'scrooloose/syntastic' " Syntastic
-Plug 'jacquesbh/vim-showmarks' "Show marks
-
-Plug 'vim-airline/vim-airline' " airline
-Plug 'vim-airline/vim-airline-themes'
-"more airline compatible plugins
-Plug 'airblade/vim-gitgutter'
-Plug 'ctrlpvim/ctrlp.vim'
-
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-obsession'
-Plug 'dhruvasagar/vim-prosession'
-Plug 'gikmx/ctrlp-obsession'
-Plug 'mbbill/undotree' "Undotree
-Plug 'majutsushi/tagbar' " Tagbar
-Plug 'junegunn/seoul256.vim' "Theme
-
 
 
 call plug#end()             " required
