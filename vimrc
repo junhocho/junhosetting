@@ -24,6 +24,8 @@ filetype off
 "=== NEOVIM ===
 "smooth scrolling : http://eduncan911.com/software/fix-slow-scrolling-in-vim-and-neovim.html
 set lazyredraw
+set synmaxcol=128
+syntax sync minlines=256
 set mouse=a
 
 "=== MACVIM ===
