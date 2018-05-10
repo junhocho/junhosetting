@@ -28,6 +28,7 @@ sudo apt-get update
 sudo apt-get install -y tmux=2.0-1~ppa1~t
 
 
+# Tmux resurrect
 git clone https://github.com/tmux-plugins/tmux-resurrect ~/junhosetting/tmux-resurrect
 
 # cp ~/junhosetting/tmux.conf ~/.tmux.conf
