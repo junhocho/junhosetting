@@ -2,9 +2,6 @@ sudo add-apt-repository ppa:neovim-ppa/unstable
 sudo apt-get update
 sudo apt-get install neovim ctags -y
 
-sudo pip install neovim
-# pip install neovim # if python overided
-
 # Config changed from neovim
 mkdir -p ~/.config/nvim/
 echo "source ~/.vimrc" >> ~/.config/nvim/init.vim

@@ -21,11 +21,12 @@ echo 'source ~/junhosetting/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh'
 # Copy my setup to zshrc
 cat my-zsh-setup >> ~/.zshrc
 
+# TMUX
 # install tmux and set tmux.conf
-sudo apt-get install -y python-software-properties software-properties-common
-sudo add-apt-repository -y ppa:pi-rho/dev
+# sudo apt-get install -y python-software-properties software-properties-common
+# sudo add-apt-repository -y ppa:pi-rho/dev
 sudo apt-get update
-sudo apt-get install -y tmux=2.0-1~ppa1~t
+sudo apt-get install tmux #-y tmux=2.0-1~ppa1~t
 
 
 # Tmux resurrect
@@ -43,6 +44,17 @@ echo 'source ~/junhosetting/vimrc' > ~/.vimrc
 
 # change default shell
 sudo chsh -s /usr/bin/zsh ${USER}
+
+
+# ANACONDA and python setup
+wget https://repo.anaconda.com/archive/Anaconda3-5.1.0-Linux-x86_64.sh
+bash Anaconda3-5.1.0-Linux-x86_64.sh
+echo 'export PATH="/home/junho/anaconda3/bin:$PATH"' >> ~/.zshrc
+
+# Neovim install
+./neovim-install.sh
+
+# Install Pytorch here : https://pytorch.org/
 
 echo "Now enjoy! start with command : zsh!"
 zsh
