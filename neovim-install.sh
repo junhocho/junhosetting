@@ -27,7 +27,7 @@ git clone https://github.com/junegunn/seoul256.vim.git ~/.vim/plugged/seoul256.v
 
 
 pip install neovim
-nvim +PluginInstall
+nvim +PlugInstall
 cd ~/.vim/plugged/YouCompleteMe
 git submodule update --init --recursive
 ./install.sh
