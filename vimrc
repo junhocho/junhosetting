@@ -54,7 +54,7 @@ set hlsearch
 set background=dark
 set number
 set noswapfile
-set cursorline
+" set cursorline
 set visualbell
 set wildmenu
 "set paste!                         "Use when Paste sth
@@ -186,6 +186,7 @@ Plug 'nathanaelkane/vim-indent-guides'
 Plug 'jiangmiao/auto-pairs' " Auto Pairs : parenthesis
 Plug 'mbbill/undotree' "Undotree
 Plug 'tpope/vim-commentary' "Comment with gcc and gc
+Plug 'Yggdroot/indentLine'
 
 " Visualize
 Plug 'jacquesbh/vim-showmarks' "Show marks
