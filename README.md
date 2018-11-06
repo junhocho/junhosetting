@@ -1,7 +1,7 @@
 # Junho setting
 
 For faster clone:
-`git clone --depth 1 https://github.com/junhocho/junhosetting.git`
+`git clone --depth 1 git@github.com:junhocho/junhosetting.git`
 
 ## you can configure zsh, vim plugins, tmux with `./setup-all.sh`
 
