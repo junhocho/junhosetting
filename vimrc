@@ -56,7 +56,7 @@ set hlsearch
 set background=dark
 set number
 set noswapfile
-set cursorline
+" set cursorline
 set visualbell
 set wildmenu
 "set paste!                         "Use when Paste sth
@@ -202,6 +202,7 @@ Plug 'hkupty/iron.nvim' "Ipython
 Plug 'tbastos/vim-lua' " Lua plugins
 "Plug 'hdima/python-syntax' "Python
 Plug 'junhocho/python-syntax'
+Plug 'Yggdroot/indentLine'
 
 " Markdown
 Plug 'plasticboy/vim-markdown'
