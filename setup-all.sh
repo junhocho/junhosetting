@@ -9,17 +9,8 @@ git config --global user.name "junhocho"
 git config --global push.default simple
 git config --global core.editor vim
 
-# install zsh and ohmyz.sh
-sudo apt-get install zsh curl -y
-sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"  # install
-
-# install zsh highlight
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
-echo 'source ~/junhosetting/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh' >> ${ZDOTDIR:-$HOME}/.zshrc
-# source zsh later
-
-# Copy my setup to zshrc
-cat my-zsh-setup >> ~/.zshrc
+# ZSH
+sh setup-zsh.sh
 
 # TMUX
 # install tmux and set tmux.conf
@@ -46,10 +37,6 @@ echo 'source ~/junhosetting/vimrc' > ~/.vimrc
 sudo chsh -s /usr/bin/zsh ${USER}
 
 
-# ANACONDA and python setup
-wget https://repo.anaconda.com/archive/Anaconda3-5.1.0-Linux-x86_64.sh
-bash Anaconda3-5.1.0-Linux-x86_64.sh
-echo 'export PATH="/home/junho/anaconda3/bin:$PATH"' >> ~/.zshrc
 
 # Neovim install
 ./neovim-install.sh
