@@ -202,7 +202,8 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'hkupty/iron.nvim' "Ipython
 Plug 'tbastos/vim-lua' " Lua plugins
 "Plug 'hdima/python-syntax' "Python
-Plug 'junhocho/python-syntax'
+" Plug 'junhocho/python-syntax'
+Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 
 " Markdown
 Plug 'plasticboy/vim-markdown'
@@ -223,8 +224,8 @@ filetype plugin indent on     " required!
 " ============================================================================
 
 
-" Python syntax
-let python_highlight_all = 1
+" " Python syntax
+" let python_highlight_all = 1
 
 
 "=== ShowMarks ====
