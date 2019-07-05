@@ -88,6 +88,7 @@ if executable('ag')
 endif
 let g:ctrlp_clear_cache_on_exit = 0
 
+noremap <leader>s :update<CR>
 " 단축키를 리더 키로 대체
 nmap <leader>p :CtrlP<cr>
 " 여러 모드를 위한 단축키
