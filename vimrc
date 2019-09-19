@@ -204,9 +204,6 @@ Plug 'tbastos/vim-lua' " Lua plugins
 "Plug 'hdima/python-syntax' "Python
 Plug 'junhocho/python-syntax'
 
-" Markdown
-Plug 'plasticboy/vim-markdown'
-Plug 'JamshedVesuna/vim-markdown-preview'
 
 
 call plug#end()             " required
