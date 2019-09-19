@@ -88,6 +88,7 @@ if executable('ag')
 endif
 let g:ctrlp_clear_cache_on_exit = 0
 
+noremap <leader>s :update<CR>
 " 단축키를 리더 키로 대체
 nmap <leader>p :CtrlP<cr>
 " 여러 모드를 위한 단축키
@@ -202,7 +203,9 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'hkupty/iron.nvim' "Ipython
 Plug 'tbastos/vim-lua' " Lua plugins
 "Plug 'hdima/python-syntax' "Python
-Plug 'junhocho/python-syntax'
+" Plug 'junhocho/python-syntax'
+Plug 'Yggdroot/indentLine'
+Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 
 
 
@@ -220,8 +223,8 @@ filetype plugin indent on     " required!
 " ============================================================================
 
 
-" Python syntax
-let python_highlight_all = 1
+" " Python syntax
+" let python_highlight_all = 1
 
 
 "=== ShowMarks ====
