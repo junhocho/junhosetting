@@ -65,6 +65,8 @@ set wildmenu
 set laststatus=2
 syntax on
 
+set colorcolumn=129
+
 "Prevent freezing vim without tmux
 " set noeb vb t_vb=
 
@@ -208,8 +210,8 @@ Plug 'Yggdroot/indentLine'
 Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 
 " Markdown
-Plug 'plasticboy/vim-markdown'
-Plug 'JamshedVesuna/vim-markdown-preview'
+" Plug 'plasticboy/vim-markdown'
+" Plug 'JamshedVesuna/vim-markdown-preview'
 
 
 call plug#end()             " required
@@ -244,8 +246,8 @@ if has("persistent_undo")
 endif
 nnoremap <leader>ut :UndotreeToggle<CR>:UndotreeFocus<CR>
 
-"=== Markdown preview requirement. Also `pip install grip`
-let vim_markdown_preview_github=1
+""=== Markdown preview requirement. Also `pip install grip`
+"let vim_markdown_preview_github=1
 
 
 "=== Theme ===
