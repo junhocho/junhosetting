@@ -65,6 +65,8 @@ set wildmenu
 set laststatus=2
 syntax on
 
+set colorcolumn=129
+
 "Prevent freezing vim without tmux
 " set noeb vb t_vb=
 
@@ -88,6 +90,7 @@ if executable('ag')
 endif
 let g:ctrlp_clear_cache_on_exit = 0
 
+noremap <leader>s :update<CR>
 " 단축키를 리더 키로 대체
 nmap <leader>p :CtrlP<cr>
 " 여러 모드를 위한 단축키
@@ -251,8 +254,8 @@ if has("persistent_undo")
 endif
 nnoremap <leader>ut :UndotreeToggle<CR>:UndotreeFocus<CR>
 
-"=== Markdown preview requirement. Also `pip install grip`
-let vim_markdown_preview_github=1
+""=== Markdown preview requirement. Also `pip install grip`
+"let vim_markdown_preview_github=1
 
 
 "=== Theme ===
