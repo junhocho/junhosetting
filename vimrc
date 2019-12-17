@@ -9,7 +9,7 @@ let mapleader = ","
 " Split line
 nnoremap L i<CR><Esc>
 nnoremap <C-l> :set nonumber!<CR>
-inoremap <C-s> <C-o>:w<CR>
+nnoremap <C-i> :IndentLinesToggle<CR>
 :tnoremap <Esc> <C-\><C-n>
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 0
 
@@ -127,9 +127,17 @@ nmap <leader>bl :ls<CR>
 nnoremap <silent> <special> <F1> :NERDTreeToggle <Bar> if &filetype ==# 'nerdtree' <Bar> wincmd p <Bar> endif<CR>
 " Quick Save
 map <F3> <ESC>:w<CR>
+" inoremap <C-s> <C-o>:w<ESC><CR>
+" inoremap <C-s> <ESC>:w<ESC><CR>a
+:imap <c-s> <ESC>:w<CR>
+:map <c-s> <Esc>:w<CR>
+:imap <c-q> <ESC>:q<CR>
+:map <c-q> <Esc>:q<CR>
+
 " remove white spaces : trailing
 map <F4> <ESC>:%s/\s\+$//e<CR>
 map <F5> <ESC>:edit<CR>
+imap <C-5> <ESC>:edit<CR>
 map <F6> <ESC>:vs<CR>
 map <F7> <ESC>:sp<CR>
 "map <F8> <ESC>:new<CR>
@@ -207,8 +215,8 @@ Plug 'Yggdroot/indentLine'
 Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 
 " Markdown
-Plug 'plasticboy/vim-markdown'
-Plug 'JamshedVesuna/vim-markdown-preview'
+" Plug 'plasticboy/vim-markdown'
+" Plug 'JamshedVesuna/vim-markdown-preview'
 
 
 call plug#end()             " required
