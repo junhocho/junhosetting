@@ -1,6 +1,3 @@
-sudo add-apt-repository ppa:neovim-ppa/unstable
-sudo apt-get update
-sudo apt-get install neovim ctags -y
 
 # Config changed from neovim
 mkdir -p ~/.config/nvim/
