@@ -180,7 +180,12 @@ nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
 call plug#begin('~/.vim/plugged')
 
 " Git
-Plug 'airblade/vim-gitgutter' "Shows git diff
+" Plug 'airblade/vim-gitgutter' "Shows git diff
+if has('nvim') || has('patch-8.0.902')
+  Plug 'mhinz/vim-signify'
+else
+  Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
+endif
 Plug 'tpope/vim-fugitive' "Git wrapper in vim
 
 " Easier browsing through vim
