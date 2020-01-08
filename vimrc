@@ -8,7 +8,7 @@ set noeb vb t_vb=
 let mapleader = ","
 " Split line
 nnoremap L i<CR><Esc>
-nnoremap <C-l> :set nonumber!<CR>:GitGutterToggle<CR>:IndentLinesToggle<CR>
+nnoremap <C-l> :edit!<CR>:set nonumber!<CR>:IndentLinesToggle<CR>:GitGutterToggle<CR>
 :tnoremap <Esc> <C-\><C-n>
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 0
 
@@ -211,6 +211,10 @@ Plug 'scrooloose/syntastic' " Syntastic
 Plug 'junegunn/seoul256.vim' "Theme
 Plug 'vim-airline/vim-airline' " airline
 Plug 'vim-airline/vim-airline-themes'
+
+" pane highlight
+Plug 'blueyed/vim-diminactive'
+Plug 'tmux-plugins/vim-tmux-focus-events'
 
 " Language
 " if not working :IPython, try :UpdateRemotePlugins and restart nvim
