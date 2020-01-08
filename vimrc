@@ -8,7 +8,8 @@ set noeb vb t_vb=
 let mapleader = ","
 " Split line
 nnoremap L i<CR><Esc>
-nnoremap <C-l> :edit!<CR>:set nonumber!<CR>:IndentLinesToggle<CR>:GitGutterToggle<CR>
+" nnoremap <C-l> :edit!<CR>:set nonumber!<CR>:IndentLinesToggle<CR>:GitGutterToggle<CR>
+nnoremap <C-l> :SignifyToggle<CR>:edit!<CR>:set nonumber!<CR>:IndentLinesToggle<CR>
 :tnoremap <Esc> <C-\><C-n>
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 0
 

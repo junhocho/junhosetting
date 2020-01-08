@@ -41,3 +41,5 @@ cd ~/junhosetting
 ln -s ~/.vimrc  ~/.config/nvim/init.vim
 echo "alias vi='nvim'" >> ~/.zshrc
 echo "Now Reload your zsh!"
+
+git config --global core.editor $(which nvim)
