@@ -28,11 +28,6 @@ echo 'source ~/junhosetting/vimrc' > ~/.vimrc
 # change default shell
 chsh -s /usr/bin/zsh ${USER}
 
-
-
-# Neovim install
-./neovim-install.sh
-
 # Install Pytorch here : https://pytorch.org/
 
 echo "Now enjoy! start with command : zsh!"

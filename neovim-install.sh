@@ -1,3 +1,5 @@
+# Python3 required!!
+pip install neovim
 
 # Config changed from neovim
 mkdir -p ~/.config/nvim/
@@ -23,7 +25,6 @@ curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
 # #git clone https://github.com/maralla/completor.vim.git ~/.vim/plugged/completor/start/completor.vim
 
 
-pip install neovim
 nvim +PlugInstall
 nvim +UpdateRemotePlugins
 # cd ~/.vim/plugged/YouCompleteMe
