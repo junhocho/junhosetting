@@ -10,7 +10,6 @@ let mapleader = ","
 nnoremap L i<CR><Esc>
 " nnoremap <C-l> :edit!<CR>:set nonumber!<CR>:IndentLinesToggle<CR>:GitGutterToggle<CR>
 nnoremap <C-l> :SignifyToggle<CR>:edit!<CR>:set nonumber!<CR>:IndentLinesToggle<CR>
-:tnoremap <Esc> <C-\><C-n>
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 0
 
 " Default shell as zsh
@@ -224,7 +223,6 @@ Plug 'tbastos/vim-lua' " Lua plugins
 "Plug 'hdima/python-syntax' "Python
 " Plug 'junhocho/python-syntax'
 Plug 'Yggdroot/indentLine'
-Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 
 " Markdown
 " Plug 'plasticboy/vim-markdown'

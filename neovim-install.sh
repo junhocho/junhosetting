@@ -5,9 +5,6 @@ pip install neovim
 mkdir -p ~/.config/nvim/
 echo "source ~/.vimrc" >> ~/.config/nvim/init.vim
 
-# Old deprcated
-#curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
-#    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
@@ -26,6 +23,10 @@ curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
 
 
 nvim +PlugInstall
+
+
+# echo "Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}" >> 
+
 nvim +UpdateRemotePlugins
 # cd ~/.vim/plugged/YouCompleteMe
 # git submodule update --init --recursive

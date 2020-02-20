@@ -20,10 +20,14 @@ git clone https://github.com/tmux-plugins/tmux-resurrect ~/junhosetting/tmux-res
 echo 'source ~/junhosetting/tmux.conf' > ~/.tmux.conf
 tmux source ~/.tmux.conf
 
+# VIM
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+	    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 # install vim and copy .vimrc
 # cp ~/junhosetting/vimrc ~/.vimrc
 # --> source vimrc for frequent vimrc update
 echo 'source ~/junhosetting/vimrc' > ~/.vimrc
+vim +PlugInstall
 
 # change default shell
 chsh -s /usr/bin/zsh ${USER}
