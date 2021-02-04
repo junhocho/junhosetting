@@ -8,9 +8,8 @@ set noeb vb t_vb=
 let mapleader = ","
 " Split line
 nnoremap L i<CR><Esc>
-nnoremap <C-l> :set nonumber!<CR>
-inoremap <C-s> <C-o>:w<CR>
-:tnoremap <Esc> <C-\><C-n>
+" nnoremap <C-l> :edit!<CR>:set nonumber!<CR>:IndentLinesToggle<CR>:GitGutterToggle<CR>
+nnoremap <C-l> :SignifyToggle<CR>:edit!<CR>:set nonumber!<CR>:IndentLinesToggle<CR>
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 0
 
 " Default shell as zsh
@@ -64,6 +63,8 @@ set wildmenu
 "set tags+=~/py-faster-rcnn/tags
 set laststatus=2
 syntax on
+
+set colorcolumn=129
 
 "Prevent freezing vim without tmux
 " set noeb vb t_vb=
@@ -128,9 +129,17 @@ nmap <leader>bl :ls<CR>
 nnoremap <silent> <special> <F1> :NERDTreeToggle <Bar> if &filetype ==# 'nerdtree' <Bar> wincmd p <Bar> endif<CR>
 " Quick Save
 map <F3> <ESC>:w<CR>
+" inoremap <C-s> <C-o>:w<ESC><CR>
+" inoremap <C-s> <ESC>:w<ESC><CR>a
+:imap <c-s> <ESC>:w<CR>
+:map <c-s> <Esc>:w<CR>
+:imap <c-q> <ESC>:q<CR>
+:map <c-q> <Esc>:q<CR>
+
 " remove white spaces : trailing
 map <F4> <ESC>:%s/\s\+$//e<CR>
 map <F5> <ESC>:edit<CR>
+imap <C-5> <ESC>:edit<CR>
 map <F6> <ESC>:vs<CR>
 map <F7> <ESC>:sp<CR>
 "map <F8> <ESC>:new<CR>
@@ -171,7 +180,12 @@ nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
 call plug#begin('~/.vim/plugged')
 
 " Git
-Plug 'airblade/vim-gitgutter' "Shows git diff
+" Plug 'airblade/vim-gitgutter' "Shows git diff
+if has('nvim') || has('patch-8.0.902')
+  Plug 'mhinz/vim-signify'
+else
+  Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
+endif
 Plug 'tpope/vim-fugitive' "Git wrapper in vim
 
 " Easier browsing through vim
@@ -198,6 +212,10 @@ Plug 'junegunn/seoul256.vim' "Theme
 Plug 'vim-airline/vim-airline' " airline
 Plug 'vim-airline/vim-airline-themes'
 
+" pane highlight
+Plug 'blueyed/vim-diminactive'
+Plug 'tmux-plugins/vim-tmux-focus-events'
+
 " Language
 " if not working :IPython, try :UpdateRemotePlugins and restart nvim
 Plug 'hkupty/iron.nvim' "Ipython
@@ -205,8 +223,10 @@ Plug 'tbastos/vim-lua' " Lua plugins
 "Plug 'hdima/python-syntax' "Python
 " Plug 'junhocho/python-syntax'
 Plug 'Yggdroot/indentLine'
-Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 
+" Markdown
+" Plug 'plasticboy/vim-markdown'
+" Plug 'JamshedVesuna/vim-markdown-preview'
 
 
 call plug#end()             " required
@@ -241,8 +261,8 @@ if has("persistent_undo")
 endif
 nnoremap <leader>ut :UndotreeToggle<CR>:UndotreeFocus<CR>
 
-"=== Markdown preview requirement. Also `pip install grip`
-let vim_markdown_preview_github=1
+""=== Markdown preview requirement. Also `pip install grip`
+"let vim_markdown_preview_github=1
 
 
 "=== Theme ===
