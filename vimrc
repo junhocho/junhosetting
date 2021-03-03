@@ -223,6 +223,7 @@ Plug 'tbastos/vim-lua' " Lua plugins
 "Plug 'hdima/python-syntax' "Python
 " Plug 'junhocho/python-syntax'
 Plug 'Yggdroot/indentLine'
+Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 
 " Markdown
 " Plug 'plasticboy/vim-markdown'
