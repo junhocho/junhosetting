@@ -1,4 +1,7 @@
-alias ta="tmux attach -t "
+alias ta="tmux attach -t"
+alias ta0="tmux attach -dt 0"
+alias ta1="tmux attach -dt 1"
+alias ta3="tmux attach -dt 2"
 alias tn="tmux new -s "
 alias fc='ls . | wc -l'
 alias grepn="grep -nr --color "
@@ -6,7 +9,4 @@ alias wn="watch nvidia-smi"
 alias jp="jupyter notebook --no-browser"
 alias vi='nvim'
 alias zshreload='source ~/.zshrc'
-
-# For iTerm-2 from client macbook
-DISABLE_AUTO_TITLE="true"
-echo -ne "\e]1;PC NAME\a"
+alias sudormall='sudo rm -rf *'

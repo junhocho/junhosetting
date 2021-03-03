@@ -7,4 +7,5 @@ echo 'source ~/junhosetting/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh'
 # source zsh later
 
 # Copy my setup to zshrc
-cat my-zsh-setup >> ~/.zshrc
+echo 'source ~/junhosetting/my-zsh-alias'  >> ~/.zshrc
+cat my-zsh-iterm >> ~/.zshrc
