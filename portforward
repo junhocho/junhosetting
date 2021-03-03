@@ -1,14 +1,2 @@
 #!/bin/bash
 ssh -L localhost:$2:localhost:$2 $1 
-if [ ! -z "$3" ]
-  then
-	ssh -L localhost:$3:localhost:$3 $1 
-fi
-if [ ! -z "$4" ]
-  then
-	ssh -L localhost:$4:localhost:$4 $1 
-fi
-if [ ! -z "$5" ]
-  then
-	ssh -L localhost:$5:localhost:$5 $1 
-fi
