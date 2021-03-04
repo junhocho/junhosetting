@@ -133,7 +133,7 @@ map <F3> <ESC>:w<CR>
 " inoremap <C-s> <ESC>:w<ESC><CR>a
 :imap <c-s> <ESC>:w<CR>
 :map <c-s> <Esc>:w<CR>
-:imap <c-q> <ESC>:q<CR>
+:imap <c-d> <ESC>:q<CR>
 :map <c-q> <Esc>:q<CR>
 
 " remove white spaces : trailing
