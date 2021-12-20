@@ -7,6 +7,8 @@ ssh-keygen -t rsa -C "junhocho@snu.ac.kr"
 eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/id_rsa
 
+// add `~/.ssh/id_rsa` in github profile SSH keys.
+
 ssh -T git@github.com
 ```
 
