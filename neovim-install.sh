@@ -1,3 +1,13 @@
+# VIM
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+	    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+# install vim and copy .vimrc
+# cp ~/junhosetting/vimrc ~/.vimrc
+# --> source vimrc for frequent vimrc update
+echo 'source ~/junhosetting/vimrc' > ~/.vimrc
+
+vim +PlugInstall
+
 # Python3 required!!
 pip install neovim
 
