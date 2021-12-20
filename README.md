@@ -1,5 +1,17 @@
 # Junho setting
 
+## setup github authentication
+
+```
+ssh-keygen -t rsa -C "junhocho@snu.ac.kr"
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_rsa
+
+ssh -T git@github.com
+```
+
+## git clone
+
 For faster clone:
 `git clone --depth 1 git@github.com:junhocho/junhosetting.git`
 
