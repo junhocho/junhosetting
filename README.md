@@ -28,7 +28,7 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCxGz3eKcLzhHmoQG+RXaPChdKKs+HxHCgGw2XZHyl6
 For faster clone:
 `git clone --depth 1 git@github.com:junhocho/junhosetting.git`
 
-## you can configure zsh, vim plugins, tmux with `./setup-all.sh`
+## you can configure zsh, tmux with `./setup-all.sh`
 
 - It installs all zsh, vim , tmux firt
 - Run `./setup-all.sh` then input passwords when needed.
@@ -38,8 +38,9 @@ For faster clone:
 
 - Install python3. `sh setup-anaconda.sh`
 
-# Neovim
+## Neovim
 
+- vim plugins and neovim
 - I prefer [neovim](https://github.com/neovim/neovim/wiki/Installing-Neovim) over vim.
 - Here's my [`neovim`](./neovim-install.sh).
 - It also installs [vim-plug](https://github.com/junegunn/vim-plug#example)
@@ -55,6 +56,15 @@ For faster clone:
 ```
 DISABLE_AUTO_TITLE="true"
 echo -ne "\e]1;serverName\a"
+```
+
+## Install autojump
+
+```
+git clone git://github.com/wting/autojump.git
+cd autojump
+./install.py or ./uninstall.py
+
 ```
 
 # Some more explanations:
