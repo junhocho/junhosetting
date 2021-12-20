@@ -5,8 +5,8 @@
 
 
 # GIT setup
-# git config --global user.email "junhocho@snu.ac.kr"
-# git config --global user.name "junhocho"
+git config --global user.email "junhocho@snu.ac.kr"
+git config --global user.name "junhocho"
 git config --global push.default simple
 git config --global core.editor vim
 

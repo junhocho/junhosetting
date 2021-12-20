@@ -1,6 +1,10 @@
 # Python3 required!!
 pip install neovim
 
+
+curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage ~
+chmod u+x ~/nvim.appimage
+
 # Config changed from neovim
 mkdir -p ~/.config/nvim/
 echo "source ~/.vimrc" >> ~/.config/nvim/init.vim
@@ -38,7 +42,7 @@ cd ~/junhosetting
 # also make .nvimrc symlink
 # ln -s ~/.vimrc ~/.nvimrc
 # ln -s ~/.vimrc  ~/.config/nvim/init.vim
-echo "alias vi='nvim'" >> ~/.bashrc
-echo "alias vi='nvim'" >> ~/.zshrc
+echo "alias vi='~/nvim.appimage'" >> ~/.bashrc
+echo "alias vi='~/nvim.appimage'" >> ~/.zshrc
 
 git config --global core.editor $(which nvim)
