@@ -1,5 +1,19 @@
+source ~/.zshrc	
+
+# VIM
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+	    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+# install vim and copy .vimrc
+# cp ~/junhosetting/vimrc ~/.vimrc
+# --> source vimrc for frequent vimrc update
+echo 'source ~/junhosetting/vimrc' > ~/.vimrc
+
 # Python3 required!!
 pip install neovim
+
+
+curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
+chmod u+x nvim.appimage
 
 # Config changed from neovim
 mkdir -p ~/.config/nvim/
@@ -22,12 +36,10 @@ curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
 # #git clone https://github.com/maralla/completor.vim.git ~/.vim/plugged/completor/start/completor.vim
 
 
-nvim +PlugInstall
 
 
 # echo "Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}" >> 
 
-nvim +UpdateRemotePlugins
 # cd ~/.vim/plugged/YouCompleteMe
 # git submodule update --init --recursive
 # ./install.sh
@@ -38,7 +50,13 @@ cd ~/junhosetting
 # also make .nvimrc symlink
 # ln -s ~/.vimrc ~/.nvimrc
 # ln -s ~/.vimrc  ~/.config/nvim/init.vim
-echo "alias vi='nvim'" >> ~/.bashrc
-echo "alias vi='nvim'" >> ~/.zshrc
+echo "alias vi='~/junhosetting/nvim.appimage'" >> ~/.bashrc
+echo "alias vi='~/junhosetting/nvim.appimage'" >> ~/.zshrc
+
+source ~/.zshrc
+
+
+vi +UpdateRemotePlugins
+vi +PlugInstall
 
 git config --global core.editor $(which nvim)

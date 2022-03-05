@@ -9,7 +9,7 @@ let mapleader = ","
 " Split line
 nnoremap L i<CR><Esc>
 " nnoremap <C-l> :edit!<CR>:set nonumber!<CR>:IndentLinesToggle<CR>:GitGutterToggle<CR>
-nnoremap <C-l> :SignifyToggle<CR>:edit!<CR>:set nonumber!<CR>:IndentLinesToggle<CR>
+nnoremap <C-l> :SignifyToggle<CR>:set nonumber!<CR>:IndentLinesToggle<CR>
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 0
 
 " Default shell as zsh
