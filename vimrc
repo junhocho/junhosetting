@@ -143,6 +143,7 @@ imap <C-5> <ESC>:edit<CR>
 map <F6> <ESC>:vs<CR>
 map <F7> <ESC>:sp<CR>
 "map <F8> <ESC>:new<CR>
+"need to install ctags
 nmap <F8> <ESC>:SrcExplToggle<CR>
 :map <F9> <ESC>:TagbarToggle<CR>
 "map <F9> <ESC>:close<CR>
