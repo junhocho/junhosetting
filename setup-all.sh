@@ -6,13 +6,13 @@
 # sudo needed
 # docker :  https://docs.docker.com/install/linux/docker-ce/ubuntu/
 # nvidia container toolkit https://github.com/NVIDIA/nvidia-docker
-sudo usermod -aG docker ${USER}
-sudo chmod 666 /var/run/docker.sock
-## apt-install
-sudo add-apt-repository ppa:neovim-ppa/unstable
-sudo apt-get update
-sudo apt-get install tmux zsh curl vim neovim ctags
-
+# sudo usermod -aG docker ${USER}
+# sudo chmod 666 /var/run/docker.sock
+# ## apt-install
+# sudo add-apt-repository ppa:neovim-ppa/unstable
+# sudo apt-get update
+# sudo apt-get install tmux zsh curl vim neovim ctags
+# 
 # GIT setup
 git config --global user.email "junhocho@snu.ac.kr"
 git config --global user.name "junhocho"
@@ -41,7 +41,7 @@ tmux source ~/.tmux.conf
 echo 'source ~/junhosetting/vimrc' > ~/.vimrc
 
 # change default shell
-sudo chsh -s /usr/bin/zsh ${USER}
+# sudo chsh -s /usr/bin/zsh ${USER}
 
 
 
