@@ -9,8 +9,7 @@ let mapleader = ","
 " Split line
 nnoremap L i<CR><Esc>
 " nnoremap <C-l> :edit!<CR>:set nonumber!<CR>:IndentLinesToggle<CR>:GitGutterToggle<CR>
-nnoremap <C-l> :SignifyToggle<CR>:edit!<CR>:set nonumber!<CR>:IndentLinesToggle<CR>
-:tnoremap <Esc> <C-\><C-n>
+nnoremap <C-l> :SignifyToggle<CR>:set nonumber!<CR>:IndentLinesToggle<CR>
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 0
 
 " Default shell as zsh
@@ -144,6 +143,7 @@ imap <C-5> <ESC>:edit<CR>
 map <F6> <ESC>:vs<CR>
 map <F7> <ESC>:sp<CR>
 "map <F8> <ESC>:new<CR>
+"need to install ctags
 nmap <F8> <ESC>:SrcExplToggle<CR>
 :map <F9> <ESC>:TagbarToggle<CR>
 "map <F9> <ESC>:close<CR>
