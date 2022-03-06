@@ -10,3 +10,4 @@ alias jp="jupyter notebook --no-browser"
 alias vi='nvim'
 alias zshreload='source ~/.zshrc'
 alias sudormall='sudo rm -rf *'
+SERVER=$(hostname)
