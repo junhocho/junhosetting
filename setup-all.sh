@@ -3,6 +3,15 @@
 # run this in ~/junhosetting
 # run this with   `sh setup-all.sh` and exit just after `zsh` is installed to proceed following configurations.
 
+# sudo needed
+# docker :  https://docs.docker.com/install/linux/docker-ce/ubuntu/
+# nvidia container toolkit https://github.com/NVIDIA/nvidia-docker
+# sudo usermod -aG docker ${USER}
+# sudo chmod 666 /var/run/docker.sock
+# ## apt-install
+# sudo add-apt-repository ppa:neovim-ppa/unstable
+# sudo apt-get update
+# sudo apt-get install tmux zsh curl vim neovim ctags
 
 # GIT setup
 git config --global user.email "junhocho@snu.ac.kr"
@@ -21,6 +30,8 @@ echo 'source ~/junhosetting/tmux.conf' > ~/.tmux.conf
 tmux source ~/.tmux.conf
 
 # change default shell
+# Neovim install
+./neovim-install.sh
 chsh -s /usr/bin/zsh ${USER}
 
 # Install Pytorch here : https://pytorch.org/

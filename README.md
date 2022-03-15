@@ -48,6 +48,8 @@ For faster clone:
 - Simple install with `sh neovim-install.sh`
 - powerline font might be needed at your client : https://github.com/powerline/fonts
 
+### Help
+
 # Iterm-2 setup
 
 - Using Iterm2, show server name on tabe.

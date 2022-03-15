@@ -10,3 +10,5 @@ alias jp="jupyter notebook --no-browser"
 alias vi='nvim'
 alias zshreload='source ~/.zshrc'
 alias sudormall='sudo rm -rf *'
+SERVER=$(hostname)
+alias dockerfont='docker run -it --rm --shm-size 100G --gpus all -v $PWD:/home -v $PWD/data:/home/data -v $PWD/experiments:/home/experiments  --hostname "${SERVER}"  junhocho/font-embedding:1 bash'
