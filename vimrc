@@ -187,7 +187,7 @@ if has('nvim') || has('patch-8.0.902')
 else
   Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
 endif
-" Plug 'tpope/vim-fugitive' "Git wrapper in vim
+Plug 'tpope/vim-fugitive' "Git wrapper in vim
 
 " Easier browsing through vim
 Plug 'scrooloose/nerdtree'
