@@ -138,7 +138,15 @@ map <F3> <ESC>:w<CR>
 
 " remove white spaces : trailing
 map <F4> <ESC>:%s/\s\+$//e<CR>
-map <F5> <ESC>:edit<CR>
+function! RefreshFileOrNERDTreeRoot()
+  if exists("t:NERDTreeBufName") && bufwinnr(t:NERDTreeBufName) != -1
+    execute "NERDTreeRefreshRoot"
+  else
+    execute "edit"
+  endif
+endfunction
+map <F5> <ESC>:call RefreshFileOrNERDTreeRoot()<CR>
+
 imap <C-5> <ESC>:edit<CR>
 map <F6> <ESC>:vs<CR>
 map <F7> <ESC>:sp<CR>
