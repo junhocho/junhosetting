@@ -21,6 +21,17 @@ filetype on
 filetype off
 
 "=== NEOVIM ===
+" Python3 host program (use global python only)
+if has('nvim')
+  " Use conda global environment
+  if !empty($CONDA_PREFIX)
+    let g:python3_host_prog = $CONDA_PREFIX . '/bin/python'
+  " macOS system default
+  elseif has('mac') && isdirectory('/Users/junho/opt/anaconda3')
+    let g:python3_host_prog = '/Users/junho/opt/anaconda3/bin/python'
+  " Let Neovim auto-detect for other cases
+  endif
+endif
 "smooth scrolling : http://eduncan911.com/software/fix-slow-scrolling-in-vim-and-neovim.html
 set lazyredraw
 set synmaxcol=0
