@@ -7,7 +7,6 @@ alias fc='ls . | wc -l'
 alias grepn="grep -nr --color "
 alias wn="watch nvidia-smi"
 alias jp="jupyter notebook --no-browser"
-alias vi='~/nvim.appimage'
 alias zshreload='source ~/.zshrc'
 alias sudormall='sudo rm -rf *'
 SERVER=$(hostname)

@@ -1,4 +1,6 @@
-source ~/.zshrc	
+#source ~/.zshrc	
+sudo apt install neovim
+sudo apt install python3-neovim
 
 # VIM
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
@@ -54,7 +56,6 @@ echo "alias vi='~/junhosetting/nvim.appimage'" >> ~/.bashrc
 echo "alias vi='~/junhosetting/nvim.appimage'" >> ~/.zshrc
 
 source ~/.zshrc
-
 
 vi +UpdateRemotePlugins
 vi +PlugInstall

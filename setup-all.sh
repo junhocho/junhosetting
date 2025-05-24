@@ -10,8 +10,8 @@
 # sudo chmod 666 /var/run/docker.sock
 # ## apt-install
 # sudo add-apt-repository ppa:neovim-ppa/unstable
-# sudo apt-get update
-# sudo apt-get install tmux zsh curl vim neovim ctags
+sudo apt-get update
+sudo apt-get install tmux zsh curl vim neovim ctags
 
 # GIT setup
 git config --global user.email "junhocho@snu.ac.kr"
