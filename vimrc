@@ -233,7 +233,7 @@ Plug 'tbastos/vim-lua' " Lua plugins
 " Plug 'junhocho/python-syntax'
 Plug 'Yggdroot/indentLine'
 Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
-Plug 'github/copilot.vim'
+"Plug 'github/copilot.vim'
 
 " Markdown
 " Plug 'plasticboy/vim-markdown'
