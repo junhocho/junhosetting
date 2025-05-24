@@ -21,18 +21,15 @@ filetype on
 filetype off
 
 "=== NEOVIM ===
-" Python3 host program (auto-detect)
+" Python3 host program (use global python only)
 if has('nvim')
-  " 1. 환경변수 VIRTUAL_ENV 확인 (가상환경)
-  if !empty($VIRTUAL_ENV)
-    let g:python3_host_prog = $VIRTUAL_ENV . '/bin/python'
-  " 2. conda 환경 확인
-  elseif !empty($CONDA_PREFIX)
+  " Use conda global environment
+  if !empty($CONDA_PREFIX)
     let g:python3_host_prog = $CONDA_PREFIX . '/bin/python'
-  " 3. 시스템별 기본값
+  " macOS system default
   elseif has('mac') && isdirectory('/Users/junho/opt/anaconda3')
     let g:python3_host_prog = '/Users/junho/opt/anaconda3/bin/python'
-  " 4. 그 외는 Neovim이 자동으로 찾도록 설정하지 않음
+  " Let Neovim auto-detect for other cases
   endif
 endif
 "smooth scrolling : http://eduncan911.com/software/fix-slow-scrolling-in-vim-and-neovim.html
