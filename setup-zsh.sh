@@ -12,3 +12,6 @@ echo 'source ~/junhosetting/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh'
 # Copy my setup to zshrc
 echo 'source ~/junhosetting/my-alias.sh'  >> ~/.zshrc
 cat my-zsh-iterm >> ~/.zshrc
+
+# Install autojump
+./setup-autojump.sh
