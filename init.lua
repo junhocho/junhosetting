@@ -131,6 +131,7 @@ require("lazy").setup({
   },
   {
     "williamboman/mason-lspconfig.nvim",
+    version = "^1.0", -- v1.x 버전으로 고정
     dependencies = { "williamboman/mason.nvim" },
     config = function()
       require("mason-lspconfig").setup({
@@ -463,7 +464,8 @@ require("lazy").setup({
     end
   },
   { "tbastos/vim-lua" },
-  { "numirias/semshi", build = ":UpdateRemotePlugins" },
+  -- semshi 제거 (Python 3.12 호환성 문제)
+  -- { "numirias/semshi", build = ":UpdateRemotePlugins" },
 
   -- LSP 진단 UI 개선
   {
