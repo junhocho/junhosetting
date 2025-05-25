@@ -5,9 +5,10 @@
 ## 📋 프로젝트 상태
 
 - **마이그레이션 시작**: 2025-01-25
-- **현재 상태**: ✅ 완료
+- **현재 상태**: ✅ 완료 (macOS, Linux 모두 확인)
 - **설정 파일**: `~/junhosetting/init.lua`
 - **설정 방식**: `~/.config/nvim/init.lua`에서 자동으로 로드
+- **호환성 확인**: macOS (2025-01-25), Linux (2025-01-26)
 
 ## 🔄 마이그레이션 개요
 
@@ -251,6 +252,18 @@ cp ~/.config/nvim/init.vim.backup ~/.config/nvim/init.vim
 ```vim
 :TSInstall python
 ```
+
+### 4. Linux에서 mason-lspconfig 버전 충돌
+**문제**: mason-lspconfig v2.0이 Neovim 0.11.0-dev에서 `vim.lsp.enable()` 함수 미지원
+
+**해결**: 
+- mason-lspconfig을 v1.x로 버전 고정 (`version = "^1.0"`)
+- `automatic_installation` 설정 제거하여 양 OS 호환성 확보
+
+### 5. semshi Python 구문 하이라이터 호환성
+**문제**: Python 3.12에서 semshi 플러그인 오류 발생
+
+**해결**: semshi 제거하고 nvim-treesitter의 Python 파서 사용
 
 ## 🚀 다음 단계 추천
 
