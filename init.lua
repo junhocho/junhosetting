@@ -142,6 +142,75 @@ require("lazy").setup({
           "yamlls",         -- YAML LSP
         },
         automatic_installation = true,
+        -- 각 서버별 자동 설정
+        handlers = {
+          -- 기본 핸들러
+          function(server_name)
+            local capabilities = require("cmp_nvim_lsp").default_capabilities()
+            require("lspconfig")[server_name].setup({
+              capabilities = capabilities,
+            })
+          end,
+          
+          -- lua_ls 전용 핸들러
+          ["lua_ls"] = function()
+            local lspconfig = require("lspconfig")
+            local capabilities = require("cmp_nvim_lsp").default_capabilities()
+            
+            lspconfig.lua_ls.setup({
+              capabilities = capabilities,
+              settings = {
+                Lua = {
+                  runtime = {
+                    version = 'LuaJIT',
+                  },
+                  diagnostics = {
+                    globals = {'vim'},
+                  },
+                  workspace = {
+                    library = vim.api.nvim_get_runtime_file("", true),
+                    checkThirdParty = false,
+                  },
+                  telemetry = {
+                    enable = false,
+                  },
+                },
+              },
+            })
+          end,
+          
+          -- pyright 전용 핸들러
+          ["pyright"] = function()
+            local lspconfig = require("lspconfig")
+            local capabilities = require("cmp_nvim_lsp").default_capabilities()
+            local util = require('lspconfig.util')
+            
+            -- 프로젝트 루트 찾기
+            local root_pattern = util.root_pattern("pyrightconfig.json", ".git", "setup.py", "requirements.txt")
+            
+            lspconfig.pyright.setup({
+              capabilities = capabilities,
+              root_dir = root_pattern,
+              on_init = function(client)
+                -- pyrightconfig.json이 있으면 그것을 사용
+                local workspace_path = client.config.root_dir
+                if workspace_path and vim.fn.filereadable(workspace_path .. "/pyrightconfig.json") == 1 then
+                  client.config.settings = {}  -- pyrightconfig.json 설정 우선
+                else
+                  -- 없으면 기본 설정 사용
+                  client.config.settings.python = {
+                    analysis = {
+                      typeCheckingMode = "basic",
+                      autoSearchPaths = true,
+                      useLibraryCodeForTypes = true,
+                    }
+                  }
+                end
+                return true
+              end,
+            })
+          end,
+        }
       })
     end
   },
@@ -158,47 +227,8 @@ require("lazy").setup({
       -- LSP 서버 설정
       local servers = require("mason-lspconfig").get_installed_servers()
       
-      for _, server_name in ipairs(servers) do
-        if server_name == "pyright" then
-          lspconfig.pyright.setup({
-            capabilities = capabilities,
-            settings = {
-              python = {
-                analysis = {
-                  typeCheckingMode = "basic",
-                  autoSearchPaths = true,
-                  useLibraryCodeForTypes = true,
-                }
-              }
-            }
-          })
-        elseif server_name == "lua_ls" then
-          lspconfig.lua_ls.setup({
-            capabilities = capabilities,
-            settings = {
-              Lua = {
-                runtime = {
-                  version = 'LuaJIT',
-                },
-                diagnostics = {
-                  globals = {'vim'},
-                },
-                workspace = {
-                  library = vim.api.nvim_get_runtime_file("", true),
-                  checkThirdParty = false,
-                },
-                telemetry = {
-                  enable = false,
-                },
-              },
-            },
-          })
-        else
-          lspconfig[server_name].setup({
-            capabilities = capabilities,
-          })
-        end
-      end
+      -- lua_ls는 특별한 설정이 필요하므로 handler에서 처리되지 않은 경우 여기서 설정
+      -- (하지만 이미 Mason handler가 처리하므로 실제로는 실행되지 않음)
     end
   },
 
@@ -292,7 +322,7 @@ require("lazy").setup({
         debug = false,
         notify_format = "[null-ls] %s", -- 에러 메시지 형식
         on_attach = function(client, bufnr)
-          -- 진단 비활성화 (pyright와 충돌 방지)
+          -- none-ls의 진단 완전 비활성화 (pyright와 중복 방지)
           client.server_capabilities.diagnosticsProvider = false
         end,
       })
@@ -535,3 +565,47 @@ vim.keymap.set('n', '<leader>ss', ':CtrlPObsession<CR>')
 -- 테마 설정
 vim.g.seoul256_background = 235
 vim.cmd.colorscheme('seoul256')
+
+-- 진단 설정
+vim.diagnostic.config({
+  virtual_text = false,  -- 기본 가상 텍스트는 끄고
+  signs = true,
+  underline = true,
+  update_in_insert = false,
+  severity_sort = true,
+  -- 중복 진단 필터링
+  float = {
+    source = "always",  -- 진단 소스 표시
+    format = function(diagnostic)
+      -- 이미 소스가 메시지에 포함되어 있으면 그대로 사용
+      if diagnostic.message:match("^" .. diagnostic.source .. ":") then
+        return diagnostic.message
+      else
+        return string.format("%s: %s", diagnostic.source, diagnostic.message)
+      end
+    end,
+  },
+})
+
+-- 커서가 멈췄을 때 자동으로 진단 메시지 표시
+vim.api.nvim_create_autocmd("CursorHold", {
+  callback = function()
+    local opts = {
+      focusable = false,
+      close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+      border = 'rounded',
+      source = 'always',
+      prefix = ' ',
+      scope = 'cursor',
+    }
+    vim.diagnostic.open_float(nil, opts)
+  end
+})
+
+-- 커서 대기 시간 설정 (300ms)
+vim.o.updatetime = 300
+
+-- 진단 관련 편리한 키매핑
+vim.keymap.set('n', 'gl', vim.diagnostic.open_float, { desc = "진단 메시지 보기" })
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = "이전 진단으로" })
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = "다음 진단으로" })
