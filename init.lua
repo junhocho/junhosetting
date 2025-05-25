@@ -355,7 +355,6 @@ require("lazy").setup({
   {
     'akinsho/bufferline.nvim',
     version = "*",
-    dependencies = 'nvim-tree/nvim-web-devicons',
     config = function()
       require("bufferline").setup({
         options = {
@@ -390,6 +389,77 @@ require("lazy").setup({
           truncate_names = true,
           tab_size = 18,
           color_icons = false,
+        },
+        highlights = {
+          -- 활성 버퍼 (현재 포커스된 버퍼)
+          buffer_selected = {
+            fg = '#ffffff',
+            bg = '#3a3a3a',
+            bold = true,
+            italic = false,
+          },
+          numbers_selected = {
+            fg = '#ffaf00',
+            bg = '#3a3a3a',
+            bold = true,
+          },
+          -- 비활성 창에 보이는 버퍼
+          buffer_visible = {
+            fg = '#888888',
+            bg = '#262626',
+            bold = false,
+            italic = false,
+          },
+          numbers_visible = {
+            fg = '#666666',
+            bg = '#262626',
+          },
+          -- 배경 버퍼 (열려있지만 보이지 않는 버퍼)
+          background = {
+            fg = '#666666',
+            bg = '#1c1c1c',
+            bold = false,
+            italic = false,
+          },
+          numbers = {
+            fg = '#444444',
+            bg = '#1c1c1c',
+          },
+          -- 인디케이터
+          indicator_selected = {
+            fg = '#ff5f00',  -- 주황색 인디케이터
+            bg = '#3a3a3a',
+          },
+          indicator_visible = {
+            fg = '#444444',
+            bg = '#262626',
+          },
+          -- 구분선
+          separator = {
+            fg = '#1c1c1c',
+            bg = '#1c1c1c',
+          },
+          separator_selected = {
+            fg = '#1c1c1c',
+            bg = '#3a3a3a',
+          },
+          separator_visible = {
+            fg = '#1c1c1c',
+            bg = '#262626',
+          },
+          -- 수정된 파일 표시
+          modified_selected = {
+            fg = '#ff5f00',
+            bg = '#3a3a3a',
+          },
+          modified_visible = {
+            fg = '#888888',
+            bg = '#262626',
+          },
+          modified = {
+            fg = '#666666',
+            bg = '#1c1c1c',
+          },
         }
       })
       
@@ -458,7 +528,8 @@ require("lazy").setup({
       })
     end
   },
-  { "blueyed/vim-diminactive" },
+  -- vim-diminactive 제거 (색상 반전 문제)
+  -- { "blueyed/vim-diminactive" },
   { "tmux-plugins/vim-tmux-focus-events" },
   { 
     "hkupty/iron.nvim",
@@ -564,9 +635,75 @@ vim.keymap.set('n', 'dm', ':execute "delmarks ".nr2char(getchar())<CR>')
 -- ctrlp-obsession 설정
 vim.keymap.set('n', '<leader>ss', ':CtrlPObsession<CR>')
 
+-- 트루컬러 지원 설정 (tmux 내에서도 색상이 제대로 나오도록)
+if vim.fn.has('termguicolors') == 1 then
+  vim.opt.termguicolors = true
+end
+
+-- tmux 내에서 실행 중인지 확인하고 추가 설정
+if vim.env.TMUX then
+  -- tmux에서 트루컬러를 위한 추가 설정
+  vim.cmd([[
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  ]])
+end
+
 -- 테마 설정
 vim.g.seoul256_background = 235
 vim.cmd.colorscheme('seoul256')
+
+-- 비활성 창을 더 어둡게 (seoul256 테마 이후에 적용)
+vim.cmd([[
+  highlight NormalNC guibg=#121212 ctermbg=233
+  highlight EndOfBuffer guibg=#121212 ctermbg=233
+  highlight WinSeparator guifg=#585858 guibg=#121212 ctermfg=240 ctermbg=233
+  highlight VertSplit guifg=#585858 guibg=#121212 ctermfg=240 ctermbg=233
+]])
+
+-- Bufferline 하이라이트 수동 설정 (테마가 덮어쓰는 것 방지)
+vim.cmd([[
+  " 활성 버퍼
+  highlight BufferLineBufferSelected guifg=#ffffff guibg=#3a3a3a gui=bold
+  highlight BufferLineNumbersSelected guifg=#ffaf00 guibg=#3a3a3a gui=bold
+  highlight BufferLineIndicatorSelected guifg=#ff5f00 guibg=#3a3a3a
+  
+  " 비활성 창의 버퍼
+  highlight BufferLineBufferVisible guifg=#888888 guibg=#262626
+  highlight BufferLineNumbersVisible guifg=#666666 guibg=#262626
+  highlight BufferLineIndicatorVisible guifg=#444444 guibg=#262626
+  
+  " 배경 버퍼
+  highlight BufferLineBackground guifg=#666666 guibg=#1c1c1c
+  highlight BufferLineNumbers guifg=#444444 guibg=#1c1c1c
+  
+  " 탭라인 배경
+  highlight BufferLineFill guibg=#1a1a1a
+  highlight BufferLineTab guifg=#666666 guibg=#1c1c1c
+  highlight BufferLineTabSelected guifg=#ffffff guibg=#3a3a3a gui=bold
+]])
+
+-- 활성 창 표시를 위한 설정
+vim.opt.cursorline = true
+vim.cmd([[
+  highlight CursorLine guibg=#303030 ctermbg=236
+  highlight CursorLineNr guifg=#ffaf00 ctermfg=214 gui=bold cterm=bold
+]])
+
+-- 창 이동 시 커서라인 토글
+vim.api.nvim_create_autocmd({"WinEnter", "BufEnter"}, {
+  callback = function()
+    vim.opt_local.cursorline = true
+    vim.opt_local.relativenumber = true
+  end
+})
+
+vim.api.nvim_create_autocmd("WinLeave", {
+  callback = function()
+    vim.opt_local.cursorline = false
+    vim.opt_local.relativenumber = false
+  end
+})
 
 -- 진단 설정
 vim.diagnostic.config({
