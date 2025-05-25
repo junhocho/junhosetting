@@ -33,6 +33,27 @@ vim.opt.lazyredraw = true
 vim.opt.synmaxcol = 256
 vim.cmd("syntax sync minlines=256")
 
+-- 클립보드 설정 (SSH/tmux 환경 지원)
+vim.opt.clipboard = "unnamedplus"  -- 시스템 클립보드 사용
+-- SSH 환경에서 원격 클립보드 지원을 위한 설정
+if vim.env.SSH_CLIENT or vim.env.SSH_TTY then
+  -- SSH 환경일 때 tmux 클립보드 통합
+  if vim.env.TMUX then
+    vim.g.clipboard = {
+      name = "tmux",
+      copy = {
+        ["+"] = {"tmux", "load-buffer", "-"},
+        ["*"] = {"tmux", "load-buffer", "-"},
+      },
+      paste = {
+        ["+"] = {"tmux", "save-buffer", "-"},
+        ["*"] = {"tmux", "save-buffer", "-"},
+      },
+      cache_enabled = true,
+    }
+  end
+end
+
 -- Python 호스트 프로그램 설정 (Neovim용)
 if vim.fn.has('nvim') == 1 then
   if vim.env.CONDA_PREFIX and vim.env.CONDA_PREFIX ~= "" then
@@ -44,7 +65,17 @@ end
 
 -- 키 매핑
 vim.keymap.set('n', 'L', 'i<CR><Esc>')
-vim.keymap.set('n', '<C-l>', ':SignifyToggle<CR>:set nonumber!<CR>:IndentLinesToggle<CR>')
+vim.keymap.set('n', '<C-l>', function()
+  vim.cmd('SignifyToggle')
+  vim.cmd('set nonumber!')
+  vim.cmd('IndentLinesToggle')
+  -- LSP 진단 표시 토글
+  if vim.diagnostic.is_disabled() then
+    vim.diagnostic.enable()
+  else
+    vim.diagnostic.disable()
+  end
+end)
 vim.keymap.set('n', '<leader>s', ':update<CR>')
 vim.keymap.set('n', '<F1>', ':NERDTreeToggle<CR>')
 vim.keymap.set('n', '<F3>', ':w<CR>')
@@ -464,6 +495,32 @@ require("lazy").setup({
   },
   { "tbastos/vim-lua" },
   { "numirias/semshi", build = ":UpdateRemotePlugins" },
+
+  -- OSC 52 클립보드 지원 (SSH 원격 세션용)
+  {
+    "ojroques/nvim-osc52",
+    config = function()
+      require("osc52").setup({
+        max_length = 0,      -- 길이 제한 없음
+        silent = false,      -- 메시지 표시
+        trim = false,        -- 공백 제거 안함
+      })
+      
+      -- OSC52 복사를 위한 키매핑
+      local function copy()
+        if vim.v.event.operator == 'y' and vim.v.event.regname == '+' then
+          require('osc52').copy_register('+')
+        end
+      end
+      
+      vim.api.nvim_create_autocmd('TextYankPost', {
+        callback = copy
+      })
+      
+      -- Visual 모드에서 선택한 텍스트 복사
+      vim.keymap.set('v', '<leader>c', require('osc52').copy_visual)
+    end
+  },
 
   -- LSP 진단 UI 개선
   {
