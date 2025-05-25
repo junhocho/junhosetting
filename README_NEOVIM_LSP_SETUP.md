@@ -160,10 +160,24 @@ ensure_installed = {
 ### 문제 해결
 
 #### Python 환경 문제
-```vim
-:LspInfo
-```
-로 상태 확인 후 conda 환경 설정 확인
+Flask 등의 패키지를 import할 때 오류가 발생하면:
+
+1. **진단 확인**:
+   ```vim
+   :LspInfo
+   ```
+
+2. **해결 방법**:
+   프로젝트 루트에 `pyrightconfig.json` 생성:
+   ```bash
+   # Python 버전 확인
+   python --version
+   
+   # site-packages 경로 확인
+   python -c "import site; print(site.getsitepackages()[0])"
+   ```
+   
+   위 정보를 바탕으로 `pyrightconfig.json` 작성 (위의 예시 참조)
 
 #### 플러그인 문제
 ```vim
@@ -188,17 +202,40 @@ cp ~/.config/nvim/init.vim.backup ~/.config/nvim/init.vim
 - `extraPaths`에 site-packages 경로 추가
 - `.python-version` 파일 생성
 
-**현재 상태**: 미해결. 프로젝트별로 `pyrightconfig.json` 생성이 가장 확실한 해결책이지만, 매번 생성하기 번거로움
+**현재 상태**: ✅ 해결 - 프로젝트별로 `pyrightconfig.json` 생성으로 완벽히 해결됨
 
-**임시 해결책**:
+**해결 방법**:
+프로젝트 루트에 `pyrightconfig.json` 파일을 생성합니다:
+
 ```json
-// 프로젝트 루트에 pyrightconfig.json 생성
 {
   "venvPath": "/Users/junho/opt/anaconda3",
   "venv": ".",
-  "pythonVersion": "3.8"
+  "pythonVersion": "3.8",
+  "executionEnvironments": [
+    {
+      "root": ".",
+      "pythonVersion": "3.8",
+      "pythonPlatform": "Darwin",
+      "extraPaths": [
+        "/Users/junho/opt/anaconda3/lib/python3.8/site-packages"
+      ]
+    }
+  ],
+  "typeCheckingMode": "basic",
+  "useLibraryCodeForTypes": true,
+  "autoImportCompletions": true,
+  "autoSearchPaths": true
 }
 ```
+
+**설정 설명**:
+- `venvPath`: Conda 설치 경로
+- `pythonVersion`: 사용 중인 Python 버전
+- `extraPaths`: site-packages 경로를 명시적으로 지정
+- `typeCheckingMode`: "basic"으로 설정하여 과도한 타입 체크 방지
+
+이 파일을 생성하면 Pyright가 즉시 conda 환경의 모든 패키지를 정상적으로 인식합니다.
 
 ### 2. none-ls flake8 경고
 **문제**: flake8이 없어도 매번 경고 메시지 출력
