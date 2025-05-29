@@ -46,7 +46,8 @@ end
 vim.keymap.set('n', 'L', 'i<CR><Esc>')
 vim.keymap.set('n', '<C-l>', ':SignifyToggle<CR>:set nonumber!<CR>:IndentLinesToggle<CR>')
 vim.keymap.set('n', '<leader>s', ':update<CR>')
-vim.keymap.set('n', '<F1>', ':NERDTreeToggle<CR>')
+vim.keymap.set('n', '<F1>', ':NvimTreeToggle<CR>')
+vim.keymap.set('n', '<F5>', ':NvimTreeRefresh<CR>')
 vim.keymap.set('n', '<F3>', ':w<CR>')
 vim.keymap.set('i', '<C-s>', '<ESC>:w<CR>')
 vim.keymap.set('n', '<C-s>', '<Esc>:w<CR>')
@@ -333,7 +334,98 @@ require("lazy").setup({
   -- 기존 플러그인들 (vim-plug에서 마이그레이션)
   { "mhinz/vim-signify" },
   { "tpope/vim-fugitive" },
-  { "scrooloose/nerdtree" },
+  
+  -- nvim-tree (NERDTree 대체)
+  {
+    "nvim-tree/nvim-tree.lua",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    config = function()
+      -- nvim-tree 설정
+      require("nvim-tree").setup({
+        -- 기본 설정
+        sort_by = "case_sensitive",
+        view = {
+          width = 30,
+          side = "left",
+          preserve_window_proportions = false,
+          number = false,
+          relativenumber = false,
+          signcolumn = "no",
+        },
+        renderer = {
+          group_empty = true,
+          highlight_git = true,
+          highlight_opened_files = "none",
+          icons = {
+            show = {
+              file = false,
+              folder = false,
+              folder_arrow = false,
+              git = true,
+            },
+            glyphs = {
+              default = "",
+              symlink = "",
+              bookmark = "",
+              folder = {
+                arrow_closed = ">",
+                arrow_open = "v",
+                default = "[D]",
+                open = "[O]",
+                empty = "[E]",
+                empty_open = "[EO]",
+                symlink = "[L]",
+                symlink_open = "[LO]",
+              },
+              git = {
+                unstaged = "M",
+                staged = "S",
+                unmerged = "U",
+                renamed = "R",
+                untracked = "?",
+                deleted = "D",
+                ignored = "I",
+              },
+            },
+          },
+        },
+        filters = {
+          dotfiles = false,
+          custom = { "^.git$" },
+        },
+        git = {
+          enable = true,
+          ignore = false,
+          timeout = 500,
+        },
+        actions = {
+          open_file = {
+            quit_on_open = false,
+            resize_window = true,
+          },
+        },
+        -- 자동 리프레시 설정
+        filesystem_watchers = {
+          enable = true,
+          debounce_delay = 50,
+        },
+        -- 프로젝트 루트 자동 감지
+        update_focused_file = {
+          enable = true,
+          update_root = true,
+          ignore_list = {},
+        },
+        -- 시스템 열기 설정
+        system_open = {
+          cmd = "open", -- macOS용
+        },
+      })
+      
+      -- nvim-tree 추가 키매핑
+      vim.keymap.set('n', '<leader>e', ':NvimTreeFocus<CR>', { desc = "파일 트리에 포커스" })
+      vim.keymap.set('n', '<leader>fc', ':NvimTreeFindFile<CR>', { desc = "현재 파일을 트리에서 찾기" })
+    end,
+  },
   { "wesleyche/SrcExpl" },
   { "majutsushi/tagbar" },
   { "ctrlpvim/ctrlp.vim" },
@@ -524,7 +616,7 @@ require("lazy").setup({
           lualine_z = {}
         },
         tabline = {},  -- bufferline.nvim 사용하므로 비활성화
-        extensions = {'nerdtree', 'fugitive'}
+        extensions = {'nvim-tree', 'fugitive'}
       })
     end
   },
@@ -690,18 +782,34 @@ vim.cmd([[
   highlight CursorLineNr guifg=#ffaf00 ctermfg=214 gui=bold cterm=bold
 ]])
 
--- 창 이동 시 커서라인 토글
+-- 창 이동 시 커서라인 토글 (nvim-tree 제외)
 vim.api.nvim_create_autocmd({"WinEnter", "BufEnter"}, {
   callback = function()
-    vim.opt_local.cursorline = true
-    vim.opt_local.relativenumber = true
+    -- nvim-tree가 아닌 경우에만 라인 넘버 활성화
+    if vim.bo.filetype ~= "NvimTree" then
+      vim.opt_local.cursorline = true
+      vim.opt_local.relativenumber = true
+    end
   end
 })
 
 vim.api.nvim_create_autocmd("WinLeave", {
   callback = function()
-    vim.opt_local.cursorline = false
+    if vim.bo.filetype ~= "NvimTree" then
+      vim.opt_local.cursorline = false
+      vim.opt_local.relativenumber = false
+    end
+  end
+})
+
+-- nvim-tree 전용 설정 (라인 넘버 강제 비활성화)
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "NvimTree",
+  callback = function()
+    vim.opt_local.number = false
     vim.opt_local.relativenumber = false
+    vim.opt_local.cursorline = false
+    vim.opt_local.signcolumn = "no"
   end
 })
 
