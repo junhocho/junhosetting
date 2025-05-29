@@ -33,6 +33,19 @@ vim.opt.lazyredraw = true
 vim.opt.synmaxcol = 256
 vim.cmd("syntax sync minlines=256")
 
+-- 파일 변경 자동 감지 및 새로고침
+vim.opt.autoread = true
+vim.opt.updatetime = 250  -- 더 빠른 감지 (기본 4000ms → 250ms)
+
+-- 포커스 시 자동 새로고침
+vim.api.nvim_create_autocmd({"FocusGained", "BufEnter", "CursorHold", "CursorHoldI"}, {
+  callback = function()
+    if vim.fn.mode() ~= 'c' then
+      vim.cmd('checktime')
+    end
+  end,
+})
+
 -- Python 호스트 프로그램 설정 (Neovim용)
 if vim.fn.has('nvim') == 1 then
   if vim.env.CONDA_PREFIX and vim.env.CONDA_PREFIX ~= "" then
