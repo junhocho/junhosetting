@@ -460,13 +460,177 @@ require("lazy").setup({
   },
   { "wesleyche/SrcExpl" },
   { "majutsushi/tagbar" },
-  { "ctrlpvim/ctrlp.vim" },
+  -- Telescope (CtrlP 대체)
+  {
+    "nvim-telescope/telescope.nvim",
+    tag = "0.1.8",
+    dependencies = { 
+      "nvim-lua/plenary.nvim",
+      -- fzf 네이티브 성능 향상
+      {
+        "nvim-telescope/telescope-fzf-native.nvim",
+        build = "make",
+      },
+    },
+    config = function()
+      local telescope = require("telescope")
+      local actions = require("telescope.actions")
+      
+      -- 아이콘 비활성화 (nvim-web-devicons 없이 사용)
+      vim.g.web_devicons_enabled = false
+      
+      telescope.setup({
+        defaults = {
+          -- 성능 최적화
+          file_ignore_patterns = {
+            "node_modules/.*",
+            "%.git/.*",
+            "%.DS_Store",
+            "%.png",
+            "%.jpg",
+            "%.jpeg",
+            "%.gif",
+            "%.pdf",
+            "%.exe",
+            "%.so",
+            "%.dll",
+          },
+          
+          -- UI 설정 (아이콘 없이)
+          prompt_prefix = "> ",
+          selection_caret = "> ",
+          entry_prefix = "  ",
+          -- 아이콘 완전 비활성화
+          borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+          initial_mode = "insert",
+          selection_strategy = "reset",
+          sorting_strategy = "ascending",
+          layout_strategy = "horizontal",
+          layout_config = {
+            horizontal = {
+              mirror = false,
+              preview_width = 0.6,
+            },
+            vertical = {
+              mirror = false,
+            },
+          },
+          
+          -- 미리보기 설정
+          preview = {
+            treesitter = true,
+          },
+          
+          -- 키매핑
+          mappings = {
+            i = {
+              ["<C-n>"] = actions.cycle_history_next,
+              ["<C-p>"] = actions.cycle_history_prev,
+              ["<C-j>"] = actions.move_selection_next,
+              ["<C-k>"] = actions.move_selection_previous,
+              ["<C-c>"] = actions.close,
+              ["<Down>"] = actions.move_selection_next,
+              ["<Up>"] = actions.move_selection_previous,
+              ["<CR>"] = actions.select_default,
+              ["<C-s>"] = actions.select_horizontal,
+              ["<C-v>"] = actions.select_vertical,
+              ["<C-t>"] = actions.select_tab,
+              ["<C-u>"] = actions.preview_scrolling_up,
+              ["<C-d>"] = actions.preview_scrolling_down,
+            },
+            n = {
+              ["<esc>"] = actions.close,
+              ["<CR>"] = actions.select_default,
+              ["<C-s>"] = actions.select_horizontal,
+              ["<C-v>"] = actions.select_vertical,
+              ["<C-t>"] = actions.select_tab,
+              ["j"] = actions.move_selection_next,
+              ["k"] = actions.move_selection_previous,
+              ["H"] = actions.move_to_top,
+              ["M"] = actions.move_to_middle,
+              ["L"] = actions.move_to_bottom,
+              ["<C-u>"] = actions.preview_scrolling_up,
+              ["<C-d>"] = actions.preview_scrolling_down,
+              ["gg"] = actions.move_to_top,
+              ["G"] = actions.move_to_bottom,
+            },
+          },
+        },
+        
+        pickers = {
+          -- 파일 찾기 설정
+          find_files = {
+            theme = "dropdown",
+            previewer = false,
+            hidden = false,
+            follow = true,
+            -- 파일 타입 아이콘 비활성화
+            disable_devicons = true,
+          },
+          
+          -- 라이브 그렙 설정
+          live_grep = {
+            theme = "ivy",
+            disable_devicons = true,
+          },
+          
+          -- 버퍼 설정
+          buffers = {
+            theme = "dropdown",
+            previewer = false,
+            sort_lastused = true,
+            disable_devicons = true,
+          },
+        },
+        
+        extensions = {
+          fzf = {
+            fuzzy = true,
+            override_generic_sorter = true,
+            override_file_sorter = true,
+            case_mode = "smart_case",
+          },
+        },
+      })
+      
+      -- fzf extension 로드
+      telescope.load_extension("fzf")
+      
+      -- 키매핑 설정
+      local builtin = require("telescope.builtin")
+      
+      -- 기본 파일 찾기 (CtrlP 대체)
+      vim.keymap.set("n", "<C-p>", builtin.find_files, { desc = "파일 찾기" })
+      
+      -- 추가 유용한 키매핑들
+      vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "파일 찾기" })
+      vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "텍스트 검색" })
+      vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "버퍼 찾기" })
+      vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "도움말 검색" })
+      vim.keymap.set("n", "<leader>fr", builtin.oldfiles, { desc = "최근 파일" })
+      vim.keymap.set("n", "<leader>fc", builtin.commands, { desc = "명령어 검색" })
+      vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "키맵 검색" })
+      vim.keymap.set("n", "<leader>fs", builtin.grep_string, { desc = "현재 단어 검색" })
+      
+      -- Git 관련
+      vim.keymap.set("n", "<leader>gf", builtin.git_files, { desc = "Git 파일" })
+      vim.keymap.set("n", "<leader>gc", builtin.git_commits, { desc = "Git 커밋" })
+      vim.keymap.set("n", "<leader>gb", builtin.git_branches, { desc = "Git 브랜치" })
+      vim.keymap.set("n", "<leader>gs", builtin.git_status, { desc = "Git 상태" })
+      
+      -- LSP 관련 (LSP가 활성화된 경우에만)
+      vim.keymap.set("n", "<leader>ld", builtin.lsp_definitions, { desc = "정의로 이동" })
+      vim.keymap.set("n", "<leader>lr", builtin.lsp_references, { desc = "참조 찾기" })
+      vim.keymap.set("n", "<leader>ls", builtin.lsp_document_symbols, { desc = "문서 심볼" })
+      vim.keymap.set("n", "<leader>lw", builtin.lsp_workspace_symbols, { desc = "작업공간 심볼" })
+      vim.keymap.set("n", "<leader>le", builtin.diagnostics, { desc = "진단 정보" })
+    end,
+  },
   { "tpope/vim-obsession" },
   { 
     "dhruvasagar/vim-prosession",
     dependencies = { "tpope/vim-obsession" },
   },
-  { "gikmx/ctrlp-obsession" },
   { "nathanaelkane/vim-indent-guides" },
   { "jiangmiao/auto-pairs" },
   { "mbbill/undotree" },
@@ -731,19 +895,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 
 -- 기타 설정들
--- CtrlP 설정
-vim.g.ctrlp_show_hidden = 0
-vim.g.ctrlp_map = '<c-p>'
-vim.g.ctrlp_custom_ignore = {
-  dir = '\\.git$\\|public$\\|log$\\|tmp$\\|vendor$',
-  file = '\\v\\.(exe|so|dll|png|jpg)$'
-}
-vim.g.ctrlp_working_path_mode = 'r'
-vim.g.ctrlp_cache_dir = vim.env.HOME .. '/.cache/ctrlp'
-if vim.fn.executable('ag') == 1 then
-  vim.g.ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-end
-vim.g.ctrlp_clear_cache_on_exit = 0
 
 -- Undotree 설정
 if vim.fn.has("persistent_undo") == 1 then
@@ -756,8 +907,6 @@ vim.keymap.set('n', '<leader>ut', ':UndotreeToggle<CR>:UndotreeFocus<CR>')
 vim.keymap.set('n', '<leader>m', ':DoShowMarks<CR>')
 vim.keymap.set('n', 'dm', ':execute "delmarks ".nr2char(getchar())<CR>')
 
--- ctrlp-obsession 설정
-vim.keymap.set('n', '<leader>ss', ':CtrlPObsession<CR>')
 
 -- 트루컬러 지원 설정 (tmux 내에서도 색상이 제대로 나오도록)
 if vim.fn.has('termguicolors') == 1 then
