@@ -401,10 +401,31 @@ require("lazy").setup({
           relativenumber = false,
           signcolumn = "no",
         },
+        filters = {
+          dotfiles = false,
+          custom = { "^.git$" },
+        },
+        git = {
+          enable = true,
+          ignore = false,
+          timeout = 500,
+        },
+        actions = {
+          open_file = {
+            quit_on_open = false,
+            resize_window = true,
+          },
+        },
+        -- sign 관련 설정 추가
         renderer = {
+          add_trailing = false,
           group_empty = true,
           highlight_git = true,
           highlight_opened_files = "none",
+          root_folder_modifier = ":~",
+          indent_markers = {
+            enable = false,
+          },
           icons = {
             show = {
               file = has_icons,
@@ -439,7 +460,7 @@ require("lazy").setup({
             } or {
               default = "",
               symlink = "",
-              bookmark = "",
+              bookmark = "m",
               modified = "●",
               folder = {
                 arrow_closed = ">",
@@ -461,21 +482,6 @@ require("lazy").setup({
                 ignored = "I",
               },
             },
-          },
-        },
-        filters = {
-          dotfiles = false,
-          custom = { "^.git$" },
-        },
-        git = {
-          enable = true,
-          ignore = false,
-          timeout = 500,
-        },
-        actions = {
-          open_file = {
-            quit_on_open = false,
-            resize_window = true,
           },
         },
         -- 자동 리프레시 설정
