@@ -44,7 +44,39 @@ end
 
 -- 키 매핑
 vim.keymap.set('n', 'L', 'i<CR><Esc>')
-vim.keymap.set('n', '<C-l>', ':SignifyToggle<CR>:set nonumber!<CR>:IndentLinesToggle<CR>')
+-- Clean mode 토글 (복사/붙여넣기 시 유용)
+local clean_mode = false
+vim.keymap.set('n', '<C-l>', function()
+  clean_mode = not clean_mode
+  if clean_mode then
+    -- Clean mode 활성화 - 모든 UI 요소 숨기기
+    vim.cmd('SignifyDisable')           -- Git 표시 끄기
+    vim.cmd('IndentLinesDisable')       -- 들여쓰기 가이드 끄기
+    vim.diagnostic.disable()            -- LSP 진단 끄기
+    vim.opt.number = false              -- 라인 넘버 끄기
+    vim.opt.relativenumber = false      -- 상대 라인 넘버 끄기
+    vim.opt.signcolumn = 'no'           -- 사인 컬럼 끄기
+    vim.opt.cursorline = false          -- 커서 라인 끄기
+    vim.opt.colorcolumn = ''            -- 컬러 컬럼 끄기
+    vim.opt.foldcolumn = '0'            -- 폴드 컬럼 끄기
+    vim.opt.laststatus = 0              -- 상태바 끄기
+    vim.opt.showtabline = 0             -- 탭라인 끄기
+    print("Clean mode ON - 복사하기 편함!")
+  else
+    -- Clean mode 비활성화 - 모든 UI 요소 복원
+    vim.cmd('SignifyEnable')            -- Git 표시 켜기
+    vim.cmd('IndentLinesEnable')        -- 들여쓰기 가이드 켜기
+    vim.diagnostic.enable()             -- LSP 진단 켜기
+    vim.opt.number = true               -- 라인 넘버 켜기
+    vim.opt.relativenumber = true       -- 상대 라인 넘버 켜기
+    vim.opt.signcolumn = 'yes'          -- 사인 컬럼 켜기
+    vim.opt.cursorline = true           -- 커서 라인 켜기
+    vim.opt.colorcolumn = '129'         -- 컬러 컬럼 복원
+    vim.opt.laststatus = 3              -- 상태바 켜기
+    vim.opt.showtabline = 2             -- 탭라인 켜기
+    print("Clean mode OFF - 일반 모드")
+  end
+end)
 vim.keymap.set('n', '<leader>s', ':update<CR>')
 vim.keymap.set('n', '<F1>', ':NvimTreeToggle<CR>')
 vim.keymap.set('n', '<F5>', ':NvimTreeRefresh<CR>')
