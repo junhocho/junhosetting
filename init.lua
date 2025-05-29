@@ -372,6 +372,23 @@ require("lazy").setup({
     "nvim-tree/nvim-tree.lua",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
+      -- 터미널 환경 감지 (Telescope와 동일한 로직)
+      local has_icons = false
+      
+      if vim.fn.has('gui_running') == 1 or 
+         vim.env.TERM_PROGRAM == 'iTerm.app' or
+         vim.env.TERM_PROGRAM == 'Apple_Terminal' or
+         vim.env.TERMINAL_EMULATOR == 'JetBrains-JediTerm' or
+         vim.env.TERM == 'xterm-kitty' or
+         vim.env.TERM == 'alacritty' or
+         (vim.env.WT_SESSION and vim.fn.has('win32') == 1) then
+        has_icons = true
+      end
+      
+      if vim.env.SSH_CLIENT or vim.env.SSH_TTY then
+        has_icons = false
+      end
+      
       -- nvim-tree 설정
       require("nvim-tree").setup({
         -- 기본 설정
@@ -390,15 +407,40 @@ require("lazy").setup({
           highlight_opened_files = "none",
           icons = {
             show = {
-              file = false,
-              folder = false,
-              folder_arrow = false,
+              file = has_icons,
+              folder = has_icons,
+              folder_arrow = has_icons,
               git = true,
             },
-            glyphs = {
+            glyphs = has_icons and {
+              default = "",
+              symlink = "",
+              bookmark = "󰃃",
+              modified = "●",
+              folder = {
+                arrow_closed = "",
+                arrow_open = "",
+                default = "",
+                open = "",
+                empty = "",
+                empty_open = "",
+                symlink = "",
+                symlink_open = "",
+              },
+              git = {
+                unstaged = "✗",
+                staged = "✓",
+                unmerged = "",
+                renamed = "➜",
+                untracked = "★",
+                deleted = "",
+                ignored = "◌",
+              },
+            } or {
               default = "",
               symlink = "",
               bookmark = "",
+              modified = "●",
               folder = {
                 arrow_closed = ">",
                 arrow_open = "v",
@@ -466,6 +508,7 @@ require("lazy").setup({
     tag = "0.1.8",
     dependencies = { 
       "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons", -- 아이콘 지원
       -- fzf 네이티브 성능 향상
       {
         "nvim-telescope/telescope-fzf-native.nvim",
@@ -476,8 +519,34 @@ require("lazy").setup({
       local telescope = require("telescope")
       local actions = require("telescope.actions")
       
-      -- 아이콘 비활성화 (nvim-web-devicons 없이 사용)
-      vim.g.web_devicons_enabled = false
+      -- 터미널 환경 감지하여 아이콘 지원 여부 확인
+      local has_icons = false
+      
+      -- GUI 환경이거나 특정 터미널에서만 아이콘 활성화
+      if vim.fn.has('gui_running') == 1 or 
+         vim.env.TERM_PROGRAM == 'iTerm.app' or
+         vim.env.TERM_PROGRAM == 'Apple_Terminal' or
+         vim.env.TERMINAL_EMULATOR == 'JetBrains-JediTerm' or
+         vim.env.TERM == 'xterm-kitty' or
+         vim.env.TERM == 'alacritty' or
+         (vim.env.WT_SESSION and vim.fn.has('win32') == 1) then -- Windows Terminal
+        has_icons = true
+      end
+      
+      -- SSH 환경에서는 아이콘 비활성화 (로컬 터미널 불확실)
+      if vim.env.SSH_CLIENT or vim.env.SSH_TTY then
+        has_icons = false
+      end
+      
+      -- 아이콘 설정
+      if has_icons then
+        require("nvim-web-devicons").setup({
+          default = true,
+        })
+        print("아이콘 모드 활성화 (터미널: " .. (vim.env.TERM_PROGRAM or vim.env.TERM or "unknown") .. ")")
+      else
+        print("텍스트 모드 활성화 (터미널: " .. (vim.env.TERM_PROGRAM or vim.env.TERM or "unknown") .. ")")
+      end
       
       telescope.setup({
         defaults = {
@@ -496,11 +565,10 @@ require("lazy").setup({
             "%.dll",
           },
           
-          -- UI 설정 (아이콘 없이)
-          prompt_prefix = "> ",
-          selection_caret = "> ",
+          -- UI 설정 (조건부 아이콘)
+          prompt_prefix = has_icons and "🔍 " or "> ",
+          selection_caret = has_icons and "➤ " or "> ",
           entry_prefix = "  ",
-          -- 아이콘 완전 비활성화
           borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
           initial_mode = "insert",
           selection_strategy = "reset",
@@ -564,14 +632,13 @@ require("lazy").setup({
             previewer = false,
             hidden = false,
             follow = true,
-            -- 파일 타입 아이콘 비활성화
-            disable_devicons = true,
+            disable_devicons = not has_icons,
           },
           
           -- 라이브 그렙 설정
           live_grep = {
             theme = "ivy",
-            disable_devicons = true,
+            disable_devicons = not has_icons,
           },
           
           -- 버퍼 설정
@@ -579,7 +646,7 @@ require("lazy").setup({
             theme = "dropdown",
             previewer = false,
             sort_lastused = true,
-            disable_devicons = true,
+            disable_devicons = not has_icons,
           },
         },
         
