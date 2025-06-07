@@ -710,6 +710,32 @@ require("lazy").setup({
       vim.keymap.set("n", "<leader>ls", builtin.lsp_document_symbols, { desc = "문서 심볼" })
       vim.keymap.set("n", "<leader>lw", builtin.lsp_workspace_symbols, { desc = "작업공간 심볼" })
       vim.keymap.set("n", "<leader>le", builtin.diagnostics, { desc = "진단 정보" })
+      
+      -- Python 함수 검색을 위한 대체 방법들
+      -- 1. 현재 파일의 함수 목록 (document symbols는 pyright가 지원함)
+      vim.keymap.set("n", "<leader>lf", builtin.lsp_document_symbols, { desc = "현재 파일의 함수/클래스 목록" })
+      
+      -- 2. grep으로 함수 정의 검색 (def/class 키워드 활용)
+      vim.keymap.set("n", "<leader>pf", function()
+        local func_name = vim.fn.input("함수명: ")
+        if func_name ~= "" then
+          builtin.grep_string({
+            search = "(def|class)\\s+" .. func_name,
+            use_regex = true,
+            file_pattern = "*.py",
+          })
+        end
+      end, { desc = "Python 함수/클래스 정의 검색" })
+      
+      -- 3. 현재 단어로 정의 검색
+      vim.keymap.set("n", "<leader>pF", function()
+        local word = vim.fn.expand("<cword>")
+        builtin.grep_string({
+          search = "(def|class)\\s+" .. word,
+          use_regex = true,
+          file_pattern = "*.py",
+        })
+      end, { desc = "현재 단어로 Python 정의 검색" })
     end,
   },
   { "tpope/vim-obsession" },
@@ -977,6 +1003,25 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', '<leader>f', function()
       vim.lsp.buf.format { async = true }
     end, opts)
+    
+    -- Python 함수 검색을 위한 실용적인 키매핑
+    vim.keymap.set('n', '<leader>gf', function()
+      -- gd가 가장 정확하지만, 여러 후보가 있을 때를 위한 대안
+      local word = vim.fn.expand('<cword>')
+      if word ~= '' then
+        -- grep으로 함수 정의 검색
+        require('telescope.builtin').grep_string({
+          search = word,
+          prompt_title = "함수 사용처 검색: " .. word,
+          file_pattern = "*.py",
+        })
+      end
+    end, vim.tbl_extend('force', opts, { desc = "현재 단어 사용처 검색 (Python)" }))
+    
+    -- 현재 파일의 구조 탐색 (Outline)
+    vim.keymap.set('n', '<leader>go', function()
+      require('telescope.builtin').lsp_document_symbols()
+    end, vim.tbl_extend('force', opts, { desc = "현재 파일 구조 (함수/클래스)" }))
   end,
 })
 
@@ -1123,3 +1168,31 @@ vim.o.updatetime = 300
 vim.keymap.set('n', 'gl', vim.diagnostic.open_float, { desc = "진단 메시지 보기" })
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = "이전 진단으로" })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = "다음 진단으로" })
+
+-- Python 함수 검색을 위한 편리한 명령어
+vim.api.nvim_create_user_command('PyDef', function(opts)
+  local search_term = opts.args
+  if search_term == '' then
+    search_term = vim.fn.expand('<cword>')
+  end
+  require('telescope.builtin').grep_string({
+    search = "(def|class)\\s+" .. search_term,
+    use_regex = true,
+    file_pattern = "*.py",
+    prompt_title = "Python 정의 검색: " .. search_term,
+  })
+end, { nargs = '?', desc = "Python 함수/클래스 정의 검색" })
+
+-- grep 스타일 검색 (터미널 grepn과 유사)
+vim.api.nvim_create_user_command('Grepn', function(opts)
+  require('telescope.builtin').grep_string({
+    search = opts.args,
+    use_regex = true,
+    additional_args = { "--line-number" },
+  })
+end, { nargs = 1, desc = "grep 스타일 검색 (라인 번호 포함)" })
+
+-- 현재 파일의 함수 목록 보기
+vim.api.nvim_create_user_command('Outline', function()
+  require('telescope.builtin').lsp_document_symbols()
+end, { desc = "현재 파일 구조 보기" })

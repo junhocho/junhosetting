@@ -10,6 +10,15 @@
 - **설정 방식**: `~/.config/nvim/init.lua`에서 자동으로 로드
 - **호환성 확인**: macOS (2025-01-25), Linux (2025-01-26)
 
+## ⚠️ 시스템 요구사항
+
+- **Neovim 버전**: 0.8.0 이상 필수 (lazy.nvim 요구사항)
+- **Git 버전**: 2.19.0 이상 (partial clones 지원)
+- **운영체제별 주의사항**:
+  - Ubuntu 22.04 기본 저장소: Neovim 0.6.1 (❌ 업그레이드 필요)
+  - Ubuntu 24.04 기본 저장소: Neovim 0.9.5 (✅ 사용 가능)
+  - macOS (Homebrew): 최신 버전 (✅ 사용 가능)
+
 ## 🔄 마이그레이션 개요
 
 ### 주요 변경사항
@@ -21,7 +30,8 @@
 | 자동완성 | completor.vim | nvim-cmp + LSP |
 | 문법 검사 | syntastic | Mason + LSP + none-ls |
 | Python 하이라이팅 | semshi | nvim-treesitter |
-| 파일 검색 | ctrlp.vim | ctrlp.vim (유지) |
+| 파일 검색 | ctrlp.vim | telescope.nvim |
+| 파일 트리 | NERDTree | nvim-tree.lua |
 | 상태바 | vim-airline | lualine.nvim |
 | 버퍼 관리 | 기본 버퍼 명령 | bufferline.nvim |
 
@@ -69,6 +79,9 @@ vim.opt.rtp:prepend(lazypath)
 7. **lualine 버퍼 표시**: tabline 설정과 아이콘 비활성화로 개선
 8. **버퍼 순서 이동 문제**: bufferline.nvim 도입으로 해결
 9. **Python 구문 하이라이팅**: semshi 대신 nvim-treesitter 도입
+10. **파일 검색 개선**: ctrlp.vim에서 telescope.nvim으로 전환
+11. **nvim-tree 도입**: NERDTree에서 nvim-tree.lua로 전환
+12. **Pyright workspace/symbol 미지원**: grep 기반 검색으로 대체
 
 ### 5. 개발 도구 설치
 ```bash
@@ -83,6 +96,28 @@ cargo install stylua
 ```
 
 ## 🚀 설치 방법
+
+### 0. Neovim 버전 확인 및 업그레이드 (중요!)
+```bash
+# 버전 확인
+nvim --version
+
+# Ubuntu 22.04에서 최신 버전 설치 (기본 저장소는 0.6.1이므로 업그레이드 필요)
+# 방법 1: PPA 사용
+sudo add-apt-repository ppa:neovim-ppa/stable
+sudo apt update
+sudo apt install neovim
+
+# 방법 2: Snap 사용 (최신 버전)
+sudo snap install nvim --classic
+
+# 방법 3: AppImage 사용
+curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
+chmod u+x nvim.appimage
+./nvim.appimage --appimage-extract
+sudo mv squashfs-root /opt/nvim
+sudo ln -s /opt/nvim/AppRun /usr/local/bin/nvim
+```
 
 ### 1. 기존 설정 백업 (선택사항)
 ```bash
@@ -115,6 +150,49 @@ nvim
 - `<leader>rn` - 심볼 이름 변경
 - `<leader>ca` - 코드 액션
 - `<leader>f` - 코드 포매팅
+- `gl` - 진단 메시지 보기
+- `[d` - 이전 진단으로
+- `]d` - 다음 진단으로
+
+#### Python 함수 검색 (⭐ 새로 추가)
+- `<leader>lf` (,lf) - 현재 파일의 함수/클래스 목록 (아웃라인)
+- `<leader>pf` (,pf) - 함수명 입력해서 정의 검색
+- `<leader>pF` (,pF) - 현재 단어로 함수 정의 검색
+- `<leader>gf` (,gf) - 현재 단어가 사용된 모든 곳 검색
+- `<leader>go` (,go) - 현재 파일 구조 보기
+- `:PyDef <함수명>` - Python 함수/클래스 정의 찾기
+- `:Grepn <패턴>` - grep 스타일 검색 (라인 번호 포함)
+- `:Outline` - 현재 파일 구조 보기
+
+#### Telescope 검색 (파일/텍스트)
+- `<C-p>` - 파일 찾기 (파일명으로)
+- `<leader>ff` (,ff) - 파일 찾기
+- `<leader>fg` (,fg) - 텍스트 검색 (프로젝트 전체)
+- `<leader>fb` (,fb) - 열린 버퍼 검색
+- `<leader>fh` (,fh) - 도움말 검색
+- `<leader>fr` (,fr) - 최근 파일
+- `<leader>fs` (,fs) - 현재 단어로 텍스트 검색
+- `<leader>fc` (,fc) - 명령어 검색
+- `<leader>fk` (,fk) - 키맵 검색
+
+#### Git 관련 (Telescope)
+- `<leader>gf` (,gf) - Git 파일
+- `<leader>gc` (,gc) - Git 커밋
+- `<leader>gb` (,gb) - Git 브랜치
+- `<leader>gs` (,gs) - Git 상태
+
+#### LSP + Telescope 통합
+- `<leader>ld` (,ld) - 정의로 이동
+- `<leader>lr` (,lr) - 참조 찾기
+- `<leader>ls` (,ls) - 문서 심볼
+- `<leader>lw` (,lw) - 작업공간 심볼
+- `<leader>le` (,le) - 진단 정보
+
+#### 파일 탐색 (nvim-tree)
+- `<F1>` - 파일 트리 토글
+- `<F5>` - 파일 트리 새로고침
+- `<leader>e` (,e) - 파일 트리에 포커스
+- `<leader>fc` (,fc) - 현재 파일을 트리에서 찾기
 
 #### 진단 도구
 - `<leader>xx` - Trouble 토글 (모든 진단)
@@ -123,11 +201,14 @@ nvim
 
 #### 기존 키 매핑 (유지됨)
 - `,` - Leader 키
-- `<F1>` - NERDTree 토글
+- `L` - 현재 위치에서 줄 나누기
 - `<F3>` / `<C-s>` - 파일 저장
 - `<F4>` - 공백 문자 제거
+- `<F6>` - 수직 분할
+- `<F7>` - 수평 분할
 - `<F8>` - SrcExpl 토글
 - `<F9>` - Tagbar 토글
+- `<C-l>` - Clean mode 토글 (복사 시 UI 요소 숨기기)
 
 #### 버퍼 관리 (bufferline.nvim)
 - `<leader>'` (,') - 다음 버퍼로 이동 (표시된 순서)
@@ -143,6 +224,18 @@ nvim
 - `:Mason` - Mason UI 열기
 - `:LspInfo` - 현재 버퍼의 LSP 상태 확인
 - `:Lazy` - 플러그인 관리자 UI
+
+### Python 함수 검색 팁
+터미널에서 `grepn "connect_on_off_entry"`로 검색하던 것을 이제 Neovim 내에서:
+
+1. **가장 정확한 방법**: `gd` (정의로 바로 이동)
+2. **함수 정의 찾기**: `:PyDef connect_on_off_entry`
+3. **현재 파일 구조**: `<leader>lf` 또는 `:Outline`
+4. **텍스트 검색**: `<leader>fg`로 전체 프로젝트 검색
+
+**pyright가 workspace/symbol을 지원하지 않는 이유**: 
+- Microsoft가 인덱싱 기능을 VS Code 전용 Pylance에만 제공
+- 대신 grep 기반 검색으로 충분히 대체 가능
 
 ## 🔧 추가 설정
 
@@ -184,6 +277,15 @@ Flask 등의 패키지를 import할 때 오류가 발생하면:
 ```vim
 :Lazy  " 플러그인 상태 확인
 :Lazy update  " 플러그인 업데이트
+```
+
+#### Neovim 버전 문제
+Ubuntu 22.04 사용자의 경우 "module 'vim.loader' not found" 등의 오류가 발생하면:
+```bash
+# 현재 버전 확인
+nvim --version  # 0.6.1이면 업그레이드 필요
+
+# 위의 "Neovim 버전 확인 및 업그레이드" 섹션 참조
 ```
 
 #### 원래 설정으로 복구
@@ -268,9 +370,9 @@ cp ~/.config/nvim/init.vim.backup ~/.config/nvim/init.vim
 ## 🚀 다음 단계 추천
 
 ### 1. 추가 최적화 가능한 플러그인
-- **파일 탐색**: NERDTree → nvim-tree.lua 또는 neo-tree.nvim
-- **검색**: ctrlp.vim → telescope.nvim
-- **Git**: vim-signify → gitsigns.nvim
+- ~~**파일 탐색**: NERDTree → nvim-tree.lua~~ ✅ 완료
+- ~~**검색**: ctrlp.vim → telescope.nvim~~ ✅ 완료
+- **Git**: vim-signify → gitsigns.nvim (검토 중)
 
 ### 2. Tree-sitter 활성화
 구문 하이라이팅 개선을 위해:
