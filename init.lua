@@ -378,8 +378,95 @@ require("lazy").setup({
     end
   },
 
-  -- 기존 플러그인들 (vim-plug에서 마이그레이션)
-  { "mhinz/vim-signify" },
+  -- Git 관련 플러그인들
+  {
+    "lewis6991/gitsigns.nvim",
+    config = function()
+      require('gitsigns').setup({
+        signs = {
+          add          = { text = '+' },
+          change       = { text = '~' },
+          delete       = { text = '_' },
+          topdelete    = { text = '‾' },
+          changedelete = { text = '~' },
+          untracked    = { text = '┆' },
+        },
+        signcolumn = true,  -- 왼쪽 컬럼에 Git 상태 표시
+        numhl      = false, -- 줄 번호에 하이라이트
+        linehl     = false, -- 줄 전체 하이라이트
+        word_diff  = false, -- 단어 단위 diff
+        watch_gitdir = {
+          interval = 1000,
+          follow_files = true
+        },
+        attach_to_untracked = true,
+        current_line_blame = false, -- 현재 줄 blame 표시
+        current_line_blame_opts = {
+          virt_text = true,
+          virt_text_pos = 'eol', -- end of line
+          delay = 1000,
+          ignore_whitespace = false,
+        },
+        current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
+        sign_priority = 6,
+        update_debounce = 100,
+        status_formatter = nil, -- Use default
+        max_file_length = 40000, -- 큰 파일에서는 비활성화
+        preview_config = {
+          -- 미리보기 창 설정
+          border = 'single',
+          style = 'minimal',
+          relative = 'cursor',
+          row = 0,
+          col = 1
+        },
+        on_attach = function(bufnr)
+          local gs = package.loaded.gitsigns
+
+          local function map(mode, l, r, opts)
+            opts = opts or {}
+            opts.buffer = bufnr
+            vim.keymap.set(mode, l, r, opts)
+          end
+
+          -- Git 탐색
+          map('n', '<leader>gn', function()
+            if vim.wo.diff then return ']c' end
+            vim.schedule(function() gs.next_hunk() end)
+            return '<Ignore>'
+          end, {expr=true, desc="다음 Git 변경사항"})
+
+          map('n', '<leader>gp', function()
+            if vim.wo.diff then return '[c' end
+            vim.schedule(function() gs.prev_hunk() end)
+            return '<Ignore>'
+          end, {expr=true, desc="이전 Git 변경사항"})
+
+          -- Git 액션 (자주 쓰는 것들)
+          map('n', '<leader>gh', gs.preview_hunk, {desc="변경사항 미리보기"})
+          map('n', '<leader>gs', gs.stage_hunk, {desc="변경사항 스테이징"})
+          map('n', '<leader>gr', gs.reset_hunk, {desc="변경사항 되돌리기"})
+          map('n', '<leader>gu', gs.undo_stage_hunk, {desc="스테이징 취소"})
+          
+          -- 파일 전체 액션
+          map('n', '<leader>gS', gs.stage_buffer, {desc="파일 전체 스테이징"})
+          map('n', '<leader>gR', gs.reset_buffer, {desc="파일 전체 되돌리기"})
+          
+          -- Blame 정보
+          map('n', '<leader>gb', function() gs.blame_line{full=true} end, {desc="현재 줄 blame"})
+          map('n', '<leader>gB', gs.toggle_current_line_blame, {desc="blame 토글"})
+          
+          -- diff 보기
+          map('n', '<leader>gd', gs.diffthis, {desc="현재 파일 diff"})
+          map('n', '<leader>gD', function() gs.diffthis('~') end, {desc="HEAD와 diff"})
+
+          -- 비주얼 모드에서 선택 영역 스테이징/리셋
+          map('v', '<leader>gs', function() gs.stage_hunk {vim.fn.line('.'), vim.fn.line('v')} end, {desc="선택 영역 스테이징"})
+          map('v', '<leader>gr', function() gs.reset_hunk {vim.fn.line('.'), vim.fn.line('v')} end, {desc="선택 영역 되돌리기"})
+        end
+      })
+    end
+  },
   { "tpope/vim-fugitive" },
   
   -- nvim-tree (NERDTree 대체)
@@ -700,11 +787,11 @@ require("lazy").setup({
       vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "키맵 검색" })
       vim.keymap.set("n", "<leader>fs", builtin.grep_string, { desc = "현재 단어 검색" })
       
-      -- Git 관련
-      vim.keymap.set("n", "<leader>gf", builtin.git_files, { desc = "Git 파일" })
-      vim.keymap.set("n", "<leader>gc", builtin.git_commits, { desc = "Git 커밋" })
-      vim.keymap.set("n", "<leader>gb", builtin.git_branches, { desc = "Git 브랜치" })
-      vim.keymap.set("n", "<leader>gs", builtin.git_status, { desc = "Git 상태" })
+      -- Git 파일 검색 관련 (대문자로 변경하여 gitsigns와 충돌 방지)
+      vim.keymap.set("n", "<leader>Gf", builtin.git_files, { desc = "Git 파일 검색" })
+      vim.keymap.set("n", "<leader>Gc", builtin.git_commits, { desc = "Git 커밋 검색" })
+      vim.keymap.set("n", "<leader>Gb", builtin.git_branches, { desc = "Git 브랜치 검색" })
+      vim.keymap.set("n", "<leader>Gs", builtin.git_status, { desc = "Git 상태 검색" })
       
       -- LSP 관련 (LSP가 활성화된 경우에만)
       vim.keymap.set("n", "<leader>ld", builtin.lsp_definitions, { desc = "정의로 이동" })

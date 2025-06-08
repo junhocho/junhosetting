@@ -177,11 +177,26 @@ nvim
 - `<leader>fc` (,fc) - 명령어 검색
 - `<leader>fk` (,fk) - 키맵 검색
 
-#### Git 관련 (Telescope)
-- `<leader>gf` (,gf) - Git 파일
-- `<leader>gc` (,gc) - Git 커밋
-- `<leader>gb` (,gb) - Git 브랜치
-- `<leader>gs` (,gs) - Git 상태
+#### Git 관련 (gitsigns.nvim) ⭐ 새로 추가
+- `<leader>gn` (,gn) - 다음 Git 변경사항으로 이동
+- `<leader>gp` (,gp) - 이전 Git 변경사항으로 이동
+- `<leader>gh` (,gh) - 현재 변경사항 미리보기
+- `<leader>gs` (,gs) - 현재 변경사항 스테이징
+- `<leader>gr` (,gr) - 현재 변경사항 되돌리기
+- `<leader>gu` (,gu) - 스테이징 취소
+- `<leader>gS` (,gS) - 파일 전체 스테이징
+- `<leader>gR` (,gR) - 파일 전체 되돌리기
+- `<leader>gb` (,gb) - 현재 줄 blame 정보
+- `<leader>gB` (,gB) - blame 토글 (항상 표시)
+- `<leader>gd` (,gd) - 현재 파일 diff 보기
+- `<leader>gD` (,gD) - HEAD와 diff 보기
+- 비주얼 모드: `<leader>gs`, `<leader>gr` - 선택 영역만 스테이징/되돌리기
+
+#### Git 파일 검색 (Telescope)
+- `<leader>Gf` (,Gf) - Git 파일 검색
+- `<leader>Gc` (,Gc) - Git 커밋 검색
+- `<leader>Gb` (,Gb) - Git 브랜치 검색
+- `<leader>Gs` (,Gs) - Git 상태 검색
 
 #### LSP + Telescope 통합
 - `<leader>ld` (,ld) - 정의로 이동
@@ -407,27 +422,148 @@ cp ~/.config/nvim/init.vim.backup ~/.config/nvim/init.vim
 
 ## 🚀 다음 단계 추천
 
-### 1. 추가 최적화 가능한 플러그인
+### 1. 2024-2025 현대적 플러그인 업그레이드 가이드
+
+#### 🔥 즉시 교체 추천 (Legacy → Modern)
+
+##### **Git 표시자**: ~~vim-signify~~ → gitsigns.nvim ✅ 완료
+```lua
+-- 기존: { "mhinz/vim-signify" }
+-- 현재: { "lewis6991/gitsigns.nvim" }
+```
+**장점**: Lua 네이티브, 비동기 처리, blame/hunk preview/stage/reset 기능  
+**성능**: 더 빠른 Git 상태 감지와 업데이트  
+**호환성**: 기존 키맵과 완전 호환  
+**상태**: ✅ 2025-01-26 적용 완료
+
+##### **심볼 아웃라인**: tagbar → outline.nvim
+```lua
+-- 현재: { "majutsushi/tagbar" }
+-- 추천: { "hedyhli/outline.nvim" }
+```
+**장점**: LSP 기반, treesitter 지원, 더 정확한 심볼 인식  
+**기능**: 키보드 중심 네비게이션, 현대적 UI  
+**키매핑**: `<F9>` 재사용 가능
+
+##### **브래킷 페어링**: auto-pairs → nvim-autopairs
+```lua
+-- 현재: { "jiangmiao/auto-pairs" }
+-- 추천: { "windwp/nvim-autopairs" }
+```
+**장점**: Lua 네이티브, nvim-cmp 완벽 통합  
+**성능**: 더 빠르고 안정적인 브래킷 처리  
+**설정**: 파일타입별 세밀한 커스터마이징
+
+#### 🎯 소스 탐색기 현대화 옵션들
+
+**SrcExpl 대체 후보들**:
+```lua
+-- 현재: { "wesleyche/SrcExpl" }
+
+-- 옵션 1: 사이드바 아웃라인 (가장 추천)
+{ "stevearc/aerial.nvim" }
+
+-- 옵션 2: breadcrumb 스타일 네비게이션
+{ "SmiteshP/nvim-navbuddy" }
+
+-- 옵션 3: 기존 Telescope LSP (이미 구현됨)
+-- <leader>ls, <leader>lf 활용
+```
+
+#### ⭐ 새로운 UX 개선 플러그인들
+
+##### **키바인딩 가이드**: which-key.nvim
+```lua
+{ "folke/which-key.nvim" }
+```
+**기능**: 키 조합 입력 시 사용 가능한 옵션들 팝업 표시  
+**장점**: 키맵 학습과 발견이 쉬워짐, 그룹핑 지원
+
+##### **breadcrumb 네비게이션**: nvim-navic + nvim-navbuddy
+```lua
+{ "SmiteshP/nvim-navic" }     -- statusline breadcrumb
+{ "SmiteshP/nvim-navbuddy" }  -- popup 네비게이션
+```
+**기능**: 현재 위치의 함수/클래스 경로 표시  
+**네비게이션**: ranger 스타일의 계층적 파일 탐색
+
+##### **통합 미니멀 플러그인**: mini.nvim
+```lua
+{ "echasnovski/mini.nvim" }
+```
+**포함**: surround, comment, pairs, diff, files 등  
+**장점**: 일관된 API, 가벼운 구현, 모듈식 로딩
+
+#### 🏆 업그레이드 우선순위
+
+1. **🥇 즉시 적용**: ~~`gitsigns.nvim` (vim-signify 대체)~~ ✅ 완료
+   - 완전 호환, 성능 크게 향상
+2. **🥈 성능 개선**: `nvim-autopairs` (auto-pairs 대체)
+   - nvim-cmp 통합, 더 안정적
+3. **🥉 심볼 탐색**: `outline.nvim` (tagbar 대체)
+   - LSP 기반, 더 정확한 정보
+4. **🎁 UX 향상**: `which-key.nvim` (새로 추가)
+   - 키맵 학습 도움, 생산성 향상
+5. **🚀 고급 탐색**: `aerial.nvim` 또는 `nvim-navbuddy` (srcexpl 대체)
+   - 현대적 소스 탐색 경험
+
+#### 📊 현재 상태 vs 2024-2025 추천
+
+| 기능 | 현재 플러그인 | 추천 대체재 | 상태 |
+|------|---------------|-------------|------|
+| 파일 탐색 | ~~NERDTree~~ | nvim-tree.lua | ✅ 완료 |
+| 파일 검색 | ~~ctrlp.vim~~ | telescope.nvim | ✅ 완료 |
+| 터미널 | ~~:terminal~~ | toggleterm.nvim | ✅ 완료 |
+| Git 표시 | ~~vim-signify~~ | **gitsigns.nvim** | ✅ 완료 |
+| 심볼 아웃라인 | tagbar | **outline.nvim** | 🔄 추천 |
+| 브래킷 페어 | auto-pairs | **nvim-autopairs** | 🔄 추천 |
+| 소스 탐색 | SrcExpl | **aerial.nvim** | 🔄 고려중 |
+| 키맵 가이드 | - | **which-key.nvim** | ⭐ 신규 |
+
+### 2. 완료된 현대화 항목
 - ~~**파일 탐색**: NERDTree → nvim-tree.lua~~ ✅ 완료
 - ~~**검색**: ctrlp.vim → telescope.nvim~~ ✅ 완료
 - ~~**터미널**: 기본 :terminal → toggleterm.nvim~~ ✅ 완료
-- **Git**: vim-signify → gitsigns.nvim (검토 중)
+- ~~**Git 표시자**: vim-signify → gitsigns.nvim~~ ✅ 2025-01-26 완료
 
-### 2. Tree-sitter 활성화
-구문 하이라이팅 개선을 위해:
+### 3. Tree-sitter 활성화 (이미 구현됨)
 ```lua
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+-- 이미 설정됨: nvim-treesitter
+-- Python, Lua, Vim, JavaScript 등 파서 자동 설치
 ```
 
-### 3. 디버깅 도구 추가
+### 4. 향후 고려사항
+
+#### **디버깅 도구 추가**
 DAP (Debug Adapter Protocol) 지원:
 ```lua
-Plug 'mfussenegger/nvim-dap'
-Plug 'rcarriga/nvim-dap-ui'
+{ 'mfussenegger/nvim-dap' }
+{ 'rcarriga/nvim-dap-ui' }
 ```
+
+#### **성능 모니터링**
+```vim
+:Lazy profile  -- 플러그인 로딩 시간 확인
+:checkhealth   -- Neovim 상태 진단
+```
+
+#### **현대적 UI 프레임워크**
+```lua
+{ "folke/noice.nvim" }  -- 메시지/커맨드라인 UI 개선
+{ "MunifTanjim/nui.nvim" }  -- UI 컴포넌트 라이브러리
+```
+
+### 5. 2024-2025 Neovim 트렌드
+
+- **Lua-first 접근**: VimScript → Lua 완전 전환
+- **LSP 중심**: ctags/regex → LSP 의미론적 분석
+- **성능 최적화**: 비동기 처리, 지연 로딩
+- **통합 경험**: 플러그인 간 상호 연동성
+- **키보드 중심**: 마우스 없는 효율적 워크플로우
 
 ## 📖 참고 자료
 
+### 기존 참고 자료
 - [Mason.nvim 공식 문서](https://github.com/williamboman/mason.nvim)
 - [nvim-cmp 설정 가이드](https://github.com/hrsh7th/nvim-cmp)
 - [Neovim LSP 문서](https://neovim.io/doc/user/lsp.html)
@@ -435,8 +571,19 @@ Plug 'rcarriga/nvim-dap-ui'
 - [bufferline.nvim 문서](https://github.com/akinsho/bufferline.nvim)
 - [lualine.nvim 문서](https://github.com/nvim-lualine/lualine.nvim)
 
+### 추천 플러그인 문서
+- [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim) - Git 통합
+- [outline.nvim](https://github.com/hedyhli/outline.nvim) - 심볼 아웃라인
+- [nvim-autopairs](https://github.com/windwp/nvim-autopairs) - 브래킷 자동완성
+- [which-key.nvim](https://github.com/folke/which-key.nvim) - 키바인딩 가이드
+- [aerial.nvim](https://github.com/stevearc/aerial.nvim) - 코드 아웃라인
+- [nvim-navbuddy](https://github.com/SmiteshP/nvim-navbuddy) - breadcrumb 네비게이션
+- [awesome-neovim](https://github.com/rockerBOO/awesome-neovim) - 플러그인 모음집
+
 ---
 
-**마이그레이션 완료!** 🎉
+**마이그레이션 완료 + 현대화 로드맵!** 🎉
 
-이제 현대적인 Neovim 개발 환경을 사용할 수 있습니다. 문제가 발생하거나 추가 기능이 필요하면 위의 가이드를 참조하세요.
+현재 현대적인 Neovim 개발 환경이 구축되었으며, 위의 2024-2025 추천 플러그인들로 더욱 향상시킬 수 있습니다. 
+
+**다음 단계**: `gitsigns.nvim`부터 시작하여 점진적으로 업그레이드하는 것을 추천합니다. 각 플러그인은 기존 설정과 호환되도록 설계되어 안전하게 전환할 수 있습니다.
