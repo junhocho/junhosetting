@@ -32,6 +32,7 @@
 | Python 하이라이팅 | semshi | nvim-treesitter |
 | 파일 검색 | ctrlp.vim | telescope.nvim |
 | 파일 트리 | NERDTree | nvim-tree.lua |
+| 터미널 | 기본 :terminal | toggleterm.nvim |
 | 상태바 | vim-airline | lualine.nvim |
 | 버퍼 관리 | 기본 버퍼 명령 | bufferline.nvim |
 
@@ -82,6 +83,7 @@ vim.opt.rtp:prepend(lazypath)
 10. **파일 검색 개선**: ctrlp.vim에서 telescope.nvim으로 전환
 11. **nvim-tree 도입**: NERDTree에서 nvim-tree.lua로 전환
 12. **Pyright workspace/symbol 미지원**: grep 기반 검색으로 대체
+13. **Floating 터미널 도입**: toggleterm.nvim으로 백그라운드 터미널 관리
 
 ### 5. 개발 도구 설치
 ```bash
@@ -194,6 +196,17 @@ nvim
 - `<leader>e` (,e) - 파일 트리에 포커스
 - `<leader>fc` (,fc) - 현재 파일을 트리에서 찾기
 
+#### Floating 터미널 (toggleterm.nvim) ⭐ 새로 추가
+- `<F10>` - Floating 터미널 토글 (가장 많이 사용)
+- `<leader>t` (,t) - Floating 터미널 토글
+- `<leader>th` (,th) - 수평 분할 터미널
+- `<leader>tv` (,tv) - 수직 분할 터미널
+- `<leader>1t` (,1t) - 1번 터미널
+- `<leader>2t` (,2t) - 2번 터미널
+- `<leader>3t` (,3t) - 3번 터미널
+- 터미널 내에서 `<Esc>` - 일반 모드로 전환
+- 터미널 내에서 `<C-h/j/k/l>` - 다른 창으로 이동
+
 #### 진단 도구
 - `<leader>xx` - Trouble 토글 (모든 진단)
 - `<leader>xw` - 워크스페이스 진단
@@ -208,6 +221,7 @@ nvim
 - `<F7>` - 수평 분할
 - `<F8>` - SrcExpl 토글
 - `<F9>` - Tagbar 토글
+- `<F10>` - Floating 터미널 토글 ⭐ 새로 추가
 - `<C-l>` - Clean mode 토글 (복사 시 UI 요소 숨기기)
 
 #### 버퍼 관리 (bufferline.nvim)
@@ -236,6 +250,30 @@ nvim
 **pyright가 workspace/symbol을 지원하지 않는 이유**: 
 - Microsoft가 인덱싱 기능을 VS Code 전용 Pylance에만 제공
 - 대신 grep 기반 검색으로 충분히 대체 가능
+
+### Floating 터미널 사용법 ⭐ 새로 추가
+
+**기존 문제점**:
+- `!<명령어>` - 명령어 실행 후 결과만 보고 종료
+- `<C-z>` - neovim 일시정지 (백그라운드로)
+- `:terminal` - 매번 새 터미널 생성 → zsh 초기화 시간
+
+**toggleterm.nvim의 장점**:
+- **Persistent Terminal**: 백그라운드에서 계속 실행 → zsh 재시작 없음
+- **Instant Toggle**: `<F10>`으로 즉시 나타남/사라짐
+- **Floating Window**: telescope처럼 깔끔한 popup
+- **Multiple Instances**: 여러 터미널을 번호로 관리
+
+**사용 패턴**:
+1. `<F10>` 누르면 처음에 새 터미널 생성 (zsh 시작)
+2. 다시 `<F10>` 누르면 즉시 사라짐
+3. 또 누르면 **같은 터미널**이 즉시 나타남 (zsh 재시작 없음!)
+4. `<leader>1t`, `<leader>2t`로 여러 터미널 인스턴스 관리
+
+**터미널 스타일**:
+- 기본: Floating window (화면 중앙에 popup)
+- `<leader>th`: 수평 분할 (화면 하단)
+- `<leader>tv`: 수직 분할 (화면 오른쪽)
 
 ## 🔧 추가 설정
 
@@ -372,6 +410,7 @@ cp ~/.config/nvim/init.vim.backup ~/.config/nvim/init.vim
 ### 1. 추가 최적화 가능한 플러그인
 - ~~**파일 탐색**: NERDTree → nvim-tree.lua~~ ✅ 완료
 - ~~**검색**: ctrlp.vim → telescope.nvim~~ ✅ 완료
+- ~~**터미널**: 기본 :terminal → toggleterm.nvim~~ ✅ 완료
 - **Git**: vim-signify → gitsigns.nvim (검토 중)
 
 ### 2. Tree-sitter 활성화

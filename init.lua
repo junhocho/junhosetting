@@ -104,6 +104,8 @@ vim.keymap.set('n', '<F7>', ':sp<CR>')
 vim.keymap.set('n', '<F8>', ':SrcExplToggle<CR>')
 vim.keymap.set('n', '<F9>', ':TagbarToggle<CR>')
 
+-- 기존 터미널 키매핑은 toggleterm으로 대체됨
+
 -- 버퍼 관련 키 매핑
 vim.keymap.set('n', '<leader>T', ':enew<CR>')
 vim.keymap.set('n', '<leader>bq', ':bp <BAR> bd #<CR>')
@@ -967,6 +969,61 @@ require("lazy").setup({
   { "tbastos/vim-lua" },
   -- semshi 제거 (Python 3.12 호환성 문제)
   -- { "numirias/semshi", build = ":UpdateRemotePlugins" },
+
+  -- ToggleTerm - Floating Terminal
+  {
+    "akinsho/toggleterm.nvim",
+    version = "*",
+    config = function()
+      require("toggleterm").setup({
+        size = 20,
+        open_mapping = [[<F10>]],  -- F10으로 토글
+        hide_numbers = true,
+        shade_filetypes = {},
+        shade_terminals = true,
+        shading_factor = 2,
+        start_in_insert = true,
+        insert_mappings = true,
+        terminal_mappings = true,
+        persist_size = true,
+        direction = 'float',  -- floating window
+        close_on_exit = true,
+        shell = vim.o.shell,
+        float_opts = {
+          border = 'curved',  -- 경계선 스타일
+          width = 100,
+          height = 30,
+          winblend = 3,  -- 투명도
+        },
+        winbar = {
+          enabled = false,
+        },
+      })
+      
+      -- 터미널 모드에서 빠지기
+      function _G.set_terminal_keymaps()
+        local opts = {buffer = 0}
+        vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
+        vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
+        vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
+        vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
+        vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
+        vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], opts)
+      end
+      
+      vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
+      
+      -- 추가 키매핑
+      vim.keymap.set('n', '<leader>t', '<cmd>ToggleTerm direction=float<cr>', { desc = "Floating 터미널 토글" })
+      vim.keymap.set('n', '<leader>th', '<cmd>ToggleTerm size=10 direction=horizontal<cr>', { desc = "수평 터미널" })
+      vim.keymap.set('n', '<leader>tv', '<cmd>ToggleTerm size=80 direction=vertical<cr>', { desc = "수직 터미널" })
+      
+      -- 터미널 번호로 선택
+      vim.keymap.set('n', '<leader>1t', '<cmd>1ToggleTerm<cr>', { desc = "1번 터미널" })
+      vim.keymap.set('n', '<leader>2t', '<cmd>2ToggleTerm<cr>', { desc = "2번 터미널" })
+      vim.keymap.set('n', '<leader>3t', '<cmd>3ToggleTerm<cr>', { desc = "3번 터미널" })
+    end
+  },
 
   -- LSP 진단 UI 개선
   {
