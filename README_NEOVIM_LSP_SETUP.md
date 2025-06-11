@@ -133,7 +133,16 @@ echo "-- junhosetting의 init.lua를 불러오기" > ~/.config/nvim/init.lua
 echo "vim.cmd('luafile ~/junhosetting/init.lua')" >> ~/.config/nvim/init.lua
 ```
 
-### 3. Neovim 실행
+### 3. 시스템 종속성 설치
+```bash
+# ripgrep 설치 (Telescope 텍스트 검색용 - <leader>fs 기능에 필요)
+sudo apt install ripgrep
+
+# 기타 유용한 도구들
+sudo apt install fd-find  # 빠른 파일 검색 (선택사항)
+```
+
+### 4. Neovim 실행
 ```bash
 nvim
 # 첫 실행 시 플러그인이 자동으로 설치됩니다
@@ -169,13 +178,15 @@ nvim
 #### Telescope 검색 (파일/텍스트)
 - `<C-p>` - 파일 찾기 (파일명으로)
 - `<leader>ff` (,ff) - 파일 찾기
-- `<leader>fg` (,fg) - 텍스트 검색 (프로젝트 전체)
+- `<leader>fg` (,fg) - 텍스트 검색 (프로젝트 전체) ⚠️ ripgrep 필요
 - `<leader>fb` (,fb) - 열린 버퍼 검색
 - `<leader>fh` (,fh) - 도움말 검색
 - `<leader>fr` (,fr) - 최근 파일
-- `<leader>fs` (,fs) - 현재 단어로 텍스트 검색
+- `<leader>fs` (,fs) - 현재 단어로 텍스트 검색 ⚠️ ripgrep 필요
 - `<leader>fc` (,fc) - 명령어 검색
 - `<leader>fk` (,fk) - 키맵 검색
+
+**주의**: `<leader>fg`와 `<leader>fs` 기능을 사용하려면 ripgrep이 설치되어 있어야 합니다.
 
 #### Git 관련 (gitsigns.nvim) ⭐ 새로 추가
 - `<leader>gn` (,gn) - 다음 Git 변경사항으로 이동
