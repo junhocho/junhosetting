@@ -63,31 +63,56 @@ vim.keymap.set('n', '<C-l>', function()
   clean_mode = not clean_mode
   if clean_mode then
     -- Clean mode 활성화 - 모든 UI 요소 숨기기
-    vim.cmd('SignifyDisable')           -- Git 표시 끄기
-    vim.cmd('IndentLinesDisable')       -- 들여쓰기 가이드 끄기
-    vim.diagnostic.disable()            -- LSP 진단 끄기
+    -- gitsigns 끄기
+    pcall(function()
+      require('gitsigns').toggle_signs(false)
+    end)
+    
+    -- IndentLines 끄기 (있는 경우)
+    pcall(function()
+      vim.cmd('IndentLinesDisable')
+    end)
+    
+    vim.diagnostic.disable()            -- LSP 진단 끄기 (E, W, I 등)
     vim.opt.number = false              -- 라인 넘버 끄기
     vim.opt.relativenumber = false      -- 상대 라인 넘버 끄기
-    vim.opt.signcolumn = 'no'           -- 사인 컬럼 끄기
+    vim.opt.signcolumn = 'no'           -- 사인 컬럼 끄기 (Git +,~,- 표시 공간)
     vim.opt.cursorline = false          -- 커서 라인 끄기
     vim.opt.colorcolumn = ''            -- 컬러 컬럼 끄기
     vim.opt.foldcolumn = '0'            -- 폴드 컬럼 끄기
     vim.opt.laststatus = 0              -- 상태바 끄기
     vim.opt.showtabline = 0             -- 탭라인 끄기
-    print("Clean mode ON - 복사하기 편함!")
+    
+    -- nvim-tree와 other UI 숨기기
+    pcall(function()
+      if vim.fn.exists(':NvimTreeClose') == 2 then
+        vim.cmd('NvimTreeClose')
+      end
+    end)
+    
+    print("🔄 Clean mode ON - 복사하기 편함! (라인넘버, Git표시, 진단 숨김)")
   else
     -- Clean mode 비활성화 - 모든 UI 요소 복원
-    vim.cmd('SignifyEnable')            -- Git 표시 켜기
-    vim.cmd('IndentLinesEnable')        -- 들여쓰기 가이드 켜기
-    vim.diagnostic.enable()             -- LSP 진단 켜기
+    -- gitsigns 켜기
+    pcall(function()
+      require('gitsigns').toggle_signs(true)
+    end)
+    
+    -- IndentLines 켜기 (있는 경우)
+    pcall(function()
+      vim.cmd('IndentLinesEnable')
+    end)
+    
+    vim.diagnostic.enable()             -- LSP 진단 켜기 (E, W, I 등)
     vim.opt.number = true               -- 라인 넘버 켜기
     vim.opt.relativenumber = true       -- 상대 라인 넘버 켜기
-    vim.opt.signcolumn = 'yes'          -- 사인 컬럼 켜기
+    vim.opt.signcolumn = 'yes'          -- 사인 컬럼 켜기 (Git +,~,- 표시 공간)
     vim.opt.cursorline = true           -- 커서 라인 켜기
     vim.opt.colorcolumn = '129'         -- 컬러 컬럼 복원
     vim.opt.laststatus = 3              -- 상태바 켜기
     vim.opt.showtabline = 2             -- 탭라인 켜기
-    print("Clean mode OFF - 일반 모드")
+    
+    print("🔄 Clean mode OFF - 일반 모드 (모든 UI 복원)")
   end
 end)
 vim.keymap.set('n', '<leader>s', ':update<CR>')
