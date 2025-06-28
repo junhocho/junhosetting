@@ -43,10 +43,25 @@ For faster clone:
 - vim plugins and neovim
 - I prefer [neovim](https://github.com/neovim/neovim/wiki/Installing-Neovim) over vim.
 - Here's my [`neovim`](./neovim-install.sh).
-- It also installs [vim-plug](https://github.com/junegunn/vim-plug#example)
+- Migrated from vim-plug to [lazy.nvim](https://github.com/folke/lazy.nvim) for better plugin management
 - Install python3 first. `sh setup-anaconda.sh`
 - Simple install with `sh neovim-install.sh`
 - powerline font might be needed at your client : https://github.com/powerline/fonts
+
+### Modern Neovim Features
+
+- **LSP 지원**: Mason을 통한 자동 LSP 서버 설치 및 관리
+- **파일 탐색기**: nvim-tree.lua (NERDTree 대체)
+  - `F1`: 파일 트리 토글
+  - `F5`: 파일 트리 새로고침 
+  - `,e`: 파일 트리에 포커스
+  - `,fc`: 현재 파일을 트리에서 찾기
+  - Git 상태 표시 및 자동 리프레시
+- **자동완성**: nvim-cmp (LSP 기반)
+- **구문 강조**: Treesitter (더 정확한 구문 분석)
+- **린터/포매터**: none-ls (null-ls 후속)
+- **버퍼 관리**: bufferline.nvim (탭 스타일 버퍼)
+- **상태바**: lualine.nvim (가벼운 모던 상태바)
 
 ### Help
 
