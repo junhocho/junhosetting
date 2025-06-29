@@ -32,6 +32,31 @@ vim.opt.mouse = "a"
 vim.opt.lazyredraw = true
 vim.opt.synmaxcol = 256
 vim.cmd("syntax sync minlines=256")
+vim.opt.conceallevel = 0  -- concealing 완전 비활성화
+
+-- conceallevel이 다른 플러그인에 의해 변경되는 것을 강력하게 방지
+vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter", "FileType", "BufRead", "BufNewFile"}, {
+  callback = function()
+    vim.opt_local.conceallevel = 0
+    vim.opt_local.concealcursor = ""  -- 커서가 있을 때도 숨기지 않음
+  end,
+  desc = "항상 conceallevel을 0으로 유지"
+})
+
+-- Markdown 파일 전용 설정
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "markdown",
+  callback = function()
+    vim.opt_local.conceallevel = 0
+    vim.opt_local.concealcursor = ""
+    -- vim.schedule로 다른 플러그인보다 나중에 실행
+    vim.schedule(function()
+      vim.opt_local.conceallevel = 0
+      vim.opt_local.concealcursor = ""
+    end)
+  end,
+  desc = "Markdown에서 concealing 완전 비활성화"
+})
 
 -- 파일 변경 자동 감지 및 새로고침
 vim.opt.autoread = true
@@ -499,19 +524,10 @@ require("lazy").setup({
     "nvim-tree/nvim-tree.lua",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
-      -- 터미널 환경 감지 (Telescope와 동일한 로직)
-      local has_icons = false
+      -- 터미널 환경 감지 (스마트한 아이콘 활성화)
+      local has_icons = true
       
-      if vim.fn.has('gui_running') == 1 or 
-         vim.env.TERM_PROGRAM == 'iTerm.app' or
-         vim.env.TERM_PROGRAM == 'Apple_Terminal' or
-         vim.env.TERMINAL_EMULATOR == 'JetBrains-JediTerm' or
-         vim.env.TERM == 'xterm-kitty' or
-         vim.env.TERM == 'alacritty' or
-         (vim.env.WT_SESSION and vim.fn.has('win32') == 1) then
-        has_icons = true
-      end
-      
+      -- SSH 환경에서는 아이콘 비활성화 (폰트 문제 방지)
       if vim.env.SSH_CLIENT or vim.env.SSH_TTY then
         has_icons = false
       end
@@ -652,21 +668,10 @@ require("lazy").setup({
       local telescope = require("telescope")
       local actions = require("telescope.actions")
       
-      -- 터미널 환경 감지하여 아이콘 지원 여부 확인
-      local has_icons = false
+      -- 터미널 환경 감지하여 아이콘 지원 여부 확인 (스마트한 아이콘 활성화)
+      local has_icons = true
       
-      -- GUI 환경이거나 특정 터미널에서만 아이콘 활성화
-      if vim.fn.has('gui_running') == 1 or 
-         vim.env.TERM_PROGRAM == 'iTerm.app' or
-         vim.env.TERM_PROGRAM == 'Apple_Terminal' or
-         vim.env.TERMINAL_EMULATOR == 'JetBrains-JediTerm' or
-         vim.env.TERM == 'xterm-kitty' or
-         vim.env.TERM == 'alacritty' or
-         (vim.env.WT_SESSION and vim.fn.has('win32') == 1) then -- Windows Terminal
-        has_icons = true
-      end
-      
-      -- SSH 환경에서는 아이콘 비활성화 (로컬 터미널 불확실)
+      -- SSH 환경에서는 아이콘 비활성화 (폰트 문제 방지)
       if vim.env.SSH_CLIENT or vim.env.SSH_TTY then
         has_icons = false
       end
