@@ -30,6 +30,22 @@ echo 'source ~/junhosetting/vimrc' > ~/.vimrc
 # Python3 required!!
 pip install neovim
 
+# LSP 서버 및 treesitter 파서 빌드에 필요한 의존성 설치
+# - node/npm: Mason이 LSP 서버(pyright, bashls, jsonls, yamlls 등)를 설치할 때 필요
+# - tree-sitter-cli: nvim-treesitter가 파서를 빌드할 때 필요
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    # macOS (Homebrew)
+    command -v node >/dev/null 2>&1 || brew install node
+    command -v tree-sitter >/dev/null 2>&1 || brew install tree-sitter-cli
+else
+    # Linux
+    command -v node >/dev/null 2>&1 || {
+        curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+        sudo apt-get install -y nodejs
+    }
+    command -v tree-sitter >/dev/null 2>&1 || npm install -g tree-sitter-cli
+fi
+
 
 # AppImage는 더 이상 필요없음 (위에서 이미 tar.gz 설치함)
 # curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage

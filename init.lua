@@ -184,38 +184,31 @@ require("lazy").setup({
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     config = function()
-      require("nvim-treesitter.configs").setup({
-        -- 필요한 파서 자동 설치
-        ensure_installed = { "python", "lua", "vim", "vimdoc", "bash", "javascript", "typescript", "c", "cpp", "rust", "go", "java" },
-        
-        -- 파서 동기식으로 설치 (첫 번째 설치에만 권장)
-        sync_install = false,
-        
-        -- 파서 자동 설치
-        auto_install = true,
-        
-        highlight = {
-          enable = true,
-          -- vim regex highlighting 비활성화 (성능 향상)
-          additional_vim_regex_highlighting = false,
-        },
-        
-        -- 추가 기능들
-        indent = {
-          enable = true,
-        },
-        
-        -- 점진적 선택 (코드 블록 선택)
-        incremental_selection = {
-          enable = true,
-          keymaps = {
-            init_selection = "gnn",
-            node_incremental = "grn",
-            scope_incremental = "grc",
-            node_decremental = "grm",
-          },
-        },
-      })
+      -- 필요한 파서 자동 설치
+      local ensure_installed = { "python", "lua", "vim", "vimdoc", "bash", "javascript", "typescript", "c", "cpp", "rust", "go", "java" }
+      local installed = require("nvim-treesitter").get_installed()
+      for _, lang in ipairs(ensure_installed) do
+        if not vim.tbl_contains(installed, lang) then
+          vim.cmd("TSInstall " .. lang)
+        end
+      end
+
+      -- treesitter highlight/indent는 nvim이 자동으로 처리
+    end,
+    init = function()
+      -- 점진적 선택 키맵
+      vim.keymap.set("n", "gnn", function()
+        require("nvim-treesitter.incremental_selection").init_selection()
+      end, { desc = "Init treesitter selection" })
+      vim.keymap.set("x", "grn", function()
+        require("nvim-treesitter.incremental_selection").node_incremental()
+      end, { desc = "Increment treesitter selection" })
+      vim.keymap.set("x", "grc", function()
+        require("nvim-treesitter.incremental_selection").scope_incremental()
+      end, { desc = "Increment scope selection" })
+      vim.keymap.set("x", "grm", function()
+        require("nvim-treesitter.incremental_selection").node_decremental()
+      end, { desc = "Decrement treesitter selection" })
     end,
   },
 
@@ -229,11 +222,10 @@ require("lazy").setup({
   },
   {
     "williamboman/mason-lspconfig.nvim",
-    version = "^1.0", -- v1.x 버전으로 고정
     dependencies = { "williamboman/mason.nvim" },
     config = function()
       require("mason-lspconfig").setup({
-        ensure_installed = { 
+        ensure_installed = {
           "pyright",        -- Python LSP
           "lua_ls",         -- Lua LSP
           "bashls",         -- Bash LSP
@@ -241,75 +233,6 @@ require("lazy").setup({
           "yamlls",         -- YAML LSP
         },
         automatic_installation = true,
-        -- 각 서버별 자동 설정
-        handlers = {
-          -- 기본 핸들러
-          function(server_name)
-            local capabilities = require("cmp_nvim_lsp").default_capabilities()
-            require("lspconfig")[server_name].setup({
-              capabilities = capabilities,
-            })
-          end,
-          
-          -- lua_ls 전용 핸들러
-          ["lua_ls"] = function()
-            local lspconfig = require("lspconfig")
-            local capabilities = require("cmp_nvim_lsp").default_capabilities()
-            
-            lspconfig.lua_ls.setup({
-              capabilities = capabilities,
-              settings = {
-                Lua = {
-                  runtime = {
-                    version = 'LuaJIT',
-                  },
-                  diagnostics = {
-                    globals = {'vim'},
-                  },
-                  workspace = {
-                    library = vim.api.nvim_get_runtime_file("", true),
-                    checkThirdParty = false,
-                  },
-                  telemetry = {
-                    enable = false,
-                  },
-                },
-              },
-            })
-          end,
-          
-          -- pyright 전용 핸들러
-          ["pyright"] = function()
-            local lspconfig = require("lspconfig")
-            local capabilities = require("cmp_nvim_lsp").default_capabilities()
-            local util = require('lspconfig.util')
-            
-            -- 프로젝트 루트 찾기
-            local root_pattern = util.root_pattern("pyrightconfig.json", ".git", "setup.py", "requirements.txt")
-            
-            lspconfig.pyright.setup({
-              capabilities = capabilities,
-              root_dir = root_pattern,
-              on_init = function(client)
-                -- pyrightconfig.json이 있으면 그것을 사용
-                local workspace_path = client.config.root_dir
-                if workspace_path and vim.fn.filereadable(workspace_path .. "/pyrightconfig.json") == 1 then
-                  client.config.settings = {}  -- pyrightconfig.json 설정 우선
-                else
-                  -- 없으면 기본 설정 사용
-                  client.config.settings.python = {
-                    analysis = {
-                      typeCheckingMode = "basic",
-                      autoSearchPaths = true,
-                      useLibraryCodeForTypes = true,
-                    }
-                  }
-                end
-                return true
-              end,
-            })
-          end,
-        }
       })
     end
   },
@@ -320,14 +243,56 @@ require("lazy").setup({
       "williamboman/mason-lspconfig.nvim",
     },
     config = function()
-      local lspconfig = require("lspconfig")
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
-      
-      -- LSP 서버 설정
-      local servers = require("mason-lspconfig").get_installed_servers()
-      
-      -- lua_ls는 특별한 설정이 필요하므로 handler에서 처리되지 않은 경우 여기서 설정
-      -- (하지만 이미 Mason handler가 처리하므로 실제로는 실행되지 않음)
+
+      -- 기본 서버 설정 (bashls, jsonls, yamlls)
+      for _, server in ipairs({ "bashls", "jsonls", "yamlls" }) do
+        vim.lsp.config(server, {
+          capabilities = capabilities,
+        })
+      end
+
+      -- lua_ls 전용 설정
+      vim.lsp.config("lua_ls", {
+        capabilities = capabilities,
+        settings = {
+          Lua = {
+            runtime = { version = 'LuaJIT' },
+            diagnostics = { globals = {'vim'} },
+            workspace = {
+              library = vim.api.nvim_get_runtime_file("", true),
+              checkThirdParty = false,
+            },
+            telemetry = { enable = false },
+          },
+        },
+      })
+
+      -- pyright 전용 설정
+      vim.lsp.config("pyright", {
+        capabilities = capabilities,
+        root_markers = { "pyrightconfig.json", ".git", "setup.py", "requirements.txt" },
+        on_init = function(client)
+          -- pyrightconfig.json이 있으면 그것을 사용
+          local workspace_path = client.config.root_dir
+          if workspace_path and vim.fn.filereadable(workspace_path .. "/pyrightconfig.json") == 1 then
+            client.config.settings = {}  -- pyrightconfig.json 설정 우선
+          else
+            -- 없으면 기본 설정 사용
+            client.config.settings.python = {
+              analysis = {
+                typeCheckingMode = "basic",
+                autoSearchPaths = true,
+                useLibraryCodeForTypes = true,
+              }
+            }
+          end
+          return true
+        end,
+      })
+
+      -- 모든 서버 활성화
+      vim.lsp.enable({ "pyright", "lua_ls", "bashls", "jsonls", "yamlls" })
     end
   },
 
